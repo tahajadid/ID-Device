@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/deviceProjects"
+            android:title="Device's Project">
+            <menu>
+                <item
+                    android:id="@+id/nav_evs"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="EVS Devices" />
+                <item
+                    android:id="@+id/nav_mims"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="MiMs Devices" />
+                <item
+                    android:id="@+id/nav_mesa"
+                    android:icon="@drawable/ic_menu_gallery"
+                    android:title="MESA Devices" />
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/personalInfo"
+            android:title="Personal Information">
+            <menu>
+                <item
+                    android:id="@+id/nav_orders"
+                    android:icon="?android:attr/actionModeFindDrawable"
+                    android:title="Orders" />
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="?attr/actionModePasteDrawable"
+                    android:title="Settings" />
+                <item
+                    android:id="@+id/nav_support"
+                    android:icon="@android:drawable/ic_menu_call"
+                    android:title="Support Center" />
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Admin"
+            android:title="Administrator Access">
+            <menu>
+                <item
+                    android:id="@+id/nav_addEmployer"
+                    android:icon="@android:drawable/ic_menu_add"
+                    android:title="Employer" />
+                <item
+                    android:id="@+id/nav_addDevice"
+                    android:icon="@android:drawable/ic_menu_add"
+                    android:title="Device" />
+                <item
+                    android:id="@+id/nav_addCupboard"
+                    android:icon="@android:drawable/ic_menu_add"
+                    android:title="Cupboard" />
+
+            </menu>
+        </item>
+    </group>
+</menu>

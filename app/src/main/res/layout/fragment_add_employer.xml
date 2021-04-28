@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddEmployer.AddEmployerFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/firstName_et"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#9C27B0"
+                android:ems="10"
+                android:hint="First name"
+                android:inputType="textPersonName"
+                android:textColorHint="#9C27B0" />
+
+            <EditText
+                android:id="@+id/lastName_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#9C27B0"
+                android:ems="10"
+                android:layout_marginTop="10dp"
+                android:hint="Last name"
+                android:inputType="textPersonName"
+                android:textColorHint="#9C27B0" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/employerEmail_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginTop="10dp"
+            android:inputType="textEmailAddress"
+            android:backgroundTint="#9C27B0"
+            android:textColorHint="#9C27B0"
+            android:hint="Email"/>
+
+        <EditText
+            android:id="@+id/employerPassword_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"
+            android:backgroundTint="#9C27B0"
+            android:textColorHint="#9C27B0"
+            android:hint="Password"/>
+
+        <EditText
+            android:id="@+id/employerPassword2_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"
+            android:backgroundTint="#9C27B0"
+            android:textColorHint="#9C27B0"
+            android:hint="Password Again"/>
+
+        <EditText
+            android:id="@+id/employerPhone_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginTop="10dp"
+            android:inputType="phone"
+            android:backgroundTint="#9C27B0"
+            android:textColorHint="#9C27B0"
+            android:hint="Phone number" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/role_label"
+                android:layout_width="76dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Role :"
+                android:textColor="#9C27B0"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/gender_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Gender :"
+                android:textColor="#9C27B0"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/role_spinner"
+                android:layout_width="361dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#9AE690F4"
+                android:entries="@array/role" />
+
+            <Spinner
+                android:id="@+id/gender_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="#9AE690F4"
+                android:entries="@array/gender"
+                android:layout_marginLeft="2dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/trib_label"
+                android:layout_width="173dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="Trib :"
+                android:textColor="#9C27B0"
+                android:textStyle="italic" />
+
+            <Spinner
+                android:id="@+id/trib_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#9AE690F4"
+                android:entries="@array/tribList" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addEmployer_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Add Employer" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="93dp"
+                android:layout_height="59dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="fill_vertical"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginBottom="0dp"
+                app:srcCompat="@drawable/logo_only" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

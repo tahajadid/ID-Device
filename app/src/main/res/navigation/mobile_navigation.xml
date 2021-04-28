@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_evs">
+
+    <fragment
+        android:id="@+id/nav_evs"
+        android:name="com.example.id_dev_fire.ui.evs.EvsFragment"
+        android:label="EVS Devices"
+        tools:layout="@layout/fragment_evs" />
+    <fragment
+        android:id="@+id/nav_mims"
+        android:name="com.example.id_dev_fire.ui.mims.MimsFragment"
+        android:label="MiMs Devices"
+        tools:layout="@layout/fragment_mims" />
+    <fragment
+        android:id="@+id/nav_mesa"
+        android:name="com.example.id_dev_fire.ui.mesa.MesaFragment"
+        android:label="MESA Devices"
+        tools:layout="@layout/fragment_mesa" />
+    <fragment
+        android:id="@+id/nav_orders"
+        android:name="com.example.id_dev_fire.ui.orders.OrdersFragment"
+        android:label="Orders"
+        tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/nav_support"
+        android:name="com.example.id_dev_fire.ui.help_center.HelpCenterFragment"
+        android:label="Help Center"
+        tools:layout="@layout/fragment_help_center" />
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.id_dev_fire.ui.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_addEmployer"
+        android:name="com.example.id_dev_fire.ui.AddEmployer.AddEmployerFragment"
+        android:label="Add Employer"
+        tools:layout="@layout/fragment_add_employer" />
+    <fragment
+        android:id="@+id/nav_addDevice"
+        android:name="com.example.id_dev_fire.ui.AddDevice.AddDeviceFragment"
+        android:label="Add Device"
+        tools:layout="@layout/fragment_add_device" />
+    <fragment
+        android:id="@+id/nav_addCupboard"
+        android:name="com.example.id_dev_fire.ui.AddCupboard.AddCupboardFragment"
+        android:label="Add Cupboard"
+        tools:layout="@layout/fragment_add_cupboard" />
+</navigation>

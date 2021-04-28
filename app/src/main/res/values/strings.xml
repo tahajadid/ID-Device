@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">ID-Dev-Fire</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="role">
+        <item>Administrator</item>
+        <item>Developer</item>
+        <item>Manager</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Man</item>
+        <item>Woman</item>
+    </string-array>
+
+    <string-array name="tribList">
+        <item>EVS</item>
+        <item>MiMs</item>
+        <item>MESA</item>
+        <item>ID-Capture</item>
+    </string-array>
+
+    <string-array name="ownerList">
+        <item>Manager EVS</item>
+        <item>Manager MESA</item>
+        <item>Manager MiMs</item>
+    </string-array>
+
+    <string-array name="cupboardList">
+        <item>EVS_1</item>
+        <item>EVS_2</item>
+        <item>MiMs_1</item>
+        <item>MESA_1</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
