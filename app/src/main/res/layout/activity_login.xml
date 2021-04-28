@@ -76,9 +76,9 @@
             android:layout_marginRight="0dp"
             android:layout_marginBottom="0dp"
             android:text="Login"
-            android:textColor="#9C27B0"
+            android:textColor="#7030A0"
             app:backgroundTint="#FFFFFF"
-            app:iconTint="#9C27B0"
+            app:iconTint="#7030A0"
             tools:ignore="MissingConstraints" />
 
     </LinearLayout>

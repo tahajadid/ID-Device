@@ -17,11 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:backgroundTint="#9C27B0"
+            android:backgroundTint="#7030A0"
             android:ems="10"
             android:hint="Device name"
             android:inputType="textPersonName"
-            android:textColorHint="#9C27B0" />
+            android:textColorHint="#7030A0" />
 
         <Button
             android:id="@+id/addCupboard_button"

@@ -4,4 +4,5 @@ class Trib(
         val id : String = "",
         val tribName : String = "",
         val tribManager : String ="")  {
+
 }

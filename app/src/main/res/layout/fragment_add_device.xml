@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:backgroundTint="#9C27B0"
+            android:backgroundTint="#7030A0"
             android:ems="10"
             android:hint="Device name"
             android:inputType="textPersonName"
@@ -29,22 +29,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:backgroundTint="#9C27B0"
+            android:backgroundTint="#7030A0"
             android:ems="10"
             android:hint="Version"
             android:inputType="textPersonName"
-            android:textColorHint="#9C27B0" />
+            android:textColorHint="#7030A0" />
 
         <EditText
             android:id="@+id/deviceSupportedOS_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:backgroundTint="#9C27B0"
+            android:backgroundTint="#7030A0"
             android:ems="10"
             android:hint="Supported OS"
             android:inputType="textPersonName"
-            android:textColorHint="#9C27B0" />
+            android:textColorHint="#7030A0" />
 
 
         <EditText
@@ -54,9 +54,9 @@
             android:ems="10"
             android:hint="Features"
             android:layout_marginTop="10dp"
-            android:backgroundTint="#9C27B0"
+            android:backgroundTint="#7030A0"
             android:inputType="textPersonName"
-            android:textColorHint="#9C27B0"  />
+            android:textColorHint="#7030A0"  />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Cupboard :"
-                android:textColor="#9C27B0"
+                android:textColor="#7030A0"
                 android:textStyle="italic" />
 
             <TextView
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Owner :"
-                android:textColor="#9C27B0"
+                android:textColor="#7030A0"
                 android:textStyle="italic" />
         </LinearLayout>
 
@@ -93,7 +93,7 @@
                 android:layout_width="361dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#9AE690F4" />
+                android:background="#617030A0" />
 
             <Spinner
                 android:id="@+id/owner_spinner"
@@ -102,7 +102,7 @@
                 android:layout_marginStart="2dp"
                 android:layout_marginLeft="2dp"
                 android:layout_weight="1"
-                android:background="#9AE690F4"
+                android:background="#617030A0"
                 android:entries="@array/ownerList" />
         </LinearLayout>
 
