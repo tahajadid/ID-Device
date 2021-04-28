@@ -146,6 +146,7 @@ class AddDeviceFragment : Fragment() {
                     "Not Reserved")
 
             FirestoreClass().addDeviceFirebase(this,device)
+            resetValue()
 
         }else {
             TODO()
@@ -186,6 +187,14 @@ class AddDeviceFragment : Fragment() {
             else -> true
         }
 
+    }
+
+    private fun resetValue() {
+
+        nameDevice.text.clear()
+        versionDevice.text.clear()
+        supportedOSDevice.text.clear()
+        featuresDevice.text.clear()
     }
 
 }
