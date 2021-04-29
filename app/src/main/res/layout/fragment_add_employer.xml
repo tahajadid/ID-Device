@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.AddEmployer.AddEmployerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -154,7 +153,7 @@
                 android:id="@+id/trib_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#9AE690F4"
+                android:background="#617030A0"
                 android:entries="@array/tribList" />
         </LinearLayout>
 

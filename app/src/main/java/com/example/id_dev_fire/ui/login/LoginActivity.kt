@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.id_dev_fire.MainActivity
 import com.example.id_dev_fire.R
+import com.example.id_dev_fire.ui.register.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -22,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var forgetPassword : TextView
     lateinit var loginButton : Button
     lateinit var mProgressDialog: Dialog
+    lateinit var signup : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +39,18 @@ class LoginActivity : AppCompatActivity() {
         email = findViewById(R.id.userEmail)
         pwd = findViewById(R.id.userPassword)
         forgetPassword = findViewById(R.id.forgetPassword_label)
+        signup = findViewById(R.id.signup_label)
 
         forgetPassword.setOnClickListener {
             forgetPasswordResponse()
         }
+
+        signup.setOnClickListener {
+            val intentregister = Intent(this, RegisterActivity::class.java)
+            startActivity(intentregister)
+            finish()
+        }
+
 
         loginButton.setOnClickListener{
 
