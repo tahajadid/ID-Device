@@ -29,12 +29,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Set the full screen layout
-        window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-
         loginButton = findViewById(R.id.buttonLogin)
         email = findViewById(R.id.userEmail)
         pwd = findViewById(R.id.userPassword)

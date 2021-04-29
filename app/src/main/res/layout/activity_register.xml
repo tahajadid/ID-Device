@@ -12,7 +12,7 @@
         android:layout_width="353dp"
         android:layout_height="551dp"
         android:orientation="vertical"
-        android:paddingTop="50dp">
+        android:paddingTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/firstName_et"
+                android:id="@+id/registerFirstName_et"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -28,10 +28,11 @@
                 android:ems="10"
                 android:hint="First name"
                 android:inputType="textPersonName"
-                android:textColorHint="#FFFFFF" />
+                android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"/>
 
             <EditText
-                android:id="@+id/lastName_et"
+                android:id="@+id/registerLastName_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
@@ -39,7 +40,8 @@
                 android:layout_marginTop="10dp"
                 android:hint="Last name"
                 android:inputType="textPersonName"
-                android:textColorHint="#FFFFFF" />
+                android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"/>
         </LinearLayout>
 
         <EditText
@@ -72,7 +74,7 @@
             android:backgroundTint="#FFF"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:textColor="#FFF"
             android:textColorHint="#FFF" />
 
@@ -91,6 +93,18 @@
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="356dp" />
+
+        <EditText
+            android:id="@+id/employerPhoneRegister_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginTop="10dp"
+            android:inputType="phone"
+            android:backgroundTint="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFF"
+            android:hint="Phone number" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,7 +137,7 @@
             android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/role_spinner"
+                android:id="@+id/registerRole_spinner"
                 android:layout_width="361dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -131,7 +145,7 @@
                 android:entries="@array/role" />
 
             <Spinner
-                android:id="@+id/gender_spinner"
+                android:id="@+id/registerGender_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="2dp"
@@ -141,6 +155,27 @@
                 android:entries="@array/gender" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tribRegister_label"
+                android:layout_width="182dp"
+                android:layout_height="match_parent"
+                android:text="Trib :"
+                android:textColor="#D0B0E8"
+                android:textStyle="italic" />
+
+            <Spinner
+                android:id="@+id/tribRegister_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D0B0E8"
+                android:entries="@array/tribList" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/buttonRegister"
