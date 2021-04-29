@@ -51,15 +51,15 @@
             android:layout_height="wrap_content"
             android:paddingLeft="6dp"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="Taha Jadid"
+            android:text="Karim"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/mailUser"
+            android:id="@+id/actualMailUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="6dp"
-            android:text="taha.jadid@idemia.com" />
+            android:text="karim.karim@idemia.com" />
     </LinearLayout>
 
 </RelativeLayout>

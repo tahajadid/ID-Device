@@ -165,7 +165,7 @@
                 android:id="@+id/tribRegister_label"
                 android:layout_width="182dp"
                 android:layout_height="match_parent"
-                android:text="Trib :"
+                android:text="Project :"
                 android:textColor="#D0B0E8"
                 android:textStyle="italic" />
 

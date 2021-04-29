@@ -76,6 +76,19 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
+        // Get the role selected
+        tribSpinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                val text: String = p0?.getItemAtPosition(p2).toString()
+                tribSelected = text
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
+
         // Click on Add Employer Button
         btn_addEmployer.setOnClickListener{
             registerEmployer()
@@ -109,7 +122,8 @@ class RegisterActivity : AppCompatActivity() {
                             actualEmail,
                             actualphone.toLong(),
                             this.genderSelected,
-                            this.roleSelected
+                            this.roleSelected,
+                            this.tribSelected
                     )
 
                     // Get Firebase instance and put the Employer Object to add it

@@ -4,10 +4,39 @@ class Employer (
 
     val id : String = "",
     val firstName : String = "",
-    val secondName : String = "",
+    val lastName : String = "",
     val email : String = "",
     val phone : Long = 0,
     val gender : String = "",
-    val role : String = ""
+    val role : String = "",
+    val project : String = ""
+) {
+    fun getEmployerFirstName() : String {
+        return firstName
+    }
 
-)
+    fun getEmployerLastName() : String {
+        return lastName
+    }
+
+    fun getEmployerEmail() : String {
+        return email
+    }
+
+    fun getEmployerPhone() : Long {
+        return phone
+    }
+
+    fun getEmployerGender() : String {
+        return gender
+    }
+
+    fun getEmployerRole() : String {
+        return role
+    }
+
+
+    fun getEmployerProject() : String {
+        return project
+    }
+}

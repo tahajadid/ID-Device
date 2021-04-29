@@ -26,9 +26,11 @@ class AddEmployerFragment : Fragment() {
 
     lateinit var genderSpinner: Spinner
     lateinit var roleSpinner: Spinner
+    lateinit var tribSpinner: Spinner
 
     lateinit var genderSelected : String
     lateinit var roleSelected : String
+    lateinit var tribSelected : String
 
     lateinit var btn_addEmployer : Button
     lateinit var mProgressDialog: Dialog
@@ -77,6 +79,19 @@ class AddEmployerFragment : Fragment() {
             }
         }
 
+        // Get the project selected
+        tribSpinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                val text: String = p0?.getItemAtPosition(p2).toString()
+                tribSelected = text
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
+
         // Click on Add Employer Button
         btn_addEmployer.setOnClickListener{
             addEmployer()
@@ -110,7 +125,8 @@ class AddEmployerFragment : Fragment() {
                             actualEmail,
                             actualphone.toLong(),
                             this.genderSelected,
-                            this.roleSelected
+                            this.roleSelected,
+                            this.tribSelected
                     )
 
                     // Get Firebase instance and put the Employer Object to add it
