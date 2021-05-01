@@ -1,5 +1,6 @@
 package com.example.id_dev_fire
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Button
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Employer
+import com.example.id_dev_fire.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_evs,R.id.nav_mesa,R.id.nav_mims,
         R.id.nav_settings,R.id.nav_orders,R.id.nav_support,R.id.nav_addEmployer,R.id.nav_addDevice,
-        R.id.nav_addCupboard)
+        R.id.nav_addCupboard,R.id.nav_singleDeviceFragment)
             , drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -68,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                     if (it.isSuccessful){
                         for (result in it.result!!) {
                             val userInfo = result.toObject(Employer::class.java)
-                            longNameEmployer = userInfo.getEmployerFirstName() + userInfo.getEmployerLastName()
+                            longNameEmployer = userInfo.getEmployerFirstName() + " " + userInfo.getEmployerLastName()
                             userName.setText(longNameEmployer)
                         }
 
@@ -82,6 +84,11 @@ class MainActivity : AppCompatActivity() {
 
         button_logout.setOnClickListener{
             mFirestoreAuth.signOut()
+
+            val intentLogin = Intent(this, LoginActivity::class.java)
+            intentLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intentLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intentLogin)
         }
 
     }
@@ -96,4 +103,5 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
 }

@@ -9,17 +9,29 @@
         android:id="@+id/nav_evs"
         android:name="com.example.id_dev_fire.ui.evs.EvsFragment"
         android:label="EVS Devices"
-        tools:layout="@layout/fragment_evs" />
+        tools:layout="@layout/fragment_evs" >
+        <action
+            android:id="@+id/action_nav_evs_to_singleDeviceFragment"
+            app:destination="@id/nav_singleDeviceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_mims"
         android:name="com.example.id_dev_fire.ui.mims.MimsFragment"
         android:label="MiMs Devices"
-        tools:layout="@layout/fragment_mims" />
+        tools:layout="@layout/fragment_mims" >
+        <action
+            android:id="@+id/action_nav_mims_to_singleDeviceFragment"
+            app:destination="@id/nav_singleDeviceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_mesa"
         android:name="com.example.id_dev_fire.ui.mesa.MesaFragment"
         android:label="MESA Devices"
-        tools:layout="@layout/fragment_mesa" />
+        tools:layout="@layout/fragment_mesa" >
+        <action
+            android:id="@+id/action_nav_mesa_to_singleDeviceFragment"
+            app:destination="@id/nav_singleDeviceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_orders"
         android:name="com.example.id_dev_fire.ui.orders.OrdersFragment"
@@ -50,4 +62,22 @@
         android:name="com.example.id_dev_fire.ui.AddCupboard.AddCupboardFragment"
         android:label="Add Cupboard"
         tools:layout="@layout/fragment_add_cupboard" />
+    <fragment
+        android:id="@+id/nav_singleDeviceFragment"
+        android:name="com.example.id_dev_fire.ui.singleDevice.SingleDeviceFragment"
+        android:label="Device Information"
+        tools:layout="@layout/fragment_single_device" >
+        <action
+            android:id="@+id/action_singleDeviceFragment_to_nav_mims"
+            app:destination="@id/nav_mims" />
+        <action
+            android:id="@+id/action_singleDeviceFragment_to_nav_mesa"
+            app:destination="@id/nav_mesa" />
+        <action
+            android:id="@+id/action_singleDeviceFragment_to_nav_evs"
+            app:destination="@id/nav_evs" />
+        <argument
+            android:name="nameDevice"
+            app:argType="string" />
+    </fragment>
 </navigation>
