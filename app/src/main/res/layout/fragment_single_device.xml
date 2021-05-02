@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/inside_layers"
     tools:context=".ui.singleDevice.SingleDeviceFragment">
 
     <LinearLayout
@@ -15,10 +16,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="172dp"
-            android:background="#3C7030A0"
+            android:background="@drawable/myview"
             android:orientation="horizontal">
 
             <ImageView
+                android:background="@drawable/myview"
                 android:id="@+id/imageView3"
                 android:layout_width="260dp"
                 android:layout_height="match_parent"

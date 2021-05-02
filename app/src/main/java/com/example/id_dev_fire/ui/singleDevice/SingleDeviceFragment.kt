@@ -1,15 +1,19 @@
 package com.example.id_dev_fire.ui.singleDevice
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.model.Device
+import com.example.id_dev_fire.ui.evs.EvsFragmentDirections
 import com.example.id_dev_fire.ui.settings.SettingsViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -45,6 +49,13 @@ class SingleDeviceFragment : Fragment() {
                 }.addOnFailureListener {
 
                 }
+        root.findViewById<Button>(R.id.orderDevice_button).setOnClickListener {
+
+            val action = SingleDeviceFragmentDirections.actionNavSingleDeviceFragmentToOrderDeviceFragment()
+            // take the id of the selected device
+            it.findNavController().navigate(action)
+
+        }
 
         return root
     }

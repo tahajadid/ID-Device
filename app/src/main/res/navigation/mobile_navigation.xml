@@ -79,5 +79,20 @@
         <argument
             android:name="nameDevice"
             app:argType="string" />
+        <action
+            android:id="@+id/action_nav_singleDeviceFragment_to_orderDeviceFragment"
+            app:destination="@id/nav_orderDeviceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_orderDeviceFragment"
+        android:name="com.example.id_dev_fire.ui.OrderDevice.OrderDeviceFragment"
+        android:label="Make order"
+        tools:layout="@layout/fragment_order_device" >
+        <action
+            android:id="@+id/action_orderDeviceFragment_to_nav_singleDeviceFragment"
+            app:destination="@id/nav_singleDeviceFragment" />
+        <action
+            android:id="@+id/action_nav_orderDeviceFragment_to_nav_orders"
+            app:destination="@id/nav_orders" />
     </fragment>
 </navigation>
