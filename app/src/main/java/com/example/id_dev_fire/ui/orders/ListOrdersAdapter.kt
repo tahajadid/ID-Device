@@ -1,5 +1,6 @@
 package com.example.id_dev_fire.ui.orders
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,12 +24,22 @@ class ListOrdersAdapter : RecyclerView.Adapter<ListOrdersAdapter.MyViewHolder>()
         return OrderList.size
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         val currentOrder= OrderList[position]
         holder.itemView.findViewById<TextView>(R.id.nameDeviceOfOrder_tv).setText(currentOrder.getorderDeviceName())
         holder.itemView.findViewById<TextView>(R.id.ownerDeviceOfOrder_tv).setText(currentOrder.getorderDeviceOwner())
         holder.itemView.findViewById<TextView>(R.id.stateOrder_tv).setText(currentOrder.getorderDecision())
+
+        if(currentOrder.getorderDecision().equals("On Hold")) {
+            holder.itemView.findViewById<TextView>(R.id.stateOrder_tv).setTextColor(R.color.design_default_color_error)
+        }else if(currentOrder.getorderDecision().equals("Accepted")){
+            holder.itemView.findViewById<TextView>(R.id.stateOrder_tv).setTextColor(R.color.white)
+        }
+        else{
+            holder.itemView.findViewById<TextView>(R.id.stateOrder_tv).setTextColor(R.color.white)
+        }
 
     }
 

@@ -20,6 +20,7 @@ import com.example.id_dev_fire.ui.singleDevice.SingleDeviceFragmentArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -58,20 +59,23 @@ class OrderDeviceFragment : Fragment() {
         root.findViewById<TextView>(R.id.nameDevOrder_tv).setText(args.deviceNameForOrder)
 
         // Getting the current date
+        val sdf = SimpleDateFormat("d-M-yyyy")
+        val currentD = sdf.format(Date())
         val today  = Calendar.getInstance()
 
         // Initialize the two value of Start/End day to avoid the lateinit propriety of two variables
-        dateStart = Date(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH))
-        dateEnd = dateStart
-        root.findViewById<TextView>(R.id.toDate_tv).setText(dateEnd.toString())
-        root.findViewById<TextView>(R.id.fromDate_tv).setText(dateStart.toString())
+
+        //dateStart = Date(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH))
+        //dateEnd = dateStart
+        root.findViewById<TextView>(R.id.toDate_tv).setText(currentD.toString())
+        root.findViewById<TextView>(R.id.fromDate_tv).setText(currentD.toString())
 
         // Initialize the Picker to know the choice of user
         datePickerFrom.init(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH)){
             view, year, month, day ->
             val month = month + 1
             dateStart = Date(year,month,day)
-            val actual = day.toString()+" - "+month.toString()+" - "+year.toString()
+            val actual = day.toString()+"-"+month.toString()+"-"+year.toString()
             val actualDateStart = root.findViewById<TextView>(R.id.fromDate_tv)
             actualDateStart.setText(actual)
         }
@@ -80,7 +84,7 @@ class OrderDeviceFragment : Fragment() {
             view, year, month, day ->
             val month = month + 1
             dateEnd = Date(year,month,day)
-            val actual = day.toString()+" - "+month.toString()+" - "+year.toString()
+            val actual = day.toString()+"-"+month.toString()+"-"+year.toString()
             val actualDateEnd = root.findViewById<TextView>(R.id.toDate_tv)
             actualDateEnd.setText(actual)
         }
