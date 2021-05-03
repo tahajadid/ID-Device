@@ -7,9 +7,11 @@ import com.example.id_dev_fire.R
 import com.example.id_dev_fire.model.Cupboard
 import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Employer
+import com.example.id_dev_fire.model.Order
 import com.example.id_dev_fire.ui.AddCupboard.AddCupboardFragment
 import com.example.id_dev_fire.ui.AddDevice.AddDeviceFragment
 import com.example.id_dev_fire.ui.AddEmployer.AddEmployerFragment
+import com.example.id_dev_fire.ui.OrderDevice.OrderDeviceFragment
 import com.example.id_dev_fire.ui.register.RegisterActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -108,6 +110,28 @@ class FirestoreClass {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+    }
+
+    fun addOrderFirebase(fragment: OrderDeviceFragment,orderInfo: Order){
+
+        mFirestoreClass.collection("orders")
+                .add(orderInfo)
+                .addOnSuccessListener {
+
+                    Toast.makeText(
+                            fragment.context,
+                            "The order was added.",
+                            Toast.LENGTH_SHORT
+                    ).show()
+                }
+                .addOnFailureListener{
+
+                    Toast.makeText(
+                            fragment.context,
+                            "There was a problem, please try again :(",
+                            Toast.LENGTH_SHORT
+                    ).show()
+                }
     }
 
 }

@@ -94,5 +94,8 @@
         <action
             android:id="@+id/action_nav_orderDeviceFragment_to_nav_orders"
             app:destination="@id/nav_orders" />
+        <argument
+            android:name="deviceNameForOrder"
+            app:argType="string" />
     </fragment>
 </navigation>

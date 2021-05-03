@@ -22,6 +22,7 @@ class SingleDeviceFragment : Fragment() {
 
     private var mFirestore = FirebaseFirestore.getInstance()
     private val args by navArgs<SingleDeviceFragmentArgs>()
+    private lateinit var nameToPass : String
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -32,7 +33,7 @@ class SingleDeviceFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_single_device, container, false)
 
         root.findViewById<TextView>(R.id.nameSingleDevice_tv).setText(args.nameDevice)
-
+        nameToPass = args.nameDevice
 
         mFirestore.collection("devices")
                 .whereEqualTo("devName",args.nameDevice)
@@ -49,9 +50,10 @@ class SingleDeviceFragment : Fragment() {
                 }.addOnFailureListener {
 
                 }
+
         root.findViewById<Button>(R.id.orderDevice_button).setOnClickListener {
 
-            val action = SingleDeviceFragmentDirections.actionNavSingleDeviceFragmentToOrderDeviceFragment()
+            val action = SingleDeviceFragmentDirections.actionNavSingleDeviceFragmentToOrderDeviceFragment(nameToPass)
             // take the id of the selected device
             it.findNavController().navigate(action)
 
