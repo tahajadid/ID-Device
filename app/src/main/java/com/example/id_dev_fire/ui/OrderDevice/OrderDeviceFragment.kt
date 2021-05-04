@@ -11,12 +11,15 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.firestoreClass.FirestoreClass
 import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Order
 import com.example.id_dev_fire.ui.singleDevice.SingleDeviceFragmentArgs
+import com.example.id_dev_fire.ui.singleDevice.SingleDeviceFragmentDirections
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -65,8 +68,6 @@ class OrderDeviceFragment : Fragment() {
 
         // Initialize the two value of Start/End day to avoid the lateinit propriety of two variables
 
-        //dateStart = Date(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH))
-        //dateEnd = dateStart
         root.findViewById<TextView>(R.id.toDate_tv).setText(currentD.toString())
         root.findViewById<TextView>(R.id.fromDate_tv).setText(currentD.toString())
 
@@ -134,6 +135,10 @@ class OrderDeviceFragment : Fragment() {
                     )
 
                     FirestoreClass().addOrderFirebase(this,order)
+
+                    val action = OrderDeviceFragmentDirections.actionNavOrderDeviceFragmentToNavOrders()
+                    // take the id of the selected device
+                    findNavController().navigate(action)
 
                 }.addOnFailureListener {
                     // There is an Error !

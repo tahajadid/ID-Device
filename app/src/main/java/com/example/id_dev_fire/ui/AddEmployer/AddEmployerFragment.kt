@@ -51,6 +51,7 @@ class AddEmployerFragment : Fragment() {
 
         genderSpinner = root.findViewById(R.id.gender_spinner)
         roleSpinner = root.findViewById(R.id.role_spinner)
+        tribSpinner = root.findViewById(R.id.trib_spinner)
         btn_addEmployer = root.findViewById(R.id.addEmployer_button)
 
         // Get the gender selected

@@ -104,13 +104,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/serviceName_label"
-                android:layout_width="50dp"
+                android:layout_width="111dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="Service name"
                 android:textColor="#7030A0"
@@ -118,9 +117,8 @@
 
             <TextView
                 android:id="@+id/supportedOsSingleDevice_label"
-                android:layout_width="50dp"
+                android:layout_width="108dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="Supported OS"
                 android:textColor="#7030A0"
@@ -128,9 +126,8 @@
 
             <TextView
                 android:id="@+id/featuresSingleDevice_label"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="Features"
                 android:textColor="#7030A0"
@@ -145,22 +142,21 @@
 
             <TextView
                 android:id="@+id/serviceName_tv"
-                android:layout_width="122dp"
+                android:layout_width="112dp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:text="Fingerprint" />
 
             <TextView
                 android:id="@+id/supportedOsSingleDevice_tv"
-                android:layout_width="123dp"
+                android:layout_width="110dp"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal" />
 
             <TextView
                 android:id="@+id/featuresSingleDevice_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center_horizontal" />
         </LinearLayout>
 
