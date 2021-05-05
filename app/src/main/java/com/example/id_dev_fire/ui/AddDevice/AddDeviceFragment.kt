@@ -1,27 +1,17 @@
 package com.example.id_dev_fire.ui.AddDevice
 
-import android.app.Dialog
-import android.nfc.Tag
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
-import android.util.MutableInt
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.firestoreClass.FirestoreClass
 import com.example.id_dev_fire.model.Cupboard
 import com.example.id_dev_fire.model.Device
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
-import com.google.firebase.ktx.Firebase
-import kotlin.properties.Delegates
 
 class AddDeviceFragment : Fragment() {
 
@@ -29,6 +19,7 @@ class AddDeviceFragment : Fragment() {
     lateinit var versionDevice : EditText
     lateinit var supportedOSDevice : EditText
     lateinit var featuresDevice : EditText
+    lateinit var serviceNameDevice : EditText
 
     lateinit var buttonAddDevice : Button
 
@@ -38,7 +29,6 @@ class AddDeviceFragment : Fragment() {
     lateinit var cupboardSelected : String
     lateinit var managerSelected : String
 
-    lateinit var lastCup : Cupboard
     var newlist = mutableListOf<String>()
 
     private val mFirestore = FirebaseFirestore.getInstance()
@@ -53,13 +43,12 @@ class AddDeviceFragment : Fragment() {
                     if (it.isSuccessful){
                         for (res in it.result!!) {
                             val cup = res.toObject(Cupboard::class.java)
-                            Log.d("taag","doc : ${cup.getName()} --")
                             newlist.add(cup.getName())
                         }
                     }
 
                 }.addOnFailureListener {
-                    Log.d("taag","There is an Error} --")
+
                 }
     }
 
@@ -72,13 +61,13 @@ class AddDeviceFragment : Fragment() {
         versionDevice = root.findViewById(R.id.deviceVersion_et)
         supportedOSDevice = root.findViewById(R.id.deviceSupportedOS_et)
         featuresDevice = root.findViewById(R.id.deviceFeature_et)
+        serviceNameDevice = root.findViewById(R.id.deviceServiceName_et)
 
         cupboardSpinner = root.findViewById(R.id.cupboard_spinner)
         managerSpinner = root.findViewById(R.id.owner_spinner)
 
         buttonAddDevice = root.findViewById(R.id.addDevice_button)
 
-        val li = newlist
         val listStable = mutableListOf("EVS_1","EVS_2","MESA_1","MiMs_1")
 
         // Put the list of cupboard from Firestore into the dropdown
@@ -92,7 +81,6 @@ class AddDeviceFragment : Fragment() {
         }
 
         // Get the cupboard selected
-
         cupboardSpinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -135,12 +123,14 @@ class AddDeviceFragment : Fragment() {
             val actualVersion = versionDevice.text.toString().trim(){ it <= ' ' }
             val actualOS = supportedOSDevice.text.toString().trim(){ it <= ' ' }
             val actualFeature = featuresDevice.text.toString().trim(){ it <= ' ' }
+            val actualservice = serviceNameDevice.text.toString().trim(){ it <= ' ' }
 
             val device = Device(
                     actualName,
                     actualName,
                     actualVersion,
                     actualOS,
+                    actualservice,
                     actualFeature,
                     cupboardSelected,
                     managerSelected,
@@ -151,7 +141,11 @@ class AddDeviceFragment : Fragment() {
             resetValue()
 
         }else {
-            TODO()
+            Toast.makeText(
+                    this.context,
+                    "Try again",
+                    Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -192,11 +186,9 @@ class AddDeviceFragment : Fragment() {
     }
 
     private fun resetValue() {
-
         nameDevice.text.clear()
         versionDevice.text.clear()
         supportedOSDevice.text.clear()
         featuresDevice.text.clear()
     }
-
 }

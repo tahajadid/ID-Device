@@ -8,7 +8,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 class SingleDeviceViewModel(application: Application) : AndroidViewModel(application)  {
 
     private var mFirestore = FirebaseFirestore.getInstance()
-    private lateinit var actualDev : Device
 
     init {
 

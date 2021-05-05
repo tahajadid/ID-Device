@@ -144,8 +144,7 @@
                 android:id="@+id/serviceName_tv"
                 android:layout_width="112dp"
                 android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:text="Fingerprint" />
+                android:gravity="center_horizontal" />
 
             <TextView
                 android:id="@+id/supportedOsSingleDevice_tv"

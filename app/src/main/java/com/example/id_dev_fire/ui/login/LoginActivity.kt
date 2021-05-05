@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -45,14 +44,13 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-
         loginButton.setOnClickListener{
 
             when{
                 TextUtils.isEmpty(email.text.toString().trim(){ it <= ' ' }) -> {
                     Toast.makeText(
                             this,
-                            "please enter your User Name",
+                            "please enter your Email adress",
                             Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -69,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             Toast.makeText(
                                     this,
-                                    "Login Succefully  !! ",
+                                    "Welcome to ID-Device Application",
                                     Toast.LENGTH_SHORT
                             ).show()
 
@@ -79,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             Toast.makeText(
                                     this,
-                                    "Please Try Again :) ",
+                                    "The Email or Password is wrong",
                                     Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -94,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
         alertDialog.apply {
             setIcon(R.drawable.ic_menu_share)
             setTitle("Hello !")
-            setMessage("Please Contact the Administrator : karim.karim@idemia.com")
+            setMessage("Please Contact the Administrator : admin.admin@idemia.com")
             setPositiveButton("Ok"){ _, _ ->
                 Toast.makeText(this@LoginActivity, "Thank's", Toast.LENGTH_SHORT).show()
             }
@@ -103,7 +101,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showProgressDialog(){
         mProgressDialog = Dialog(this)
-
         mProgressDialog.setContentView(R.layout.dialog_progress)
         mProgressDialog.setCancelable(false)
         mProgressDialog.setCanceledOnTouchOutside(false)

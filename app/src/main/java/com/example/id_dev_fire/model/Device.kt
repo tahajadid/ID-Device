@@ -9,6 +9,7 @@ data class Device (
     val deviceName : String? = "",
     val version : String? = "",
     val supportedOS : String? = "",
+    val serviceName : String? = "",
     val features : String? = "",
     val cupboard : String? = "",
     val deviceOwner : String? = "",
@@ -20,6 +21,7 @@ data class Device (
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+            parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -37,6 +39,10 @@ data class Device (
 
     fun getvdeVersion() : String? {
         return version
+    }
+
+    fun getdevServiceName() : String? {
+        return serviceName
     }
 
     fun getdevFeatures() : String? {
@@ -68,6 +74,7 @@ data class Device (
         parcel.writeString(deviceName)
         parcel.writeString(version)
         parcel.writeString(supportedOS)
+        parcel.writeString(serviceName)
         parcel.writeString(features)
         parcel.writeString(cupboard)
         parcel.writeString(deviceOwner)

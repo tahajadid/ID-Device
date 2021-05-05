@@ -4,24 +4,17 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.id_dev_fire.R
-import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.ui.list.ListDeviceAdapter
-import com.example.id_dev_fire.ui.mims.MimsViewModel
-import com.google.firebase.firestore.FirebaseFirestore
 
 class EvsFragment : Fragment() {
 
     private lateinit var evsViewModel: EvsViewModel
     lateinit var mProgressDialog: Dialog
-    private var mFirestore = FirebaseFirestore.getInstance()
-    private var AllData: MutableList<Device> = arrayListOf()
-
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -43,7 +36,7 @@ class EvsFragment : Fragment() {
         showProgressDialog()
 
         // Observe all the LiveData returned from the ViewModel
-        evsViewModel.readAllData.observe(viewLifecycleOwner, Observer { device ->
+        evsViewModel.readAllData.observe(viewLifecycleOwner, { device ->
             adapter.setDeviceData(device)
             hideProgressDialog()
         })

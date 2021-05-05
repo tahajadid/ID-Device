@@ -1,9 +1,7 @@
 package com.example.id_dev_fire.firestoreClass
 
 import android.app.Dialog
-import android.widget.ProgressBar
 import android.widget.Toast
-import com.example.id_dev_fire.R
 import com.example.id_dev_fire.model.Cupboard
 import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Employer
@@ -18,19 +16,27 @@ import com.google.firebase.firestore.SetOptions
 
 class FirestoreClass {
 
-    lateinit var mProgressDialog: Dialog
     private val mFirestoreClass = FirebaseFirestore.getInstance()
 
     fun addEmployerFirebase(fragment: AddEmployerFragment,employerInfo: Employer){
 
-        mFirestoreClass.collection("employers")
-                .document(employerInfo.id)
-                .set(employerInfo, SetOptions.merge())
+        val newEmployerRef = mFirestoreClass.collection("employers").document()
+        val employer = Employer(
+                newEmployerRef.id,
+                employerInfo.firstName,
+                employerInfo.lastName,
+                employerInfo.email,
+                employerInfo.phone,
+                employerInfo.gender,
+                employerInfo.role,
+                employerInfo.project)
+
+                newEmployerRef.set(employer)
                 .addOnSuccessListener {
 
                     Toast.makeText(
                             fragment.context,
-                            "The Employer was added ^^ ",
+                            "The Employer was added",
                             Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -46,11 +52,19 @@ class FirestoreClass {
 
     fun addEmployerActivityFirebase(activity: RegisterActivity,employerInfo: Employer){
 
-        mFirestoreClass.collection("employers")
-                .document(employerInfo.id)
-                .set(employerInfo, SetOptions.merge())
-                .addOnSuccessListener {
+        val newEmployerRef = mFirestoreClass.collection("employers").document()
+        val employer = Employer(
+                newEmployerRef.id,
+                employerInfo.firstName,
+                employerInfo.lastName,
+                employerInfo.email,
+                employerInfo.phone,
+                employerInfo.gender,
+                employerInfo.role,
+                employerInfo.project)
 
+        newEmployerRef.set(employer)
+                .addOnSuccessListener {
                     Toast.makeText(
                             activity,
                             "Welcome to ID-Device Application",
@@ -58,25 +72,36 @@ class FirestoreClass {
                     ).show()
                 }
                 .addOnFailureListener{
-
                     Toast.makeText(
                             activity,
                             "There was a problem, please try again :(",
                             Toast.LENGTH_SHORT
                     ).show()
                 }
-    }
 
+    }
 
     fun addDeviceFirebase(fragment: AddDeviceFragment,deviceInfo: Device){
 
-        mFirestoreClass.collection("devices")
-                .add(deviceInfo)
+        val newDeviceRef = mFirestoreClass.collection("devices").document()
+        val device = Device(
+                newDeviceRef.id,
+                deviceInfo.deviceName,
+                deviceInfo.version,
+                deviceInfo.supportedOS,
+                deviceInfo.serviceName,
+                deviceInfo.features,
+                deviceInfo.cupboard,
+                deviceInfo.deviceOwner,
+                deviceInfo.state,
+                deviceInfo.currentState)
+
+        newDeviceRef.set(device)
                 .addOnSuccessListener {
 
                     Toast.makeText(
                             fragment.context,
-                            "The Device was added ^^ ",
+                            "The Device was added",
                             Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -92,13 +117,16 @@ class FirestoreClass {
 
     fun addCupboardFirebase(fragment: AddCupboardFragment,cupboardInfo: Cupboard){
 
-        mFirestoreClass.collection("cupboards")
-            .add(cupboardInfo)
+
+        val newCupboardRef = mFirestoreClass.collection("cupboards").document()
+        val newCupboard = Cupboard(newCupboardRef.id,cupboardInfo.getName())
+
+        newCupboardRef.set(newCupboard)
             .addOnSuccessListener {
 
                 Toast.makeText(
                     fragment.context,
-                    "The Cupboard was added ^^ ",
+                    "The Cupboard was added",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -114,13 +142,24 @@ class FirestoreClass {
 
     fun addOrderFirebase(fragment: OrderDeviceFragment,orderInfo: Order){
 
-        mFirestoreClass.collection("orders")
-                .add(orderInfo)
+        val newOrderdRef = mFirestoreClass.collection("orders").document()
+        val newOrder = Order(
+                newOrderdRef.id,
+                orderInfo.deviceName,
+                orderInfo.deviceOwner,
+                orderInfo.currentOwner,
+                orderInfo.startDay,
+                orderInfo.endDay,
+                orderInfo.reason,
+                orderInfo.decision)
+
+        newOrderdRef
+                .set(newOrder)
                 .addOnSuccessListener {
 
                     Toast.makeText(
                             fragment.context,
-                            "The order was added.",
+                            "The order was added",
                             Toast.LENGTH_SHORT
                     ).show()
                 }

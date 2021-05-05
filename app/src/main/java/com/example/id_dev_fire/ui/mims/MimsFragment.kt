@@ -11,17 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.id_dev_fire.R
-import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.ui.list.ListDeviceAdapter
-import com.google.firebase.firestore.FirebaseFirestore
 
 
 class MimsFragment : Fragment() {
 
     private lateinit var mimsViewModel: MimsViewModel
     lateinit var mProgressDialog: Dialog
-    private var mFirestore = FirebaseFirestore.getInstance()
-    private var AllData: MutableList<Device> = arrayListOf()
 
 
     override fun onCreateView(

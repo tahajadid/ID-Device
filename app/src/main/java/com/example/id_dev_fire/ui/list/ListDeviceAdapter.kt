@@ -1,15 +1,11 @@
 package com.example.id_dev_fire.ui.list
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.id_dev_fire.R
@@ -55,15 +51,15 @@ class ListDeviceAdapter : RecyclerView.Adapter<ListDeviceAdapter.MyViewHolder>()
             // In this application case there is 3 tribs
 
             if(currentDevice.getdevOwner() == "Manager EVS"){
-                val action = EvsFragmentDirections.actionNavEvsToSingleDeviceFragment(currentDevice.getdevId().toString())
+                val action = EvsFragmentDirections.actionNavEvsToSingleDeviceFragment(currentDevice.getdevId().toString(),currentDevice)
                 holder.itemView.findNavController().navigate(action)
 
             }else if (currentDevice.getdevOwner() == "Manager MiMs"){
-                val action = MimsFragmentDirections.actionNavMimsToSingleDeviceFragment(currentDevice.getdevId().toString())
+                val action = MimsFragmentDirections.actionNavMimsToSingleDeviceFragment(currentDevice.getdevId().toString(),currentDevice)
                 holder.itemView.findNavController().navigate(action)
 
             }else if(currentDevice.getdevOwner() == "Manager MESA"){
-                val action = MesaFragmentDirections.actionNavMesaToSingleDeviceFragment(currentDevice.getdevId().toString())
+                val action = MesaFragmentDirections.actionNavMesaToSingleDeviceFragment(currentDevice.getdevId().toString(),currentDevice)
                 holder.itemView.findNavController().navigate(action)
             }
 

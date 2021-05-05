@@ -2,10 +2,7 @@ package com.example.id_dev_fire.ui.orders
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Order
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -19,16 +16,14 @@ class OrdersViewModel(application: Application) : AndroidViewModel(application) 
     private var mFirestoreAuth = FirebaseAuth.getInstance()
     private var mFirestoreUser : FirebaseUser
 
-    private var currentOwner_uid : String
     private var AllData: MutableList<Order> = arrayListOf()
 
     init {
 
-        mFirestoreUser= mFirestoreAuth.currentUser
-        currentOwner_uid = mFirestoreUser.uid
+        mFirestoreUser = mFirestoreAuth.currentUser
 
         mFirestore.collection("orders")
-                .whereEqualTo("deviceOwner","Manager EVS")
+                .whereEqualTo("currentOwner",mFirestoreUser.uid)
                 .get().addOnCompleteListener {
 
                     if (it.isSuccessful){

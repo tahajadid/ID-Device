@@ -46,6 +46,17 @@
             android:inputType="textPersonName"
             android:textColorHint="#7030A0" />
 
+        <EditText
+            android:id="@+id/deviceServiceName_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#7030A0"
+            android:ems="10"
+            android:hint="Service name"
+            android:inputType="textPersonName"
+            android:textColorHint="#7030A0" />
+
 
         <EditText
             android:id="@+id/deviceFeature_et"

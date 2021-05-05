@@ -188,7 +188,7 @@ class RegisterActivity : AppCompatActivity() {
         else {
             Toast.makeText(
                     this,
-                    "Not the same password !",
+                    "set the same password in the two fields",
                     Toast.LENGTH_SHORT
             ).show()
             return false

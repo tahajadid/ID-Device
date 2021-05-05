@@ -4,166 +4,173 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/inside_layers"
     tools:context=".ui.OrderDevice.OrderDeviceFragment">
 
     <TextView
         android:id="@+id/nameDevOrder_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="#547030A0"
-        android:fontFamily="monospace"
+        android:background="#D87030A0"
+        android:fontFamily="sans-serif"
         android:gravity="center_horizontal"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:text="Name of the Device"
         android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="236dp" />
 
-    <TextView
-        android:id="@+id/fromDevOrder_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="68dp"
-        android:text="From :"
-        android:textColor="#7030A0"
-        android:textSize="16dp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toStartOf="@+id/calendarFrom"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/fromDate_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="2dp"
-        android:fontFamily="sans-serif-black"
-        android:text="01-1-2021"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/calendarFrom"
-        app:layout_constraintHorizontal_bias="0.171"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fromDevOrder_label"
-        tools:ignore="MissingConstraints" />
-
-    <DatePicker
-        android:id="@+id/calendarFrom"
-        android:layout_width="226dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="396dp"
+        android:layout_height="280dp"
+        android:background="#2C7030A0"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/toDevOrder_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
-        android:layout_marginTop="208dp"
-        android:text="To  :"
-        android:textColor="#7030A0"
-        android:textSize="16dp"
-        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/nameDevOrder_tv">
 
-    <TextView
-        android:id="@+id/toDate_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="2dp"
-        android:fontFamily="sans-serif-black"
-        android:text="2-01-2021"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/calendarTo"
-        app:layout_constraintHorizontal_bias="0.179"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toDevOrder_label" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="138dp"
+            android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/reasonOrder_et"
-        android:layout_width="257dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="288dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.711"
-        app:layout_constraintStart_toEndOf="@+id/reasonOrder_tv"
-        app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/reasonOrder_tv"
-        android:layout_width="68dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="48dp"
-        android:text="Reason :"
-        android:textColor="#7030A0"
-        android:textSize="16dp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toDate_tv" />
+                <TextView
+                    android:id="@+id/fromDevOrder_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="74dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingTop="20dp"
+                    android:text="From :"
+                    android:textColor="#7030A0"
+                    android:textSize="16dp"
+                    android:textStyle="bold|italic"
+                    tools:ignore="MissingConstraints" />
 
-    <DatePicker
-        android:id="@+id/calendarTo"
-        android:layout_width="226dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="#FFFFFF"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarFrom"
-        tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/fromDate_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center_horizontal"
+                    android:text="01-1-2021"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+
+            <DatePicker
+                android:id="@+id/calendarFrom"
+                android:layout_width="226dp"
+                android:layout_height="140dp"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/toDevOrder_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="74dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingTop="20dp"
+                    android:text="To  :"
+                    android:textColor="#7030A0"
+                    android:textSize="16dp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/toDate_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center_horizontal"
+                    android:text="2-01-2021"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <DatePicker
+                android:id="@+id/calendarTo"
+                android:layout_width="226dp"
+                android:layout_height="140dp"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="8dp">
+
+        <TextView
+            android:id="@+id/reasonOrder_tv"
+            android:layout_width="68dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:text="Reason :"
+            android:textColor="#7030A0"
+            android:textSize="16dp"
+            android:textStyle="bold|italic" />
+
+        <EditText
+            android:id="@+id/reasonOrder_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:paddingRight="10dp"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/PlaceOrder_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="372dp"
+        android:layout_marginTop="24dp"
         android:text="Place Order"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="174dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:src="@drawable/idemia"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

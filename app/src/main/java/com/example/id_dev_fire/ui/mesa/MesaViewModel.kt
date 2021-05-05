@@ -29,7 +29,7 @@ class MesaViewModel(application: Application): AndroidViewModel(application) {
                     readAllData.value = AllData
 
                 }.addOnFailureListener {
-                    Log.d("taag","There is an Error} --")
+
                 }
     }
 

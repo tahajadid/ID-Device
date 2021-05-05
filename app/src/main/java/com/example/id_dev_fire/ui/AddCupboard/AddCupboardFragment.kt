@@ -56,7 +56,7 @@ class AddCupboardFragment : Fragment() {
             TextUtils.isEmpty(cupboardName.text.toString().trim(){ it <= ' ' }) -> {
                 Toast.makeText(
                     this.context,
-                    "please enter an Email",
+                    "please enter a Cupboard",
                     Toast.LENGTH_SHORT
                 ).show()
                 false

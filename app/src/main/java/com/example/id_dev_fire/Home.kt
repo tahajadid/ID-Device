@@ -18,6 +18,7 @@ class Home : Application() {
             val intentMain = Intent(this, MainActivity::class.java)
             intentMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intentMain)
+
         }else{
             val intentLogin = Intent(this, LoginActivity::class.java)
             intentLogin.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

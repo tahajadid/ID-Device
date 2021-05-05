@@ -82,6 +82,9 @@
         <action
             android:id="@+id/action_nav_singleDeviceFragment_to_orderDeviceFragment"
             app:destination="@id/nav_orderDeviceFragment" />
+        <argument
+            android:name="deviceSelected"
+            app:argType="com.example.id_dev_fire.model.Device" />
     </fragment>
     <fragment
         android:id="@+id/nav_orderDeviceFragment"
