@@ -61,4 +61,10 @@ class EvsFragment : Fragment() {
         mProgressDialog.hide()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu,inflater: MenuInflater) {
+        inflater.inflate(R.menu.main,menu)
+        menu.findItem(R.id.app_bar_search).setVisible(true)
+    }
+
+
 }

@@ -53,17 +53,8 @@ class FirestoreClass {
     fun addEmployerActivityFirebase(activity: RegisterActivity,employerInfo: Employer){
 
         val newEmployerRef = mFirestoreClass.collection("employers").document()
-        val employer = Employer(
-                newEmployerRef.id,
-                employerInfo.firstName,
-                employerInfo.lastName,
-                employerInfo.email,
-                employerInfo.phone,
-                employerInfo.gender,
-                employerInfo.role,
-                employerInfo.project)
 
-        newEmployerRef.set(employer)
+        newEmployerRef.set(employerInfo)
                 .addOnSuccessListener {
                     Toast.makeText(
                             activity,

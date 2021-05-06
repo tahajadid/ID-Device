@@ -2,10 +2,8 @@ package com.example.id_dev_fire.ui.mims
 
 import android.app.Dialog
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,5 +59,11 @@ class MimsFragment : Fragment() {
     private fun hideProgressDialog() {
         mProgressDialog.hide()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main,menu)
+        menu.findItem(R.id.app_bar_search).setVisible(true)
+    }
+
 
 }

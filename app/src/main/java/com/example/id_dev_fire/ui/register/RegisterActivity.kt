@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.example.id_dev_fire.MainActivity
@@ -112,11 +113,9 @@ class RegisterActivity : AppCompatActivity() {
             addOnCompleteListener { task ->
 
                 if (task.isSuccessful) {
-                    val firebaseUser : FirebaseUser = task.result!!.user!!
-
                     // Set an Employer Object
                     val employer = Employer(
-                            firebaseUser.uid,
+                            FirebaseAuth.getInstance().currentUser.uid,
                             actualFirstName,
                             actualLastName,
                             actualEmail,

@@ -2,13 +2,12 @@ package com.example.id_dev_fire.ui.AddCupboard
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.view.menu.MenuAdapter
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.firestoreClass.FirestoreClass
 import com.example.id_dev_fire.model.Cupboard

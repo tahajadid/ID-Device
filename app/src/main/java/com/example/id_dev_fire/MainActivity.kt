@@ -1,12 +1,17 @@
 package com.example.id_dev_fire
 
+import android.annotation.SuppressLint
+import android.content.ClipData
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+import androidx.annotation.RequiresApi
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,9 +21,10 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.example.id_dev_fire.model.Device
+import androidx.core.view.get
 import com.example.id_dev_fire.model.Employer
 import com.example.id_dev_fire.ui.login.LoginActivity
+import com.google.android.material.appbar.AppBarLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,12 +35,19 @@ class MainActivity : AppCompatActivity() {
     private var mFirestoreAuth = FirebaseAuth.getInstance()
     private var mFirestore = FirebaseFirestore.getInstance()
     private lateinit var mFirestoreUser : FirebaseUser
+
     private lateinit var userName : TextView
     private lateinit var userMail : TextView
     lateinit var button_logout : Button
+
     private lateinit var actualUid : String
     lateinit var longNameEmployer : String
+    lateinit var roleEmployer : String
 
+    lateinit var employer: Employer
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -45,15 +58,6 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val header = navView.getHeaderView(0)
         val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_evs,R.id.nav_mesa,R.id.nav_mims,
-        R.id.nav_settings,R.id.nav_orders,R.id.nav_support,R.id.nav_addEmployer,R.id.nav_addDevice,
-        R.id.nav_addCupboard,R.id.nav_singleDeviceFragment,R.id.nav_orderDeviceFragment)
-            , drawerLayout)
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
 
         mFirestoreUser= mFirestoreAuth.currentUser
 
@@ -63,24 +67,19 @@ class MainActivity : AppCompatActivity() {
 
         userMail.setText(mFirestoreUser.email)
         actualUid = mFirestoreUser.uid
+        Log.d("DebugFire -- ","# Uid : ${mFirestoreUser.uid}")
 
-        mFirestore.collection("employers")
-                .whereEqualTo("id",actualUid)
-                .get().addOnCompleteListener {
-                    if (it.isSuccessful){
-                        for (result in it.result!!) {
-                            val userInfo = result.toObject(Employer::class.java)
-                            longNameEmployer = userInfo.getEmployerFirstName() + " " + userInfo.getEmployerLastName()
-                            userName.setText(longNameEmployer)
-                        }
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_mims,R.id.nav_mesa, R.id.nav_evs,
+        R.id.nav_settings,R.id.nav_orders,R.id.nav_support,R.id.nav_addEmployer,R.id.nav_addDevice,
+        R.id.nav_addCupboard,R.id.nav_singleDeviceFragment,R.id.nav_orderDeviceFragment)
+            , drawerLayout)
 
-                    }else {
-                        userName.setText("User")
-                    }
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
-                }.addOnFailureListener {
-                    userName.setText("User")
-                }
+        setInfo(navView)
 
         button_logout.setOnClickListener{
             mFirestoreAuth.signOut()
@@ -93,10 +92,45 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
+    fun setInfo(navView : NavigationView) {
+
+        mFirestore.collection("employers")
+                .whereEqualTo("id",actualUid)
+                .get().addOnCompleteListener {
+                    if (it.isSuccessful){
+                        for (res in it.result!!) {
+                            employer = res.toObject(Employer::class.java)
+                            longNameEmployer = employer.getEmployerFirstName() + " " + employer.getEmployerLastName()
+                            roleEmployer = employer.getEmployerRole()
+                            redrawNavView(navView,roleEmployer)
+                            userName.setText(longNameEmployer)
+                        }
+                    }else {
+                        userName.setText("User")
+                    }
+                }.addOnFailureListener {
+                    userName.setText("User")
+                }
+    }
+
+    fun redrawNavView(navView : NavigationView, roleEmployer : String) {
+
+        when(roleEmployer) {
+            "Manager" -> {
+                navView.menu.findItem(R.id.nav_addCupboard).setVisible(false)
+                navView.menu.findItem(R.id.nav_addDevice).setVisible(false)
+                navView.menu.findItem(R.id.nav_addEmployer).setVisible(false)
+            }
+            "Administrator" -> {
+                navView.menu.findItem(R.id.nav_orders).setVisible(false)
+            }
+            else -> {
+                navView.menu.findItem(R.id.nav_addCupboard).setVisible(false)
+                navView.menu.findItem(R.id.nav_addDevice).setVisible(false)
+                navView.menu.findItem(R.id.nav_addEmployer).setVisible(false)
+            }
+        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

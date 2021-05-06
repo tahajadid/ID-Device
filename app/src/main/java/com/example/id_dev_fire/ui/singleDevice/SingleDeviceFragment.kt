@@ -1,10 +1,9 @@
 package com.example.id_dev_fire.ui.singleDevice
 
 import android.os.Bundle
+import android.view.*
+import android.view.View.inflate
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.findNavController
@@ -23,6 +22,8 @@ class SingleDeviceFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
+        setHasOptionsMenu(true)
+
         val root = inflater.inflate(R.layout.fragment_single_device, container, false)
 
         root.findViewById<TextView>(R.id.nameSingleDevice_tv).setText(args.deviceSelected.getdevName())
@@ -38,8 +39,8 @@ class SingleDeviceFragment : Fragment() {
             it.findNavController().navigate(action)
 
         }
-
         return root
+
     }
 
 }
