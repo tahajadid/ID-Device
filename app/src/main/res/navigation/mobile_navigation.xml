@@ -101,4 +101,9 @@
             android:name="deviceNameForOrder"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_ordersManager"
+        android:name="com.example.id_dev_fire.ui.ordersManager.OrdersManagerFragment"
+        android:label="Orders passed"
+        tools:layout="@layout/fragment_orders_manager" />
 </navigation>

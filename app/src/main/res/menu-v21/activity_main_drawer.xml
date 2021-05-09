@@ -33,6 +33,10 @@
                     android:icon="?android:attr/actionModeFindDrawable"
                     android:title="Orders" />
                 <item
+                    android:id="@+id/nav_ordersManager"
+                    android:icon="?android:attr/actionModeFindDrawable"
+                    android:title="Orders Passed" />
+                <item
                     android:id="@+id/nav_settings"
                     android:icon="?attr/actionModePasteDrawable"
                     android:title="Settings" />
@@ -60,7 +64,6 @@
                     android:id="@+id/nav_addCupboard"
                     android:icon="@android:drawable/ic_menu_add"
                     android:title="Cupboard" />
-
             </menu>
         </item>
     </group>
