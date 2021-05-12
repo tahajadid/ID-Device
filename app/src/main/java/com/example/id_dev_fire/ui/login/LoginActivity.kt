@@ -24,6 +24,20 @@ class LoginActivity : AppCompatActivity() {
     lateinit var mProgressDialog: Dialog
     lateinit var signup : TextView
 
+    override fun onStart() {
+        super.onStart()
+
+        val actualUser = FirebaseAuth.getInstance().currentUser
+
+        if(actualUser != null){
+            val intentMain = Intent(this, MainActivity::class.java)
+            intentMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intentMain)
+            finish()
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -41,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
         signup.setOnClickListener {
             val intentregister = Intent(this, RegisterActivity::class.java)
             startActivity(intentregister)
-            finish()
+            finishAffinity()
         }
 
         loginButton.setOnClickListener{
@@ -73,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
 
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
-                            finish()
+                            finishAffinity()
                         } else {
                             Toast.makeText(
                                     this,
@@ -84,6 +98,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
+
         }
     }
 

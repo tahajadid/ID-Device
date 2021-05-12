@@ -11,12 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.id_dev_fire.R
+import com.example.id_dev_fire.model.Order
 
 class OrdersManagerFragment : Fragment() {
 
 
     private lateinit var ordersManagerViewModel: OrdersManagerViewModel
     lateinit var mProgressDialog: Dialog
+    private lateinit var orderManagerList:ArrayList<Order>
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -29,7 +31,8 @@ class OrdersManagerFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_orders_manager, container, false)
 
         // Recyclerview
-        val adapter = ListOrdersManagerAdapter()
+        orderManagerList = ArrayList()
+        val adapter = ListOrdersManagerAdapter(orderManagerList)
         val recyclerView : RecyclerView = root.findViewById(R.id.recyclerview_orders_manager)
 
         recyclerView.adapter = adapter

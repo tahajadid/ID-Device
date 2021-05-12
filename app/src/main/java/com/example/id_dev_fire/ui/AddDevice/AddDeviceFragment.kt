@@ -190,5 +190,6 @@ class AddDeviceFragment : Fragment() {
         versionDevice.text.clear()
         supportedOSDevice.text.clear()
         featuresDevice.text.clear()
+        serviceNameDevice.text.clear()
     }
 }

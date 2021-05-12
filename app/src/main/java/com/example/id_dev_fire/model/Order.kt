@@ -10,7 +10,8 @@ class Order(
         val startDay : String?="",
         val endDay : String?="",
         val reason : String? = "",
-        val decision : String? = "") {
+        // var declaration because it can be changed so it's not a value
+        var decision : String? = "") {
 
     fun getorderId() : String? {
         return id
@@ -44,6 +45,10 @@ class Order(
 
     fun getorderDateEnd() : String? {
         return endDay
+    }
+
+    fun setOrderDecision(dec : String?)  {
+        this.decision = dec
     }
 
 }

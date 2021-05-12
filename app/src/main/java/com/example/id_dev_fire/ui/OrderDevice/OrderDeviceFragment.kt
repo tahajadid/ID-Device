@@ -54,13 +54,16 @@ class OrderDeviceFragment : Fragment() {
 
         // Getting the current date
         val sdf = SimpleDateFormat("d-M-yyyy")
-        val currentD = sdf.format(Date())
+        val currentDay = sdf.format(Date())
         val today  = Calendar.getInstance()
 
         // Initialize the two value of Start/End day to avoid the lateinit propriety of two variables
 
-        root.findViewById<TextView>(R.id.toDate_tv).setText(currentD.toString())
-        root.findViewById<TextView>(R.id.fromDate_tv).setText(currentD.toString())
+        root.findViewById<TextView>(R.id.toDate_tv).setText(currentDay.toString())
+        root.findViewById<TextView>(R.id.fromDate_tv).setText(currentDay.toString())
+
+        dateEnd = Date(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH))
+        dateStart = Date(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH))
 
         // Initialize the Picker to know the choice of user
         datePickerFrom.init(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH)){
@@ -95,7 +98,6 @@ class OrderDeviceFragment : Fragment() {
     }
 
     fun getAllInformation() {
-
 
         if(checkDate()){
 

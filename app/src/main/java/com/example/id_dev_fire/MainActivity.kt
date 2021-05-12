@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val header = navView.getHeaderView(0)
@@ -81,6 +82,7 @@ class MainActivity : AppCompatActivity() {
 
         setInfo(navView)
 
+
         button_logout.setOnClickListener{
             mFirestoreAuth.signOut()
 
@@ -89,6 +91,7 @@ class MainActivity : AppCompatActivity() {
             intentLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intentLogin)
         }
+
 
     }
 
@@ -113,6 +116,7 @@ class MainActivity : AppCompatActivity() {
                     userName.setText("User")
                     redrawNavView(navView,"User")
                 }
+
     }
 
     fun redrawNavView(navView : NavigationView, roleEmployer : String) {

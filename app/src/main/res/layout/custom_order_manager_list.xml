@@ -168,16 +168,30 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/informationOrder_iv"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:background="@drawable/view_order"
-            android:padding="16dp"
-            app:srcCompat="@android:drawable/checkbox_on_background" />
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/deleteManagerOrder_iv"
+                android:layout_width="match_parent"
+                android:layout_height="369dp"
+                android:layout_weight="1"
+                android:background="@drawable/view_order"
+                android:padding="4dp"
+                app:srcCompat="@drawable/delete_white" />
+
+            <ImageView
+                android:id="@+id/informationOrder_iv"
+                android:layout_width="match_parent"
+                android:layout_height="88dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/view_order"
+                android:padding="16dp"
+                app:srcCompat="@drawable/checkmark_white" />
+        </LinearLayout>
 
     </LinearLayout>
 
