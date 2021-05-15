@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class HelpCenterViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is MESA Fragment"
+        value = "Still working on it !!"
     }
     val text: LiveData<String> = _text
 }

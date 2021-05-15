@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.airbnb.lottie.Lottie
 import com.example.id_dev_fire.R
 
 class HelpCenterFragment : Fragment() {
@@ -21,14 +22,12 @@ class HelpCenterFragment : Fragment() {
     ): View? {
         helpCenterViewModel =
             ViewModelProvider(this).get(HelpCenterViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_mesa, container, false)
+        val root = inflater.inflate(R.layout.fragment_help_center, container, false)
 
-        /*
-        val textView: TextView = root.findViewById(R.id.text_mesa)
+        val textView: TextView = root.findViewById(R.id.text_help_center)
         helpCenterViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
-         */
 
         return root
     }

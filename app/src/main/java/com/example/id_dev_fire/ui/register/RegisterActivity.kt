@@ -12,8 +12,10 @@ import com.example.id_dev_fire.MainActivity
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.firestoreClass.FirestoreClass
 import com.example.id_dev_fire.model.Employer
+import com.example.id_dev_fire.model.TokenDevice
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.messaging.FirebaseMessaging
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -34,6 +36,8 @@ class RegisterActivity : AppCompatActivity() {
 
     lateinit var btn_addEmployer : Button
     lateinit var mProgressDialog: Dialog
+
+    lateinit var tokenDevice : TokenDevice
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,6 +117,7 @@ class RegisterActivity : AppCompatActivity() {
             addOnCompleteListener { task ->
 
                 if (task.isSuccessful) {
+
                     // Set an Employer Object
                     val employer = Employer(
                             FirebaseAuth.getInstance().currentUser.uid,

@@ -1,15 +1,14 @@
 package com.example.id_dev_fire.firestoreClass
 
 import android.app.Dialog
+import android.util.Log
 import android.widget.Toast
-import com.example.id_dev_fire.model.Cupboard
-import com.example.id_dev_fire.model.Device
-import com.example.id_dev_fire.model.Employer
-import com.example.id_dev_fire.model.Order
+import com.example.id_dev_fire.model.*
 import com.example.id_dev_fire.ui.AddCupboard.AddCupboardFragment
 import com.example.id_dev_fire.ui.AddDevice.AddDeviceFragment
 import com.example.id_dev_fire.ui.AddEmployer.AddEmployerFragment
 import com.example.id_dev_fire.ui.OrderDevice.OrderDeviceFragment
+import com.example.id_dev_fire.ui.login.LoginActivity
 import com.example.id_dev_fire.ui.register.RegisterActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -71,6 +70,21 @@ class FirestoreClass {
                 }
 
     }
+
+    fun addTokenFirebase(activity: LoginActivity,tokenDevice: TokenDevice){
+
+        val newTokenRef = mFirestoreClass.collection("tokens").document()
+
+        newTokenRef.set(tokenDevice)
+            .addOnSuccessListener {
+
+            }
+            .addOnFailureListener{
+
+            }
+
+    }
+
 
     fun addDeviceFirebase(fragment: AddDeviceFragment,deviceInfo: Device){
 

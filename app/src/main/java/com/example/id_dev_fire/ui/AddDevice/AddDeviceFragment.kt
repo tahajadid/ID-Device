@@ -2,6 +2,7 @@ package com.example.id_dev_fire.ui.AddDevice
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import com.example.id_dev_fire.R
 import com.example.id_dev_fire.firestoreClass.FirestoreClass
 import com.example.id_dev_fire.model.Cupboard
 import com.example.id_dev_fire.model.Device
+import com.example.id_dev_fire.model.Employer
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddDeviceFragment : Fragment() {
@@ -29,28 +32,13 @@ class AddDeviceFragment : Fragment() {
     lateinit var cupboardSelected : String
     lateinit var managerSelected : String
 
-    var newlist = mutableListOf<String>()
+    lateinit var adapterCupboard : ArrayAdapter<String>
+    lateinit var adapterManagers : ArrayAdapter<String>
+
+    var newlistCupboards = mutableListOf<String>()
+    var newlistManagers = mutableListOf<String>()
 
     private val mFirestore = FirebaseFirestore.getInstance()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // Get list of Cupboards from database
-
-        mFirestore.collection("cupboards")
-                .get().addOnCompleteListener {
-                    if (it.isSuccessful){
-                        for (res in it.result!!) {
-                            val cup = res.toObject(Cupboard::class.java)
-                            newlist.add(cup.getName())
-                        }
-                    }
-
-                }.addOnFailureListener {
-
-                }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -68,21 +56,35 @@ class AddDeviceFragment : Fragment() {
 
         buttonAddDevice = root.findViewById(R.id.addDevice_button)
 
-        val listStable = mutableListOf("EVS_1","EVS_2","MESA_1","MiMs_1")
+        // Get the list of Cupboards and Managers from Database
+        getAllCupboards()
+        getAllManagers()
 
-        // Put the list of cupboard from Firestore into the dropdown
-        ArrayAdapter(
+        // Set the list of Cupboard and Managers in spinners with an Adapter
+        adapterCupboard = ArrayAdapter(
                 requireActivity().applicationContext,
                 android.R.layout.simple_spinner_item,
-                listStable
+                newlistCupboards
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             cupboardSpinner.adapter = adapter
+            adapter.notifyDataSetChanged()
+        }
+
+        adapterManagers = ArrayAdapter(
+            requireActivity().applicationContext,
+            android.R.layout.simple_spinner_item,
+            newlistManagers
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            managerSpinner.adapter = adapter
+            adapter.notifyDataSetChanged()
         }
 
         // Get the cupboard selected
         cupboardSpinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
+
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val text: String = p0?.getItemAtPosition(p2).toString()
                 cupboardSelected = text
@@ -97,6 +99,7 @@ class AddDeviceFragment : Fragment() {
         // Get the owner selected
         managerSpinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
+
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val text: String = p0?.getItemAtPosition(p2).toString()
                 managerSelected = text
@@ -113,6 +116,35 @@ class AddDeviceFragment : Fragment() {
         }
 
         return root
+    }
+
+    fun getAllManagers() {
+        // Get list of Cupboards from database
+        mFirestore.collection("employers").whereEqualTo("employerRole","Manager")
+            .get().addOnSuccessListener {
+                for (res in it.toObjects(Employer::class.java)) {
+                    newlistManagers.add(res.getEmployerFirstName())
+                    adapterManagers.notifyDataSetChanged()
+                }
+            }.addOnFailureListener {
+
+            }
+    }
+
+    fun getAllCupboards() {
+
+        // Get list of Cupboards from database
+        mFirestore.collection("cupboards")
+            .get().addOnSuccessListener {
+                    for (res in it.toObjects(Cupboard::class.java)) {
+                        newlistCupboards.add(res.getName())
+                        Log.d("MyTest", " -- "+ res.getName())
+                        adapterCupboard.notifyDataSetChanged()
+                    }
+            }.addOnFailureListener {
+
+            }
+
     }
 
     private fun addDevice() {

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -12,8 +13,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.id_dev_fire.MainActivity
 import com.example.id_dev_fire.R
+import com.example.id_dev_fire.firestoreClass.FirestoreClass
+import com.example.id_dev_fire.model.TokenDevice
 import com.example.id_dev_fire.ui.register.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
 
 class LoginActivity : AppCompatActivity() {
 
@@ -23,11 +29,10 @@ class LoginActivity : AppCompatActivity() {
     lateinit var loginButton : Button
     lateinit var mProgressDialog: Dialog
     lateinit var signup : TextView
+    val actualUser = FirebaseAuth.getInstance().currentUser
 
     override fun onStart() {
         super.onStart()
-
-        val actualUser = FirebaseAuth.getInstance().currentUser
 
         if(actualUser != null){
             val intentMain = Intent(this, MainActivity::class.java)
@@ -79,6 +84,7 @@ class LoginActivity : AppCompatActivity() {
 
                         hideProgressDialog()
                         if (task.isSuccessful) {
+                            retrieveAndStoreToken(FirebaseAuth.getInstance().currentUser.uid)
                             Toast.makeText(
                                     this,
                                     "Welcome to ID-Device Application",
@@ -114,6 +120,22 @@ class LoginActivity : AppCompatActivity() {
         }.create().show()
     }
 
+    private fun retrieveAndStoreToken(uid : String) {
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener{
+                if (it.isSuccessful){
+                    val token : String? = it.result
+                    val tokenDevice = TokenDevice(
+                        uid,
+                        token.toString()
+                    )
+                    FirestoreClass().addTokenFirebase(this,tokenDevice)
+                }
+            }.addOnFailureListener {
+                //
+            }
+    }
+
     private fun showProgressDialog(){
         mProgressDialog = Dialog(this)
         mProgressDialog.setContentView(R.layout.dialog_progress)
@@ -126,4 +148,5 @@ class LoginActivity : AppCompatActivity() {
     private fun hideProgressDialog() {
         mProgressDialog.hide()
     }
+
 }
