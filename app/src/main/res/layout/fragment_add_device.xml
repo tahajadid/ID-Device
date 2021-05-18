@@ -77,15 +77,14 @@
 
             <TextView
                 android:id="@+id/cupboard_label"
-                android:layout_width="86dp"
+                android:layout_width="142dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:text="Cupboard :"
                 android:textColor="#7030A0"
                 android:textStyle="italic" />
 
             <TextView
-                android:id="@+id/deviceOwner_label"
+                android:id="@+id/projectDev_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -101,9 +100,8 @@
 
             <Spinner
                 android:id="@+id/cupboard_spinner"
-                android:layout_width="361dp"
+                android:layout_width="140dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="#617030A0" />
 
             <Spinner

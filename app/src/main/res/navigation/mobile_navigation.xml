@@ -45,8 +45,12 @@
     <fragment
         android:id="@+id/nav_settings"
         android:name="com.example.id_dev_fire.ui.settings.SettingsFragment"
-        android:label="Settings"
-        tools:layout="@layout/fragment_settings" />
+        android:label="Personal Information"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_nav_settings_to_changePasswordFragment"
+            app:destination="@id/nav_changePassword" />
+    </fragment>
     <fragment
         android:id="@+id/nav_addEmployer"
         android:name="com.example.id_dev_fire.ui.AddEmployer.AddEmployerFragment"
@@ -106,4 +110,13 @@
         android:name="com.example.id_dev_fire.ui.ordersManager.OrdersManagerFragment"
         android:label="Orders passed"
         tools:layout="@layout/fragment_orders_manager" />
+    <fragment
+        android:id="@+id/nav_changePassword"
+        android:name="com.example.id_dev_fire.ui.ChangePassword.ChangePasswordFragment"
+        android:label="Change Password"
+        tools:layout="@layout/fragment_change_password">
+        <action
+            android:id="@+id/action_changePasswordFragment_to_nav_settings"
+            app:destination="@id/nav_settings" />
+    </fragment>
 </navigation>

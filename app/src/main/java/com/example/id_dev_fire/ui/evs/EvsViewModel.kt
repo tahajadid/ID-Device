@@ -1,6 +1,8 @@
 package com.example.id_dev_fire.ui.evs
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.id_dev_fire.model.Device
@@ -13,9 +15,9 @@ class EvsViewModel(application: Application) : AndroidViewModel(application) {
     private var AllData: MutableList<Device> = arrayListOf()
 
     init {
-
-        mFirestore.collection("devices")
-                .whereEqualTo("deviceOwner","Manager EVS")
+        if(readAllData.value.isNullOrEmpty()) {
+            mFirestore.collection("devices")
+                .whereEqualTo("projectName","EVS")
                 .get().addOnCompleteListener {
 
                     if (it.isSuccessful){
@@ -30,5 +32,8 @@ class EvsViewModel(application: Application) : AndroidViewModel(application) {
                 }.addOnFailureListener {
 
                 }
+        }
+
     }
+
 }

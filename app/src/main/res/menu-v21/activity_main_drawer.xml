@@ -10,15 +10,15 @@
             <menu>
                 <item
                     android:id="@+id/nav_evs"
-                    android:icon="@drawable/ic_menu_gallery"
+                    android:icon="@drawable/listlist"
                     android:title="EVS Devices" />
                 <item
                     android:id="@+id/nav_mims"
-                    android:icon="@drawable/ic_menu_gallery"
+                    android:icon="@drawable/listlist"
                     android:title="MiMs Devices" />
                 <item
                     android:id="@+id/nav_mesa"
-                    android:icon="@drawable/ic_menu_gallery"
+                    android:icon="@drawable/listlist"
                     android:title="MESA Devices" />
             </menu>
         </item>
@@ -38,11 +38,11 @@
                     android:title="Orders Passed" />
                 <item
                     android:id="@+id/nav_settings"
-                    android:icon="?attr/actionModePasteDrawable"
+                    android:icon="@drawable/settingsicon"
                     android:title="Settings" />
                 <item
                     android:id="@+id/nav_support"
-                    android:icon="@android:drawable/ic_menu_call"
+                    android:icon="@drawable/support"
                     android:title="Support Center" />
             </menu>
         </item>
@@ -54,15 +54,15 @@
             <menu>
                 <item
                     android:id="@+id/nav_addEmployer"
-                    android:icon="@android:drawable/ic_menu_add"
+                    android:icon="@drawable/addicon"
                     android:title="Employer" />
                 <item
                     android:id="@+id/nav_addDevice"
-                    android:icon="@android:drawable/ic_menu_add"
+                    android:icon="@drawable/addicon"
                     android:title="Device" />
                 <item
                     android:id="@+id/nav_addCupboard"
-                    android:icon="@android:drawable/ic_menu_add"
+                    android:icon="@drawable/addicon"
                     android:title="Cupboard" />
             </menu>
         </item>

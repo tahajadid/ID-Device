@@ -10,12 +10,15 @@ import com.example.id_dev_fire.ui.AddEmployer.AddEmployerFragment
 import com.example.id_dev_fire.ui.OrderDevice.OrderDeviceFragment
 import com.example.id_dev_fire.ui.login.LoginActivity
 import com.example.id_dev_fire.ui.register.RegisterActivity
+import com.example.id_dev_fire.ui.settings.SettingsFragment
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
 class FirestoreClass {
 
     private val mFirestoreClass = FirebaseFirestore.getInstance()
+    private val mFirebaseAuth = FirebaseAuth.getInstance()
 
     fun addEmployerFirebase(fragment: AddEmployerFragment,employerInfo: Employer){
 
@@ -98,6 +101,8 @@ class FirestoreClass {
                 deviceInfo.features,
                 deviceInfo.cupboard,
                 deviceInfo.deviceOwner,
+                deviceInfo.fullNameOwner,
+                deviceInfo.projectName,
                 deviceInfo.state,
                 deviceInfo.currentState)
 
@@ -153,6 +158,7 @@ class FirestoreClass {
                 orderInfo.deviceName,
                 orderInfo.deviceOwner,
                 orderInfo.currentOwner,
+                orderInfo.fullNameDeviceOwner,
                 orderInfo.startDay,
                 orderInfo.endDay,
                 orderInfo.reason,
@@ -176,6 +182,30 @@ class FirestoreClass {
                             Toast.LENGTH_SHORT
                     ).show()
                 }
+    }
+
+
+    fun editPhoneEmployerFirebase(fragment: SettingsFragment,iid : String, number : String){
+
+        val newEmployerRef = mFirestoreClass.collection("employers").document(iid)
+
+        newEmployerRef.update(mapOf("a" to number))
+            .addOnSuccessListener {
+
+                Toast.makeText(
+                    fragment.context,
+                    "The Cupboard was added",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            .addOnFailureListener{
+
+                Toast.makeText(
+                    fragment.context,
+                    "There was a problem, please try again :(",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
     }
 
 }

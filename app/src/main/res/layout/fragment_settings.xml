@@ -1,47 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/login_background"
+    android:paddingTop="20dp"
+    android:paddingRight="30dp"
+    android:paddingLeft="30dp"
     tools:context=".ui.settings.SettingsFragment">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/anim_2"
-        android:layout_width="373dp"
-        android:layout_height="293dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginRight="21dp"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/dev" />
+    <LinearLayout
+        android:layout_width="353dp"
+        android:layout_height="551dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_settings"
-        android:layout_width="391dp"
-        android:layout_height="72dp"
-        android:layout_below="@+id/anim_2"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="center_horizontal"
-        android:text="Still workin on it"
-        android:textAlignment="center"
-        android:textColor="#3F51B5"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnknownId" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="151dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="115dp"
+                android:layout_height="131dp"
+                android:layout_marginTop="5dp"
+                android:adjustViewBounds="false"
+                android:paddingLeft="0dp"
+                android:paddingTop="15dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="15dp"
+                app:srcCompat="@drawable/person_for_login"
+                tools:ignore="VectorDrawableCompat"
+                tools:layout_editor_absoluteX="158dp"
+                tools:layout_editor_absoluteY="30dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nameSetting_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Application User"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/roleSetting_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Role"
+                    android:textColor="#DEB9FA"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="#fff"/>
+
+        <TextView
+            android:id="@+id/email_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:gravity="start"
+            android:text="Email :"
+            android:textAlignment="viewStart"
+            android:textColor="#FFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/email_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:backgroundTint="#FFF"
+            android:ems="10"
+            android:text="*****@idemia.com"
+            android:textSize="18sp"
+            android:textColor="#FFF"
+            android:textColorHint="#FFF" />
+
+        <TextView
+            android:id="@+id/phone_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="start"
+            android:text="Number Phone :"
+            android:textAlignment="viewStart"
+            android:textColor="#FFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/phone_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginBottom="0dp"
+                android:backgroundTint="#FFF"
+                android:ems="10"
+                android:text="+212 XXX XXX XXX"
+                android:textColor="#FFF"
+                android:textColorHint="#FFF"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="textEnd"
+                android:orientation="horizontal"
+                android:gravity="end">
+
+                <TextView
+                    android:id="@+id/changePhone_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:gravity="end"
+                    android:text="Edit"
+                    android:textStyle="italic"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#FFF"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/editPhone_iv"
+                    android:layout_width="38dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="4dp"
+                    android:adjustViewBounds="false"
+                    app:srcCompat="@drawable/edit"
+                    tools:ignore="VectorDrawableCompat"
+                    tools:layout_editor_absoluteX="158dp"
+                    tools:layout_editor_absoluteY="30dp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/gender_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Gender :"
+            android:layout_marginTop="14dp"
+            android:textAlignment="viewStart"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/genderSetting_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:backgroundTint="#FFF"
+            android:ems="10"
+            android:text=" "
+            android:textSize="18sp"
+            android:textColor="#FFF"
+            android:textColorHint="#FFF" />
+
+        <TextView
+            android:id="@+id/project_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Project :"
+            android:layout_marginTop="14dp"
+            android:textAlignment="viewStart"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/projectSetting_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"
+            android:backgroundTint="#FFF"
+            android:ems="10"
+            android:text=" "
+            android:textSize="18sp"
+            android:textColor="#FFF"
+            android:textColorHint="#FFF"
+            />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_marginTop="14dp"
+            android:layout_height="1dip"
+            android:background="#fff"/>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_marginTop="2dp"
+            android:layout_height="1dip"
+            android:background="#3EFFFFFF"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="textEnd"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/changePwd_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="end"
+                android:text="Change Password"
+                android:textAlignment="viewEnd"
+                android:textColor="#DEB9FA"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

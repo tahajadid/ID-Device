@@ -33,7 +33,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:text="Device :"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textStyle="italic" />
 
                 <TextView

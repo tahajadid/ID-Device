@@ -13,6 +13,8 @@ data class Device (
     val features : String? = "",
     val cupboard : String? = "",
     val deviceOwner : String? = "",
+    val fullNameOwner : String? = "",
+    val projectName : String? = "",
     val state : String? = "",
     val currentState : String? = "") : Parcelable {
 
@@ -21,7 +23,9 @@ data class Device (
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-            parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -57,6 +61,15 @@ data class Device (
         return deviceOwner
     }
 
+    fun getdevFullNameOwner() : String? {
+        return fullNameOwner
+    }
+
+    fun getdevProjectName() : String? {
+        return projectName
+    }
+
+
     fun getdevSupportedOS() : String? {
         return supportedOS
     }
@@ -78,6 +91,8 @@ data class Device (
         parcel.writeString(features)
         parcel.writeString(cupboard)
         parcel.writeString(deviceOwner)
+        parcel.writeString(fullNameOwner)
+        parcel.writeString(projectName)
         parcel.writeString(state)
         parcel.writeString(currentState)
     }

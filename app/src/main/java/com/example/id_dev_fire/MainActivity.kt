@@ -1,15 +1,14 @@
 package com.example.id_dev_fire
 
 import android.annotation.SuppressLint
-import android.content.ClipData
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.google.android.material.navigation.NavigationView
@@ -21,10 +20,11 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.get
+import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Employer
+import com.example.id_dev_fire.ui.list.ListDeviceAdapter
 import com.example.id_dev_fire.ui.login.LoginActivity
-import com.google.android.material.appbar.AppBarLayout
+import com.example.id_dev_fire.ui.orders.ListOrdersAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_mims,R.id.nav_mesa, R.id.nav_evs,
         R.id.nav_settings,R.id.nav_orders,R.id.nav_support,R.id.nav_addEmployer,R.id.nav_addDevice,
         R.id.nav_addCupboard,R.id.nav_singleDeviceFragment,R.id.nav_orderDeviceFragment,
-        R.id.nav_ordersManager)
+        R.id.nav_ordersManager,R.id.nav_changePassword)
             , drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 
     fun setInfo(navView : NavigationView) {
 
@@ -150,5 +151,20 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+/*
+    override fun onCreateOptionsMenu(menu: Menu?) : Boolean{
+        menuInflater.inflate(R.menu.main,menu)
+
+        val item = menu?.findItem(R.id.app_bar_search)
+        val searchView : androidx.appcompat.widget.SearchView = item?.actionView as androidx.appcompat.widget.SearchView
+
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+        Log.d("IntoMain","into for onCreateOptionsMenu -- ")
+        return true
+    }
+
+ */
 
 }

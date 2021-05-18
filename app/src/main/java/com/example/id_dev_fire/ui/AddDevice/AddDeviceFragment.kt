@@ -30,13 +30,17 @@ class AddDeviceFragment : Fragment() {
     lateinit var managerSpinner: Spinner
 
     lateinit var cupboardSelected : String
-    lateinit var managerSelected : String
+    lateinit var projectManagerSelected : String
+    lateinit var idManagerSelected : String
+    lateinit var fullNameManagerSelected : String
+
 
     lateinit var adapterCupboard : ArrayAdapter<String>
     lateinit var adapterManagers : ArrayAdapter<String>
 
     var newlistCupboards = mutableListOf<String>()
-    var newlistManagers = mutableListOf<String>()
+    var labelManagers = mutableListOf<String>()
+    var allManagers = mutableListOf<Employer>()
 
     private val mFirestore = FirebaseFirestore.getInstance()
 
@@ -74,7 +78,7 @@ class AddDeviceFragment : Fragment() {
         adapterManagers = ArrayAdapter(
             requireActivity().applicationContext,
             android.R.layout.simple_spinner_item,
-            newlistManagers
+            labelManagers
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             managerSpinner.adapter = adapter
@@ -101,8 +105,11 @@ class AddDeviceFragment : Fragment() {
                 AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                val text: String = p0?.getItemAtPosition(p2).toString()
-                managerSelected = text
+                val currentId : String = allManagers[p2].getEmployerId()
+                val currentProject : String = allManagers[p2].getEmployerProject()
+                fullNameManagerSelected = allManagers[p2].getEmployerFirstName() + " " + allManagers[p2].getEmployerLastName()
+                idManagerSelected = currentId
+                projectManagerSelected = currentProject
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -118,31 +125,31 @@ class AddDeviceFragment : Fragment() {
         return root
     }
 
-    fun getAllManagers() {
+    private fun getAllManagers() {
         // Get list of Cupboards from database
         mFirestore.collection("employers").whereEqualTo("employerRole","Manager")
             .get().addOnSuccessListener {
                 for (res in it.toObjects(Employer::class.java)) {
-                    newlistManagers.add(res.getEmployerFirstName())
+                    labelManagers.add(res.getEmployerFirstName()+" - "+res.getEmployerProject())
+                    allManagers.add(res)
                     adapterManagers.notifyDataSetChanged()
                 }
             }.addOnFailureListener {
-
+            //
             }
     }
 
-    fun getAllCupboards() {
+    private fun getAllCupboards() {
 
         // Get list of Cupboards from database
         mFirestore.collection("cupboards")
             .get().addOnSuccessListener {
                     for (res in it.toObjects(Cupboard::class.java)) {
                         newlistCupboards.add(res.getName())
-                        Log.d("MyTest", " -- "+ res.getName())
                         adapterCupboard.notifyDataSetChanged()
                     }
             }.addOnFailureListener {
-
+            //
             }
 
     }
@@ -158,14 +165,16 @@ class AddDeviceFragment : Fragment() {
             val actualservice = serviceNameDevice.text.toString().trim(){ it <= ' ' }
 
             val device = Device(
-                    actualName,
+                    "0",
                     actualName,
                     actualVersion,
                     actualOS,
                     actualservice,
                     actualFeature,
                     cupboardSelected,
-                    managerSelected,
+                    idManagerSelected,
+                    fullNameManagerSelected,
+                    projectManagerSelected,
                     "Available",
                     "Not Reserved")
 

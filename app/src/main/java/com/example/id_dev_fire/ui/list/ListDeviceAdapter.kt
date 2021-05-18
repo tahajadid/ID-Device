@@ -1,6 +1,8 @@
 package com.example.id_dev_fire.ui.list
 
 import android.annotation.SuppressLint
+import android.app.Application
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +11,14 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.id_dev_fire.R
+import com.example.id_dev_fire.firestoreClass.FirestoreClass
 import com.example.id_dev_fire.model.Device
+import com.example.id_dev_fire.model.Employer
 import com.example.id_dev_fire.ui.evs.EvsFragmentDirections
+import com.example.id_dev_fire.ui.evs.EvsViewModel
 import com.example.id_dev_fire.ui.mesa.MesaFragmentDirections
 import com.example.id_dev_fire.ui.mims.MimsFragmentDirections
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ListDeviceAdapter : RecyclerView.Adapter<ListDeviceAdapter.MyViewHolder>()  {
 
@@ -33,9 +39,12 @@ class ListDeviceAdapter : RecyclerView.Adapter<ListDeviceAdapter.MyViewHolder>()
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         val currentDevice = DevList[position]
+
         holder.itemView.findViewById<TextView>(R.id.nameDevice_txt).setText(currentDevice.getdevName())
-        holder.itemView.findViewById<TextView>(R.id.deviceOwner_txt).setText(currentDevice.getdevOwner())
         holder.itemView.findViewById<TextView>(R.id.version_tv).setText(currentDevice.getvdeVersion())
+        holder.itemView.findViewById<TextView>(R.id.fullNameDeviceOwner_label_txt).setText(currentDevice.getdevFullNameOwner())
+        holder.itemView.findViewById<TextView>(R.id.projectDev_txt).setText(currentDevice.getdevProjectName())
+
         this.Deviceid = currentDevice.getdevId().toString()
 
         /*
@@ -50,16 +59,19 @@ class ListDeviceAdapter : RecyclerView.Adapter<ListDeviceAdapter.MyViewHolder>()
             // Each Device belong to a trib which had an only Manager label
             // In this application case there is 3 tribs
 
-            if(currentDevice.getdevOwner() == "Manager EVS"){
-                val action = EvsFragmentDirections.actionNavEvsToSingleDeviceFragment(currentDevice.getdevId().toString(),currentDevice)
+            if(currentDevice.getdevProjectName() == "EVS"){
+                val action = EvsFragmentDirections.actionNavEvsToSingleDeviceFragment(
+                    currentDevice.getdevId().toString(),currentDevice)
                 holder.itemView.findNavController().navigate(action)
 
-            }else if (currentDevice.getdevOwner() == "Manager MiMs"){
-                val action = MimsFragmentDirections.actionNavMimsToSingleDeviceFragment(currentDevice.getdevId().toString(),currentDevice)
+            }else if (currentDevice.getdevProjectName() == "MiMs"){
+                val action = MimsFragmentDirections.actionNavMimsToSingleDeviceFragment(
+                    currentDevice.getdevId().toString(),currentDevice)
                 holder.itemView.findNavController().navigate(action)
 
-            }else if(currentDevice.getdevOwner() == "Manager MESA"){
-                val action = MesaFragmentDirections.actionNavMesaToSingleDeviceFragment(currentDevice.getdevId().toString(),currentDevice)
+            }else if(currentDevice.getdevProjectName() == "MESA"){
+                val action = MesaFragmentDirections.actionNavMesaToSingleDeviceFragment(
+                    currentDevice.getdevId().toString(),currentDevice)
                 holder.itemView.findNavController().navigate(action)
             }
 

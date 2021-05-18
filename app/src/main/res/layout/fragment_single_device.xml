@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/inside_layers"
     tools:context=".ui.singleDevice.SingleDeviceFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -169,4 +169,5 @@
             app:backgroundTint="#7030A0" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

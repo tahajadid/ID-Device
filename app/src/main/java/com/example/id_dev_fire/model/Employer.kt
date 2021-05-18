@@ -11,6 +11,9 @@ class Employer (
     val role : String = "",
     val project : String = ""
 ) {
+    fun getEmployerId() : String {
+        return id
+    }
     fun getEmployerFirstName() : String {
         return firstName
     }

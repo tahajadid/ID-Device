@@ -6,6 +6,7 @@ class Order(
         val id : String? = "",
         val deviceName : String? = "",
         val deviceOwner : String? ="",
+        val fullNameDeviceOwner : String? ="",
         val currentOwner : String?="",
         val startDay : String?="",
         val endDay : String?="",
@@ -30,6 +31,9 @@ class Order(
         return currentOwner
     }
 
+    fun getorderFullNameDeviceOwner() : String? {
+        return fullNameDeviceOwner
+    }
 
     fun getorderReason() : String? {
         return reason

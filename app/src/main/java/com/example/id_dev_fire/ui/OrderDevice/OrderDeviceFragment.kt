@@ -27,6 +27,7 @@ class OrderDeviceFragment : Fragment() {
     lateinit var datePickerTo: DatePicker
 
     private lateinit var deviceOwner : String
+    private lateinit var fullNameDeviceOwner : String
     private lateinit var currentOwner_uid : String
 
     private lateinit var dateStart : Date
@@ -109,6 +110,7 @@ class OrderDeviceFragment : Fragment() {
                             for (result in it.result!!) {
                                 val devInfo = result.toObject(Device::class.java)
                                 deviceOwner = devInfo.deviceOwner.toString()
+                                fullNameDeviceOwner = devInfo.fullNameOwner.toString()
                             }
                         }
 
@@ -130,6 +132,7 @@ class OrderDeviceFragment : Fragment() {
                                 args.deviceNameForOrder,
                                 deviceOwner,
                                 currentOwner_uid,
+                                fullNameDeviceOwner,
                                 dateStart_to_put,
                                 dateEnd_to_put,
                                 reason_to_put,

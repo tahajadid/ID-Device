@@ -2,6 +2,7 @@ package com.example.id_dev_fire.ui.orders
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.example.id_dev_fire.model.Order
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ListOrdersAdapter(var OrderList : ArrayList<Order>) : RecyclerView.Adapter<ListOrdersAdapter.MyViewHolder>()  {
+
 
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private var mFirestore = FirebaseFirestore.getInstance()
@@ -69,7 +71,7 @@ class ListOrdersAdapter(var OrderList : ArrayList<Order>) : RecyclerView.Adapter
 
         val currentOrder= OrderList[position]
         holder.itemView.findViewById<TextView>(R.id.nameDeviceOfOrder_tv).setText(currentOrder.getorderDeviceName())
-        holder.itemView.findViewById<TextView>(R.id.ownerDeviceOfOrder_tv).setText(currentOrder.getorderDeviceOwner())
+        holder.itemView.findViewById<TextView>(R.id.ownerDeviceOfOrder_tv).setText(currentOrder.getorderFullNameDeviceOwner())
         holder.itemView.findViewById<TextView>(R.id.stateOrder_tv).setText(currentOrder.getorderDecision())
 
     }

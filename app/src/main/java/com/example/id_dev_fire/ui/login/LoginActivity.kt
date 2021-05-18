@@ -65,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginButton.setOnClickListener{
 
+
             when{
                 TextUtils.isEmpty(email.text.toString().trim(){ it <= ' ' }) -> {
                     Toast.makeText(
