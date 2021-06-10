@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.information.InformationFragment">
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="168dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="83dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="88dp"
+            android:src="@drawable/logonum_5" />
+
+        <TextView
+            android:id="@+id/nameApplication_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView2"
+            android:layout_marginTop="20dp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="ID-Device"
+            android:textColor="#7030A0"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/versionApplication"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nameApplication_tv"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:text="Version :" />
+
+        <View
+            android:id="@+id/viewupp"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@+id/viewdown"
+            android:layout_marginTop="2dp"
+            android:background="#9F99A3" />
+
+        <View
+            android:id="@+id/viewdown"
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:layout_below="@+id/versionApplication"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="8dp"
+            android:background="#7030a0" />
+
+        <TextView
+            android:id="@+id/lastVersion_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewupp"
+            android:layout_marginTop="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/descriptionApplication_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lastVersion_tv"
+            android:layout_marginTop="13dp"
+            android:textColor="#7030a0"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/linkdownload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descriptionApplication_tv"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:autoLink="web" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="76dp"
+            android:layout_height="66dp"
+            android:layout_below="@+id/nameApplication_tv"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="380dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:src="@drawable/maingif"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints" />
+
+    </RelativeLayout>
+</ScrollView>

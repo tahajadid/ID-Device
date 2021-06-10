@@ -34,7 +34,7 @@
                     android:title="Orders" />
                 <item
                     android:id="@+id/nav_ordersManager"
-                    android:icon="?android:attr/actionModeFindDrawable"
+                    android:icon="@drawable/verifylist"
                     android:title="Orders Passed" />
                 <item
                     android:id="@+id/nav_settings"
@@ -53,17 +53,47 @@
             android:title="Administrator Access">
             <menu>
                 <item
+                    android:id="@+id/nav_listEmployers"
+                    android:icon="@drawable/verifyid"
+                    android:title="List of Employers" />
+                <item
                     android:id="@+id/nav_addEmployer"
                     android:icon="@drawable/addicon"
-                    android:title="Employer" />
+                    android:title="Add Employer" />
                 <item
                     android:id="@+id/nav_addDevice"
                     android:icon="@drawable/addicon"
-                    android:title="Device" />
+                    android:title="Add Device" />
                 <item
                     android:id="@+id/nav_addCupboard"
                     android:icon="@drawable/addicon"
-                    android:title="Cupboard" />
+                    android:title="Add Cupboard" />
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Bug"
+            android:title="Helping Developer">
+            <menu>
+                <item
+                    android:id="@+id/nav_bug"
+                    android:icon="@drawable/bug"
+                    android:title="Declare Bug" />
+
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/aboutApp"
+            android:title="About Application">
+            <menu>
+                <item
+                    android:id="@+id/nav_information"
+                    android:icon="@drawable/info"
+                    android:title="Information" />
+
             </menu>
         </item>
     </group>

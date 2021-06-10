@@ -5,6 +5,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.example.id_dev_fire.firestoreClass.ImpactOrder
 import com.example.id_dev_fire.model.Device
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -35,5 +36,6 @@ class EvsViewModel(application: Application) : AndroidViewModel(application) {
         }
 
     }
+
 
 }

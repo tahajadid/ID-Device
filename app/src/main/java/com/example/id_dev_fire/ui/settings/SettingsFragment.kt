@@ -32,7 +32,7 @@ class SettingsFragment : Fragment() {
     lateinit var idEmployer : String
     lateinit var newPhone : EditText
 
-    private lateinit var mFireStoreClass : FirestoreClass
+    private var mFireStoreClass = FirestoreClass()
 
     @ExperimentalStdlibApi
     override fun onCreateView(
@@ -84,19 +84,20 @@ class SettingsFragment : Fragment() {
     fun editNumberPhone(id : String){
         val builder = AlertDialog.Builder(this.requireContext())
         newPhone = EditText(this.requireContext())
+        newPhone.hint = "06XXXX.."
         newPhone.inputType = InputType.TYPE_CLASS_PHONE
         builder.setView(newPhone)
 
         builder.setPositiveButton("Yes") { _, _ ->
-            mFireStoreClass.editPhoneEmployerFirebase(this,"e","e")
+
+            mFireStoreClass.editPhoneEmployerFirebase(this,id,newPhone.text.toString())
 
         }
-        builder.setNegativeButton("No") { _, _ -> }
+        builder.setNegativeButton("Cancel") { _, _ -> }
 
         builder.setTitle("Change Number Phone")
         builder.create().show()
     }
-
 
     private fun showProgressDialog(){
         mProgressDialog = Dialog(this.requireContext())
@@ -111,4 +112,5 @@ class SettingsFragment : Fragment() {
     private fun hideProgressDialog() {
         mProgressDialog.hide()
     }
+
 }

@@ -2,7 +2,6 @@ package com.example.id_dev_fire.ui.AddDevice
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import com.example.id_dev_fire.firestoreClass.FirestoreClass
 import com.example.id_dev_fire.model.Cupboard
 import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Employer
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddDeviceFragment : Fragment() {
@@ -34,7 +32,6 @@ class AddDeviceFragment : Fragment() {
     lateinit var idManagerSelected : String
     lateinit var fullNameManagerSelected : String
 
-
     lateinit var adapterCupboard : ArrayAdapter<String>
     lateinit var adapterManagers : ArrayAdapter<String>
 
@@ -46,6 +43,7 @@ class AddDeviceFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_add_device, container, false)
 
@@ -142,7 +140,7 @@ class AddDeviceFragment : Fragment() {
     private fun getAllCupboards() {
 
         // Get list of Cupboards from database
-        mFirestore.collection("cupboards")
+        mFirestore.collection("cupboards").orderBy("name")
             .get().addOnSuccessListener {
                     for (res in it.toObjects(Cupboard::class.java)) {
                         newlistCupboards.add(res.getName())
@@ -233,4 +231,5 @@ class AddDeviceFragment : Fragment() {
         featuresDevice.text.clear()
         serviceNameDevice.text.clear()
     }
+
 }

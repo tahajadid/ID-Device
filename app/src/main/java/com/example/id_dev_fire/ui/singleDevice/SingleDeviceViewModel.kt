@@ -2,25 +2,49 @@ package com.example.id_dev_fire.ui.singleDevice
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import com.example.id_dev_fire.model.Device
+import com.example.id_dev_fire.model.Order
+import com.example.id_dev_fire.model.QueueDevices
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import java.util.*
 
-class SingleDeviceViewModel(application: Application) : AndroidViewModel(application)  {
+class SingleDeviceViewModel(idDevice : String, application: Application) : AndroidViewModel(
+    application
+)  {
+
+    var readAllData = MutableLiveData<List<Order>>()
+
+    val calendar = Calendar.getInstance()
+    val today = Date(calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH))
 
     private var mFirestore = FirebaseFirestore.getInstance()
+    private var AllData: MutableList<Order> = arrayListOf()
 
     init {
 
-        mFirestore.collection("devices")
-                .whereEqualTo("deviceOwner","Manager EVS")
+        // Need to add orderBy("orderDateStart", Query.Direction.DESCENDING)
+        mFirestore.collection("orders")
+                .whereEqualTo("idDevice",idDevice)
                 .get().addOnCompleteListener {
 
                     if (it.isSuccessful){
-                        for (result in it.result!!) {
-                            val devInfo = result.toObject(Device::class.java)
+
+                        for(res in it.result.toObjects(Order::class.java)){
+                            if(res.getorderDateEnd()!!.after(today)){
+                                AllData.add(res)
+                            }else{
+                                // Noth..
+                            }
                         }
+
+
                     }
 
+                // Set the list of device in the LiveData var
+                readAllData.value = AllData
                 }.addOnFailureListener {
 
                 }

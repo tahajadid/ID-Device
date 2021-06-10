@@ -6,14 +6,19 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.id_dev_fire.model.Employer
 import com.example.id_dev_fire.model.Order
+import com.example.id_dev_fire.notificationClasses.PushNotification
+import com.example.id_dev_fire.notificationClasses.RetrofitInstance
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class OrdersManagerViewModel(application: Application) : AndroidViewModel(application) {
 
     var readAllData = MutableLiveData<List<Order>>()
-    lateinit var tribManager : String
+    lateinit var idManager : String
 
     private var mFirestore = FirebaseFirestore.getInstance()
     private var mFirestoreAuth = FirebaseAuth.getInstance()
@@ -28,33 +33,19 @@ class OrdersManagerViewModel(application: Application) : AndroidViewModel(applic
         mFirestore.collection("employers")
                 .whereEqualTo("id",mFirestoreUser.uid)
                 .get().addOnCompleteListener {
-                    /* ------------------ */
-                    Log.d("tahaa","enter collection employers")
 
                     if (it.isSuccessful){
-                        /* ------------------ */
-                        Log.d("tahaa","enter if it succ")
                         for (manager in it.result!!) {
-                            /* ------------------ */
-                            Log.d("tahaa","enter for Loop")
                             val managerInfo = manager.toObject(Employer::class.java)
-                            tribManager = managerInfo.getEmployerRole() + " " + managerInfo.getEmployerProject()
-                            Log.d("devv", "--------- ${tribManager}")
+                            idManager = managerInfo.getEmployerId()
                         }
-
                         mFirestore.collection("orders")
-                                .whereEqualTo("deviceOwner",tribManager.toString())
+                                .whereEqualTo("deviceOwner",idManager)
                                 .get().addOnCompleteListener {
 
-                                    /* ------------------ */
-                                    Log.d("tahaa","enter Orders collection")
                                     if (it.isSuccessful){
 
-                                        /* ------------------ */
-                                        Log.d("tahaa","enter orders if succ")
                                         for (result in it.result!!) {
-                                            /* ------------------ */
-                                            Log.d("tahaa","enter orders for Loop")
                                             val orderInfo = result.toObject(Order::class.java)
                                             AllDataOrders.add(orderInfo)
                                         }
@@ -67,11 +58,24 @@ class OrdersManagerViewModel(application: Application) : AndroidViewModel(applic
                                 }
                     }
 
-
-
                 }.addOnFailureListener{
 
                 }
+    }
+
+    private fun sendNotification(notification : PushNotification) = CoroutineScope(Dispatchers.IO).launch{
+
+        try {
+            val response = RetrofitInstance.api.postNotification(notification)
+            if(response.isSuccessful){
+                Log.d("testNotif","#### Successful" )
+            }else{
+                Log.d("testNotif", response.errorBody().toString() )
+            }
+
+        }catch (e : Exception){
+            Log.d("testNotif",e.toString() )
+        }
 
     }
 

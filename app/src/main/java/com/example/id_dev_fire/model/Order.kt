@@ -4,18 +4,24 @@ import java.util.*
 
 class Order(
         val id : String? = "",
+        val idDevice : String? = "",
         val deviceName : String? = "",
         val deviceOwner : String? ="",
         val fullNameDeviceOwner : String? ="",
         val currentOwner : String?="",
-        val startDay : String?="",
-        val endDay : String?="",
+        val fullNamecurrentOwner : String?="",
+        val startDay : Date?= Date(),
+        val endDay : Date?=Date(),
         val reason : String? = "",
         // var declaration because it can be changed so it's not a value
         var decision : String? = "") {
 
     fun getorderId() : String? {
         return id
+    }
+
+    fun getOrderDeviceId() : String? {
+        return idDevice
     }
 
     fun getorderDeviceName() : String? {
@@ -31,6 +37,10 @@ class Order(
         return currentOwner
     }
 
+    fun getorderfullNamecurrentOwner() : String?{
+        return fullNamecurrentOwner
+    }
+
     fun getorderFullNameDeviceOwner() : String? {
         return fullNameDeviceOwner
     }
@@ -43,11 +53,11 @@ class Order(
         return decision
     }
 
-    fun getorderDateStart() : String? {
+    fun getorderDateStart() : Date? {
         return startDay
     }
 
-    fun getorderDateEnd() : String? {
+    fun getorderDateEnd() : Date? {
         return endDay
     }
 

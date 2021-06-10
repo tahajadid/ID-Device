@@ -11,4 +11,6 @@
     <color name="reserved">#CC2525</color>
     <color name="refused">#673AB7</color>
     <color name="accepted">#4CAF50</color>
+    <color name="firstGrey">#938597</color>
+    <color name="secondGrey">#4D4A4E</color>
 </resources>

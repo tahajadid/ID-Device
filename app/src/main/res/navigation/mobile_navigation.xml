@@ -89,6 +89,9 @@
         <argument
             android:name="deviceSelected"
             app:argType="com.example.id_dev_fire.model.Device" />
+        <action
+            android:id="@+id/action_nav_singleDeviceFragment_to_employerInformationFragment"
+            app:destination="@id/nav_employerInformation" />
     </fragment>
     <fragment
         android:id="@+id/nav_orderDeviceFragment"
@@ -104,6 +107,9 @@
         <argument
             android:name="deviceNameForOrder"
             app:argType="string" />
+        <argument
+            android:name="idDeviceToPut"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/nav_ordersManager"
@@ -118,5 +124,33 @@
         <action
             android:id="@+id/action_changePasswordFragment_to_nav_settings"
             app:destination="@id/nav_settings" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_bug"
+        android:name="com.example.id_dev_fire.ui.bug.BugFragment"
+        android:label="Declare Bug"
+        tools:layout="@layout/fragment_bug" />
+    <fragment
+        android:id="@+id/nav_listEmployers"
+        android:name="com.example.id_dev_fire.ui.listEmployers.EmployersFragment"
+        android:label="List of Employers"
+        tools:layout="@layout/fragment_employers" />
+    <fragment
+        android:id="@+id/nav_information"
+        android:name="com.example.id_dev_fire.ui.information.InformationFragment"
+        android:label="Application Information"
+        tools:layout="@layout/fragment_information" />
+
+    <fragment
+        android:id="@+id/nav_employerInformation"
+        android:name="com.example.id_dev_fire.ui.userInformation.EmployerInformationFragment"
+        android:label="Employer Information"
+        tools:layout="@layout/fragment_employer_information" >
+        <action
+            android:id="@+id/action_employerInformationFragment_to_nav_singleDeviceFragment"
+            app:destination="@id/nav_singleDeviceFragment" />
+        <argument
+            android:name="idEmployer"
+            app:argType="string" />
     </fragment>
 </navigation>

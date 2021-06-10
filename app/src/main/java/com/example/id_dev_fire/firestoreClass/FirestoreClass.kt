@@ -1,28 +1,31 @@
 package com.example.id_dev_fire.firestoreClass
 
-import android.app.Dialog
 import android.util.Log
 import android.widget.Toast
 import com.example.id_dev_fire.model.*
+import com.example.id_dev_fire.notificationClasses.NotificationData
+import com.example.id_dev_fire.notificationClasses.PushNotification
+import com.example.id_dev_fire.notificationClasses.RetrofitInstance
 import com.example.id_dev_fire.ui.AddCupboard.AddCupboardFragment
 import com.example.id_dev_fire.ui.AddDevice.AddDeviceFragment
 import com.example.id_dev_fire.ui.AddEmployer.AddEmployerFragment
 import com.example.id_dev_fire.ui.OrderDevice.OrderDeviceFragment
-import com.example.id_dev_fire.ui.login.LoginActivity
+import com.example.id_dev_fire.ui.bug.BugFragment
 import com.example.id_dev_fire.ui.register.RegisterActivity
 import com.example.id_dev_fire.ui.settings.SettingsFragment
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FirestoreClass {
 
     private val mFirestoreClass = FirebaseFirestore.getInstance()
-    private val mFirebaseAuth = FirebaseAuth.getInstance()
 
     fun addEmployerFirebase(fragment: AddEmployerFragment,employerInfo: Employer){
 
-        val newEmployerRef = mFirestoreClass.collection("employers").document()
+        val newEmployerRef = mFirestoreClass.collection("employers")
+            .document(employerInfo.getEmployerId())
         val employer = Employer(
                 newEmployerRef.id,
                 employerInfo.firstName,
@@ -31,7 +34,8 @@ class FirestoreClass {
                 employerInfo.phone,
                 employerInfo.gender,
                 employerInfo.role,
-                employerInfo.project)
+                employerInfo.project,
+                false)
 
                 newEmployerRef.set(employer)
                 .addOnSuccessListener {
@@ -54,15 +58,76 @@ class FirestoreClass {
 
     fun addEmployerActivityFirebase(activity: RegisterActivity,employerInfo: Employer){
 
-        val newEmployerRef = mFirestoreClass.collection("employers").document()
+        Log.d("testTokens","-- Intern addEmployerActivityFirebase")
 
-        newEmployerRef.set(employerInfo)
+        val newEmployerRef = mFirestoreClass.collection("employers")
+            .document(employerInfo.getEmployerId())
+
+        val employer = Employer(
+            newEmployerRef.id,
+            employerInfo.firstName,
+            employerInfo.lastName,
+            employerInfo.email,
+            employerInfo.phone,
+            employerInfo.gender,
+            employerInfo.role,
+            employerInfo.project,
+            false)
+
+        newEmployerRef.set(employer)
                 .addOnSuccessListener {
                     Toast.makeText(
                             activity,
-                            "Welcome to ID-Device Application",
+                            "Successfully registered. Please wait access from administrator !",
                             Toast.LENGTH_SHORT
                     ).show()
+                    Log.d("testTokens","-- Intern set Employer")
+                    mFirestoreClass.collection("employers").whereEqualTo("role","Administrator")
+                        .get().addOnCompleteListener {
+                            Log.d("testTokens","-- Intern find employer")
+                            if(it.isSuccessful){
+                                for (actualAdmin in it.result!!.toObjects(Employer::class.java))
+                                {
+                                    Log.d("testTokens","-- Intern for employer")
+                                    mFirestoreClass.collection("tokens")
+                                        .document(actualAdmin.getEmployerId())
+                                        .get().addOnCompleteListener {
+                                            if(it.isSuccessful){
+                                                Log.d("testTokens","-- Intern find token employer")
+                                                val newToken = it.result!!.toObject(TokenDevice::class.java)
+                                                if(newToken != null){
+
+                                                    val title = "New Registration"
+                                                    val message = employerInfo.getEmployerFirstName() +
+                                                            " " + employerInfo.getEmployerLastName() +
+                                                            " was sing up"
+                                                    PushNotification(
+                                                        NotificationData(title,message),
+                                                        newToken!!.getTokDeviceToken().toString()
+                                                    ).also{
+                                                        sendNotification(it)
+                                                    }
+
+                                                }else{
+                                                    Log.d("testTokens","-- Intern Else 1")
+                                                    // Not success
+                                                }
+                                            }else{
+                                                Log.d("testTokens","-- Intern Else 2")
+                                                // Noth..
+                                            }
+                                        }.addOnFailureListener {
+                                            Log.d("testTokens","-- Intern Else 3")
+                                            // Noth..
+                                        }
+                                }
+                            }else{
+                                Log.d("testTokens","-- Intern Else 4")
+
+                            }
+                        }.addOnFailureListener {
+
+                        }
                 }
                 .addOnFailureListener{
                     Toast.makeText(
@@ -74,20 +139,60 @@ class FirestoreClass {
 
     }
 
-    fun addTokenFirebase(activity: LoginActivity,tokenDevice: TokenDevice){
+    fun addTokenFirebase(tokenDevice: TokenDevice){
 
-        val newTokenRef = mFirestoreClass.collection("tokens").document()
-
-        newTokenRef.set(tokenDevice)
-            .addOnSuccessListener {
-
-            }
-            .addOnFailureListener{
-
+        mFirestoreClass.collection("tokens")
+            .document(tokenDevice.getTokId().toString()).get().addOnCompleteListener {
+                if(it.isSuccessful){
+                    if(it.result!!.exists()){
+                        Log.d("TestToken","--- set")
+                        // make update
+                        mFirestoreClass.collection("tokens")
+                            .document(tokenDevice.getTokId().toString()).update(
+                                hashMapOf("deviceToken" to tokenDevice.getTokDeviceToken(),
+                                    "tokDeviceToken" to tokenDevice.getTokDeviceToken()) as Map<String, Any>
+                            )
+                    }else{
+                        Log.d("TestToken","--- update")
+                        // just set the new token
+                        mFirestoreClass.collection("tokens")
+                            .document(tokenDevice.getTokId().toString()).set(tokenDevice)
+                    }
+                }else{
+                    Log.d("TestToken","--- there is a problem")
+                }
+            }.addOnFailureListener {
+                Log.d("TestToken","--- there is a problem")
             }
 
     }
 
+
+    fun addBugFirebase(fragment: BugFragment,bug: Bug){
+
+        val bugRef = mFirestoreClass.collection("bugs").document()
+        val newBug = Bug(bugRef.id,
+            bug.getThisBugOwner(),
+            bug.getBugType(),
+            bug.getBugDescription())
+
+        bugRef.set(newBug)
+            .addOnSuccessListener {
+                Toast.makeText(
+                    fragment.requireContext(),
+                    "Thank's, the Bug was declared to the admin",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            .addOnFailureListener{
+                Toast.makeText(
+                    fragment.requireContext(),
+                    "There was a problem, please try again :(",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+    }
 
     fun addDeviceFirebase(fragment: AddDeviceFragment,deviceInfo: Device){
 
@@ -105,6 +210,9 @@ class FirestoreClass {
                 deviceInfo.projectName,
                 deviceInfo.state,
                 deviceInfo.currentState)
+
+        // add also an empty Queue for the Device
+        addQueueForDeviceFirebase(device.id.toString())
 
         newDeviceRef.set(device)
                 .addOnSuccessListener {
@@ -125,8 +233,19 @@ class FirestoreClass {
                 }
     }
 
-    fun addCupboardFirebase(fragment: AddCupboardFragment,cupboardInfo: Cupboard){
+    fun addQueueForDeviceFirebase(idDevice: String){
+        val newDeviceRef = mFirestoreClass.collection("queueDevices")
+            .document(idDevice)
 
+        val newQueueDevices = QueueDevices(idDevice,0, 0,mutableListOf())
+        newDeviceRef.set(newQueueDevices).addOnCompleteListener {
+            //
+        }.addOnFailureListener {
+            //
+        }
+    }
+
+    fun addCupboardFirebase(fragment: AddCupboardFragment,cupboardInfo: Cupboard){
 
         val newCupboardRef = mFirestoreClass.collection("cupboards").document()
         val newCupboard = Cupboard(newCupboardRef.id,cupboardInfo.getName())
@@ -155,46 +274,50 @@ class FirestoreClass {
         val newOrderdRef = mFirestoreClass.collection("orders").document()
         val newOrder = Order(
                 newOrderdRef.id,
+                orderInfo.idDevice,
                 orderInfo.deviceName,
                 orderInfo.deviceOwner,
-                orderInfo.currentOwner,
                 orderInfo.fullNameDeviceOwner,
+                orderInfo.currentOwner,
+                orderInfo.fullNamecurrentOwner,
                 orderInfo.startDay,
                 orderInfo.endDay,
                 orderInfo.reason,
                 orderInfo.decision)
 
-        newOrderdRef
-                .set(newOrder)
-                .addOnSuccessListener {
-
-                    Toast.makeText(
-                            fragment.context,
-                            "The order was added",
-                            Toast.LENGTH_SHORT
-                    ).show()
-                }
-                .addOnFailureListener{
-
-                    Toast.makeText(
-                            fragment.context,
-                            "There was a problem, please try again :(",
-                            Toast.LENGTH_SHORT
-                    ).show()
-                }
-    }
-
-
-    fun editPhoneEmployerFirebase(fragment: SettingsFragment,iid : String, number : String){
-
-        val newEmployerRef = mFirestoreClass.collection("employers").document(iid)
-
-        newEmployerRef.update(mapOf("a" to number))
+        newOrderdRef.set(newOrder)
             .addOnSuccessListener {
+
+                mFirestoreClass.collection("tokens")
+                    .document(newOrder.getorderDeviceOwner().toString())
+                    .get().addOnCompleteListener {
+                        if(it.isSuccessful){
+
+                            val newToken = it.result!!.toObject(TokenDevice::class.java)
+                            if(newToken != null){
+
+                                val title = "New Order"
+                                val message = "New order by " + orderInfo.fullNamecurrentOwner + " of < " + orderInfo.deviceName+" >"
+                                PushNotification(
+                                    NotificationData(title,message),
+                                    newToken!!.getTokDeviceToken().toString()
+                                ).also{
+                                    sendNotification(it)
+                                }
+
+                            }else{
+                                // Not success
+                            }
+                        }else{
+                            // Noth..
+                        }
+                    }.addOnFailureListener {
+                            // Noth..
+                    }
 
                 Toast.makeText(
                     fragment.context,
-                    "The Cupboard was added",
+                    "The order was added",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -206,6 +329,49 @@ class FirestoreClass {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+    }
+
+
+    fun editPhoneEmployerFirebase(fragment: SettingsFragment,id : String, number : String){
+
+        val newNumber = number.toLong()
+        val newEmployerRef = mFirestoreClass.collection("employers").document(id)
+
+        newEmployerRef.update(
+            mapOf("employerPhone" to newNumber,
+            "phone" to newNumber))
+            .addOnSuccessListener {
+                Toast.makeText(
+                    fragment.context,
+                    "The NumberPhone was changed",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            .addOnFailureListener{
+
+                Toast.makeText(
+                    fragment.context,
+                    "There was a problem, please try again :(",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+    }
+
+
+    private fun sendNotification(notification : PushNotification) = CoroutineScope(Dispatchers.IO).launch{
+
+        try {
+            val response = RetrofitInstance.api.postNotification(notification)
+            if(response.isSuccessful){
+                Log.d("testNotif","#### Successful" )
+            }else{
+                Log.d("testNotif", response.errorBody().toString() )
+            }
+
+        }catch (e : Exception){
+            Log.d("testNotif",e.toString() )
+        }
+
     }
 
 }

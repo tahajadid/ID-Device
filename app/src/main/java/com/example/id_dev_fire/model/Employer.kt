@@ -9,7 +9,8 @@ class Employer (
     val phone : Long = 0,
     val gender : String = "",
     val role : String = "",
-    val project : String = ""
+    val project : String = "",
+    val flagAccess : Boolean = false,
 ) {
     fun getEmployerId() : String {
         return id
@@ -38,8 +39,11 @@ class Employer (
         return role
     }
 
-
     fun getEmployerProject() : String {
         return project
+    }
+
+    fun getEmployerFlagAccess() : Boolean {
+        return flagAccess
     }
 }

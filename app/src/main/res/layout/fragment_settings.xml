@@ -11,13 +11,13 @@
     tools:context=".ui.settings.SettingsFragment">
 
     <LinearLayout
-        android:layout_width="353dp"
-        android:layout_height="551dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="151dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
@@ -38,8 +38,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -66,7 +66,7 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dip"
-            android:background="#fff"/>
+            android:background="#fff" />
 
         <TextView
             android:id="@+id/email_label"
@@ -93,9 +93,9 @@
             android:backgroundTint="#FFF"
             android:ems="10"
             android:text="*****@idemia.com"
-            android:textSize="18sp"
             android:textColor="#FFF"
-            android:textColorHint="#FFF" />
+            android:textColorHint="#FFF"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/phone_label"
@@ -134,9 +134,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAlignment="textEnd"
+                android:gravity="end"
                 android:orientation="horizontal"
-                android:gravity="end">
+                android:textAlignment="textEnd">
 
                 <TextView
                     android:id="@+id/changePhone_label"
@@ -145,10 +145,10 @@
                     android:layout_marginTop="4dp"
                     android:gravity="end"
                     android:text="Edit"
-                    android:textStyle="italic"
                     android:textAlignment="viewEnd"
                     android:textColor="#FFF"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="italic" />
 
                 <ImageView
                     android:id="@+id/editPhone_iv"
@@ -169,13 +169,13 @@
             android:id="@+id/gender_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
             android:gravity="start"
             android:text="Gender :"
-            android:layout_marginTop="14dp"
             android:textAlignment="viewStart"
             android:textColor="#FFF"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/genderSetting_tv"
@@ -190,21 +190,21 @@
             android:backgroundTint="#FFF"
             android:ems="10"
             android:text=" "
-            android:textSize="18sp"
             android:textColor="#FFF"
-            android:textColorHint="#FFF" />
+            android:textColorHint="#FFF"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/project_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
             android:gravity="start"
             android:text="Project :"
-            android:layout_marginTop="14dp"
             android:textAlignment="viewStart"
             android:textColor="#FFF"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/projectSetting_tv"
@@ -219,29 +219,29 @@
             android:backgroundTint="#FFF"
             android:ems="10"
             android:text=" "
-            android:textSize="18sp"
             android:textColor="#FFF"
             android:textColorHint="#FFF"
-            />
+            android:textSize="18sp" />
 
         <View
             android:layout_width="fill_parent"
-            android:layout_marginTop="14dp"
             android:layout_height="1dip"
-            android:background="#fff"/>
+            android:layout_marginTop="14dp"
+            android:background="#fff" />
+
         <View
             android:layout_width="fill_parent"
-            android:layout_marginTop="2dp"
             android:layout_height="1dip"
-            android:background="#3EFFFFFF"/>
+            android:layout_marginTop="2dp"
+            android:background="#3EFFFFFF" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAlignment="textEnd"
             android:layout_marginTop="4dp"
+            android:gravity="end"
             android:orientation="horizontal"
-            android:gravity="end">
+            android:textAlignment="textEnd">
 
             <TextView
                 android:id="@+id/changePwd_label"
@@ -253,7 +253,7 @@
                 android:textAlignment="viewEnd"
                 android:textColor="#DEB9FA"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 

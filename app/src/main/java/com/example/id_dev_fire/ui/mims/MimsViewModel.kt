@@ -14,11 +14,13 @@ class MimsViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
 
-        mFirestore.collection("devices")
-                .whereEqualTo("deviceOwner","Manager MiMs")
+        if(readAllData.value.isNullOrEmpty()) {
+
+            mFirestore.collection("devices")
+                .whereEqualTo("projectName", "MiMs")
                 .get().addOnCompleteListener {
 
-                    if (it.isSuccessful){
+                    if (it.isSuccessful) {
                         for (result in it.result!!) {
                             val devInfo = result.toObject(Device::class.java)
                             AllData.add(devInfo)
@@ -30,6 +32,8 @@ class MimsViewModel(application: Application) : AndroidViewModel(application) {
                 }.addOnFailureListener {
 
                 }
+        }
+
     }
 
 }

@@ -127,7 +127,8 @@ class AddEmployerFragment : Fragment() {
                             actualphone.toLong(),
                             this.genderSelected,
                             this.roleSelected,
-                            this.tribSelected
+                            this.tribSelected,
+                        false
                     )
 
                     // Get Firebase instance and put the Employer Object to add it

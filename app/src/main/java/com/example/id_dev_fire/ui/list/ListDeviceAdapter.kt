@@ -35,15 +35,28 @@ class ListDeviceAdapter : RecyclerView.Adapter<ListDeviceAdapter.MyViewHolder>()
         return DevList.size
     }
     
-    @SuppressLint("RestrictedApi")
+    @SuppressLint("RestrictedApi", "ResourceAsColor")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         val currentDevice = DevList[position]
 
-        holder.itemView.findViewById<TextView>(R.id.nameDevice_txt).setText(currentDevice.getdevName())
-        holder.itemView.findViewById<TextView>(R.id.version_tv).setText(currentDevice.getvdeVersion())
-        holder.itemView.findViewById<TextView>(R.id.fullNameDeviceOwner_label_txt).setText(currentDevice.getdevFullNameOwner())
-        holder.itemView.findViewById<TextView>(R.id.projectDev_txt).setText(currentDevice.getdevProjectName())
+        holder.itemView.findViewById<TextView>(R.id.nameDevice_txt)
+            .setText(currentDevice.getdevName())
+        holder.itemView.findViewById<TextView>(R.id.version_tv)
+            .setText(currentDevice.getvdeVersion())
+        holder.itemView.findViewById<TextView>(R.id.fullNameDeviceOwner_label_txt)
+            .setText(currentDevice.getdevFullNameOwner())
+        holder.itemView.findViewById<TextView>(R.id.projectDev_txt)
+            .setText(currentDevice.getdevProjectName())
+
+        if(currentDevice.getdevCurrentState().toString() == "Reserved"){
+            holder.itemView.findViewById<TextView>(R.id.circle_currentState)
+                .setBackgroundResource(R.drawable.mycercle_red)
+            holder.itemView.findViewById<TextView>(R.id.deviceCurrentState_tv)
+                .setText(currentDevice.getdevCurrentState())
+            holder.itemView.findViewById<TextView>(R.id.deviceCurrentState_tv)
+                .setTextColor(R.color.black)
+        }
 
         this.Deviceid = currentDevice.getdevId().toString()
 

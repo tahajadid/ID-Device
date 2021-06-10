@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">ID-Device</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -8,9 +9,9 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="role">
-        <item>Administrator</item>
         <item>Developer</item>
         <item>Manager</item>
+        <item>Administrator</item>
     </string-array>
 
     <string-array name="gender">
@@ -22,20 +23,8 @@
         <item>EVS</item>
         <item>MiMs</item>
         <item>MESA</item>
-        <item>ID-Capture</item>
-    </string-array>
-
-    <string-array name="ownerList">
-        <item>Manager EVS</item>
-        <item>Manager MESA</item>
-        <item>Manager MiMs</item>
-    </string-array>
-
-    <string-array name="cupboardList">
-        <item>EVS_1</item>
-        <item>EVS_2</item>
-        <item>MiMs_1</item>
-        <item>MESA_1</item>
+        <item>IC-VS</item>
+        <item>MBIS</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

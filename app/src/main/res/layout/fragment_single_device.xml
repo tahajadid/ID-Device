@@ -1,162 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.singleDevice.SingleDeviceFragment">
+    android:layout_width="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="15dp">
+        tools:context=".ui.singleDevice.SingleDeviceFragment"
+        tools:ignore="ScrollViewSize">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="143dp"
-            android:background="@drawable/myview"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="260dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/myview"
-                android:padding="10dp"
-                android:src="?attr/actionModeSelectAllDrawable" />
+            android:id="@+id/linearLayout3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingTop="14dp">
+                android:layout_height="wrap_content"
+                android:background="@drawable/myview"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/nameSingleDevice_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:text="Name of the Device"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="200dp"
+                    android:layout_height="114dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/myview"
+                    android:padding="10dp"
+                    android:src="?attr/actionModeSelectAllDrawable" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="12dp">
 
                     <TextView
-                        android:id="@+id/versionSingleDevice_label"
+                        android:id="@+id/nameSingleDevice_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
-                        android:text="Version "
-                        android:textStyle="bold|italic" />
-
-                    <TextView
-                        android:id="@+id/versionSingleDevice_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingLeft="2dp"
-                        android:text="2.2.1" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/available_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:text="Available "
-                        android:textStyle="bold|italic" />
-
-                    <TextView
-                        android:id="@+id/dateAvailable_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="Now"
-                        android:textColor="#4CAF50"
+                        android:text="Name of the Device"
+                        android:textColor="?attr/colorOnSecondary"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/versionSingleDevice_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:text="Version "
+                            android:textStyle="bold|italic" />
+
+                        <TextView
+                            android:id="@+id/versionSingleDevice_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:paddingLeft="2dp"
+                            android:text="2.2.1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/available_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:text="Available "
+                            android:textStyle="bold|italic" />
+
+                        <TextView
+                            android:id="@+id/dateAvailable_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0"
+                            android:text=".."
+                            android:textColor="#4CAF50"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/placeDevice_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:text="Place "
+                            android:textStyle="bold|italic" />
+
+                        <TextView
+                            android:id="@+id/placeDevice_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0"
+                            android:text=".."
+                            android:textColor="#4CAF50"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <TextView
-                android:id="@+id/serviceName_label"
-                android:layout_width="111dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Service name"
-                android:textColor="#7030A0"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/supportedOsSingleDevice_label"
-                android:layout_width="108dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Supported OS"
-                android:textColor="#7030A0"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/featuresSingleDevice_label"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Features"
-                android:textColor="#7030A0"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:padding="8dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="106dp"
-            android:orientation="horizontal"
-            android:padding="8dp">
+                <TextView
+                    android:id="@+id/serviceName_label"
+                    android:layout_width="111dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Service name"
+                    android:textColor="#7030A0"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/serviceName_tv"
-                android:layout_width="112dp"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal" />
+                <TextView
+                    android:id="@+id/supportedOsSingleDevice_label"
+                    android:layout_width="108dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Supported OS"
+                    android:textColor="#7030A0"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/supportedOsSingleDevice_tv"
-                android:layout_width="110dp"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal" />
+                <TextView
+                    android:id="@+id/featuresSingleDevice_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Features"
+                    android:textColor="#7030A0"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/featuresSingleDevice_tv"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/serviceName_tv"
+                    android:layout_width="112dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal" />
+
+                <TextView
+                    android:id="@+id/supportedOsSingleDevice_tv"
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal" />
+
+                <TextView
+                    android:id="@+id/featuresSingleDevice_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <Button
@@ -164,10 +206,82 @@
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="Order Device"
-            app:backgroundTint="#7030A0" />
+            app:backgroundTint="#7030A0"
+            android:textColor="#FFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:src="@drawable/lineseparate"
+            app:layout_constraintTop_toBottomOf="@+id/orderDevice_button"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/listOfOrders_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="List of orders"
+            android:textColor="#7030A0"
+            android:textSize="18sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_orderedby"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/listOfOrders_tv" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim_empty_singleDev"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/listOfOrders_tv"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/search_empty_light"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/noDeviceFound_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="cursive"
+            android:textColor="?attr/colorOnSecondary"
+            android:gravity="center"
+            android:text="No Orders found"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/anim_empty_singleDev"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

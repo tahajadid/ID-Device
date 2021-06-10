@@ -117,7 +117,7 @@
             android:layout_gravity="center"
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
-            android:background="@drawable/view_order"
+            android:background="@drawable/side_nav_bar"
             android:padding="16dp"
             app:srcCompat="@drawable/delete_white" />
 

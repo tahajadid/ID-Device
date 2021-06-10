@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+
+        android:id="@+id/rowDeviceLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.bug.BugFragment">
+
+        <TextView
+            android:id="@+id/typeBug_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="18dp"
+            android:text="Type of Bug :"
+            android:textColor="#7030a0" />
+
+        <RadioGroup
+            android:id="@+id/group_radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/typeBug_label"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="18dp"
+            android:textColor="#7030a0">
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="in UI"
+                android:textColor="#7030a0"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="in UX"
+                android:textColor="#7030a0"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="other.."
+                android:textColor="#7030a0"
+                android:textStyle="bold" />
+        </RadioGroup>
+
+
+        <TextView
+            android:id="@+id/descriptionBug_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/group_radioButton"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="35dp"
+            android:text="Description of the Bug :"
+            android:textColor="#7030a0" />
+
+        <EditText
+            android:id="@+id/descriptionBug_et"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_below="@+id/descriptionBug_label"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="18dp"
+            android:backgroundTint="#7030a0"
+            android:ems="0"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/anim"
+        android:layout_width="match_parent"
+        android:layout_height="141dp"
+        android:layout_below="@+id/addBug_btn"
+        android:layout_marginTop="14dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/mobile" />
+
+    <TextView
+            android:id="@+id/ownBug_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/anim"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center_horizontal"
+            android:text="We are doing our best"
+            android:textAlignment="center"
+            android:textColor="#7030A0"
+            android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/addBug_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descriptionBug_et"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:textColor="#FFF"
+        android:text="Add Bug" />
+
+
+</RelativeLayout>
+
+</ScrollView>
+

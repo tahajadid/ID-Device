@@ -33,7 +33,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:text="Device :"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:textStyle="italic" />
 
                 <TextView
@@ -44,7 +44,7 @@
                     android:layout_marginLeft="6dp"
                     android:text="e-doc"
                     android:textColor="#000000"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
-                    android:text="Manager EVS"
+                    android:text="dd"
                     android:textColor="#000000"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -126,8 +126,8 @@
 
                 <TextView
                     android:id="@+id/reasonOfOrderManager_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:paddingLeft="2dp"
                     android:text="I want to test"
                     android:textColor="#7030A0"
@@ -178,8 +178,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="369dp"
                 android:layout_weight="1"
-                android:background="@drawable/view_order"
-                android:padding="4dp"
+                android:background="@drawable/side_nav_bar"
+                android:padding="6dp"
                 app:srcCompat="@drawable/delete_white" />
 
             <ImageView
@@ -188,7 +188,7 @@
                 android:layout_height="88dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="2dp"
-                android:background="@drawable/view_order"
+                android:background="@drawable/side_nav_bar"
                 android:padding="16dp"
                 app:srcCompat="@drawable/checkmark_white" />
         </LinearLayout>

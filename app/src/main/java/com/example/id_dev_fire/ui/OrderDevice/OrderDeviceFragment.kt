@@ -1,20 +1,31 @@
 package com.example.id_dev_fire.ui.OrderDevice
 
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.OrientationEventListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.id_dev_fire.MainActivity
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.firestoreClass.FirestoreClass
 import com.example.id_dev_fire.model.Device
+import com.example.id_dev_fire.model.Employer
 import com.example.id_dev_fire.model.Order
+import com.example.id_dev_fire.notificationClasses.NotificationData
+import com.example.id_dev_fire.notificationClasses.PushNotification
+import com.example.id_dev_fire.notificationClasses.RetrofitInstance
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,6 +54,7 @@ class OrderDeviceFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_order_device, container, false)
         reason = root.findViewById(R.id.reasonOrder_et)
@@ -53,11 +65,27 @@ class OrderDeviceFragment : Fragment() {
         // Make the name of device on Top
         root.findViewById<TextView>(R.id.nameDevOrder_tv).setText(args.deviceNameForOrder)
 
+        /*
+        // I need to detect the rotation event and delete the background when the phone is rotated
+        val orientationEventListener = object : OrientationEventListener(context){
+
+            override fun onOrientationChanged(orientation: Int) {
+
+                Log.d("testOrientation","---------------1")
+                val rel = root.findViewById<RelativeLayout>(R.id.relativeLayoutOfOrder)
+                rel.setBackgroundResource(0)
+            }
+        }
+        orientationEventListener.enable()
+
+         */
+
+
         // Getting the current date
         val sdf = SimpleDateFormat("d-M-yyyy")
         val currentDay = sdf.format(Date())
         val today  = Calendar.getInstance()
-
+        val toPlot = Date(2021,0,4)
         // Initialize the two value of Start/End day to avoid the lateinit propriety of two variables
 
         root.findViewById<TextView>(R.id.toDate_tv).setText(currentDay.toString())
@@ -66,21 +94,18 @@ class OrderDeviceFragment : Fragment() {
         dateEnd = Date(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH))
         dateStart = Date(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH))
 
-        // Initialize the Picker to know the choice of user
         datePickerFrom.init(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH)){
             view, year, month, day ->
-            val month = month + 1
             dateStart = Date(year,month,day)
-            val actualStart = day.toString()+"-"+month.toString()+"-"+year.toString()
+            val actualStart = day.toString()+"-"+(month+1).toString()+"-"+year.toString()
             val actualDateStart = root.findViewById<TextView>(R.id.fromDate_tv)
             actualDateStart.setText(actualStart)
         }
 
         datePickerTo.init(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH)){
             view, year, month, day ->
-            val month = month + 1
             dateEnd = Date(year,month,day)
-            val actualEnd = day.toString()+"-"+month.toString()+"-"+year.toString()
+            val actualEnd = day.toString()+"-"+(month+1).toString()+"-"+year.toString()
             val actualDateEnd = root.findViewById<TextView>(R.id.toDate_tv)
             actualDateEnd.setText(actualEnd)
         }
@@ -92,10 +117,21 @@ class OrderDeviceFragment : Fragment() {
         return root
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        Log.d("testOrientation","---------------122")
+        super.onConfigurationChanged(newConfig)
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Log.d("testOrientation","---------------22")
+        }else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Log.d("testOrientation","---------------333")
+        }
+
+    }
+
     fun checkDate() : Boolean {
 
         // We check if the period is exact
-        return dateEnd.after(dateStart)
+        return dateEnd.after(dateStart) || dateEnd.equals(dateStart)
     }
 
     fun getAllInformation() {
@@ -117,46 +153,54 @@ class OrderDeviceFragment : Fragment() {
                         mFirestoreUser= mFirestoreAuth.currentUser
                         currentOwner_uid = mFirestoreUser.uid
 
-                        /*
-                        * This step just to see if Document in Firestore was created two times
-                        * */
+                        mFirestore.collection("employers").document(mFirestoreUser.uid)
+                            .get().addOnCompleteListener {
+                                val CurrentEmployer = it.result!!.toObject(Employer::class.java)
+                                val fullNameCurrentOwner : String = CurrentEmployer!!.getEmployerFirstName()+" "+
+                                        CurrentEmployer.getEmployerLastName()
+                                /*
+                                * This step just to see if Document in Firestore was created two times
+                                * */
 
-                        val dateStart_to_put = dateStart.toString()
-                        val dateEnd_to_put = dateEnd.toString()
-                        val reason_to_put = reason.text.toString()
+                                val reason_to_put = reason.text.toString()
 
-                        // Create an Order Object
-                        // We pass at first the device name as an id
-                        order = Order(
-                                args.deviceNameForOrder,
-                                args.deviceNameForOrder,
-                                deviceOwner,
-                                currentOwner_uid,
-                                fullNameDeviceOwner,
-                                dateStart_to_put,
-                                dateEnd_to_put,
-                                reason_to_put,
-                                "On Hold"
-                        )
+                                // Create an Order Object
+                                // We pass at first the device name as an id
+                                order = Order(
+                                    args.deviceNameForOrder,
+                                    args.idDeviceToPut,
+                                    args.deviceNameForOrder,
+                                    deviceOwner,
+                                    fullNameDeviceOwner,
+                                    currentOwner_uid,
+                                    fullNameCurrentOwner,
+                                    dateStart,
+                                    dateEnd,
+                                    reason_to_put,
+                                    "On Hold"
+                                )
 
-                        FirestoreClass().addOrderFirebase(this,order)
+                                FirestoreClass().addOrderFirebase(this,order)
 
-                        val action = OrderDeviceFragmentDirections.actionNavOrderDeviceFragmentToNavOrders()
-                        // take the id of the selected device
-                        findNavController().navigate(action)
+                                val action = OrderDeviceFragmentDirections.actionNavOrderDeviceFragmentToNavOrders()
+
+                                // take the id of the selected device
+                                findNavController().navigate(action)
+                            }.addOnFailureListener {
+                                // Noth..
+                            }
+
 
                     }.addOnFailureListener {
 
                     }
         }else {
-
             Toast.makeText(
                     this.context,
                     "The End is after the Start Date ",
                     Toast.LENGTH_SHORT
             ).show()
         }
-
 
     }
 

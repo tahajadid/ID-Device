@@ -8,14 +8,12 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.*
-import com.example.id_dev_fire.MainActivity
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.firestoreClass.FirestoreClass
 import com.example.id_dev_fire.model.Employer
 import com.example.id_dev_fire.model.TokenDevice
+import com.example.id_dev_fire.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.messaging.FirebaseMessaging
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -36,8 +34,6 @@ class RegisterActivity : AppCompatActivity() {
 
     lateinit var btn_addEmployer : Button
     lateinit var mProgressDialog: Dialog
-
-    lateinit var tokenDevice : TokenDevice
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,8 +68,8 @@ class RegisterActivity : AppCompatActivity() {
         roleSpinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                val text: String = p0?.getItemAtPosition(p2).toString()
-                roleSelected = text
+                val value : String = p0?.getItemAtPosition(p2).toString()
+                roleSelected = value
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -127,14 +123,15 @@ class RegisterActivity : AppCompatActivity() {
                             actualphone.toLong(),
                             this.genderSelected,
                             this.roleSelected,
-                            this.tribSelected
+                            this.tribSelected,
+                        false
                     )
 
                     // Get Firebase instance and put the Employer Object to add it
                     FirestoreClass().addEmployerActivityFirebase(this,employer)
                     hideProgressDialog()
 
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
 
@@ -157,9 +154,27 @@ class RegisterActivity : AppCompatActivity() {
 
             TextUtils.isEmpty(employerEmail.text.toString().trim(){ it <= ' ' }) -> {
                 Toast.makeText(
+                    this,
+                    "please enter your E-mail adress",
+                    Toast.LENGTH_SHORT
+                ).show()
+                false
+            }
+
+            TextUtils.isEmpty(firstName.text.toString().trim(){ it <= ' ' }) -> {
+                Toast.makeText(
                         this,
-                        "please enter an Email",
+                        "please enter your First name",
                         Toast.LENGTH_SHORT
+                ).show()
+                false
+            }
+
+            TextUtils.isEmpty(lastName.text.toString().trim(){ it <= ' ' }) -> {
+                Toast.makeText(
+                    this,
+                    "please enter your Last name",
+                    Toast.LENGTH_SHORT
                 ).show()
                 false
             }
@@ -178,6 +193,15 @@ class RegisterActivity : AppCompatActivity() {
                         this,
                         "please enter second field of the password",
                         Toast.LENGTH_SHORT
+                ).show()
+                false
+            }
+
+            TextUtils.isEmpty(phone.text.toString().trim(){ it <= ' ' }) -> {
+                Toast.makeText(
+                    this,
+                    "please enter your Phone number",
+                    Toast.LENGTH_SHORT
                 ).show()
                 false
             }

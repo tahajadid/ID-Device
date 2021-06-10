@@ -6,6 +6,8 @@ plugins {
 
 apply plugin : "androidx.navigation.safeargs.kotlin"
 apply plugin: "com.google.gms.google-services"
+apply plugin: 'com.google.firebase.crashlytics'
+
 
 android {
     compileSdkVersion 30
@@ -13,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.id_dev_fire"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -55,18 +57,36 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:20.0.4'
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     implementation 'com.google.firebase:firebase-firestore-ktx:22.1.2'
+    implementation 'com.google.firebase:firebase-inappmessaging-display-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    //noinspection GradleCompatible
+    implementation 'com.android.support:support-compat:28.0.0'
 
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
 
     implementation 'com.airbnb.android:lottie:3.6.1'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 
     // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // Shimmer
+    implementation "com.facebook.shimmer:shimmer:0.1.0@aar"
 
     testImplementation 'junit:junit:4.+'
     implementation 'com.android.support:multidex:2.0.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    testImplementation "com.google.truth:truth:1.0.1"
+
 }

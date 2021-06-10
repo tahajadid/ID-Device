@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:textColor="#000"
+                    android:textColor="?attr/colorOnSecondary"
                     android:layout_marginLeft="6dp"
                     android:text="Dev"
                     android:textSize="14sp"
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
-                    android:text="Version :"
+                    android:text="Version : "
                     android:textSize="12sp"
                     android:textStyle="italic" />
 
@@ -90,11 +90,11 @@
 
                 <TextView
                     android:id="@+id/fullNameDeviceOwner_label"
-                    android:layout_width="44dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
-                    android:text="Owner :"
+                    android:text="Owner : "
                     android:textSize="12sp"
                     android:textStyle="italic" />
 
@@ -115,11 +115,11 @@
 
                 <TextView
                     android:id="@+id/projectDev_label"
-                    android:layout_width="44dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
-                    android:text="Project :"
+                    android:text="Project : "
                     android:textSize="12sp"
                     android:textStyle="italic" />
 
@@ -143,8 +143,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginLeft="60dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
                     android:width="8dp"
                     android:height="8dp"
                     android:background="@drawable/mycircle" />

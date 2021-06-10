@@ -1,15 +1,14 @@
 package com.example.id_dev_fire
 
 import android.annotation.SuppressLint
+import android.app.Notification
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.SearchView
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -20,6 +19,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Employer
 import com.example.id_dev_fire.ui.list.ListDeviceAdapter
@@ -49,7 +50,9 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.Q)
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -74,14 +77,14 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_mims,R.id.nav_mesa, R.id.nav_evs,
         R.id.nav_settings,R.id.nav_orders,R.id.nav_support,R.id.nav_addEmployer,R.id.nav_addDevice,
         R.id.nav_addCupboard,R.id.nav_singleDeviceFragment,R.id.nav_orderDeviceFragment,
-        R.id.nav_ordersManager,R.id.nav_changePassword)
+        R.id.nav_ordersManager,R.id.nav_changePassword,R.id.nav_bug,R.id.nav_bug,R.id.nav_listEmployers,
+        R.id.nav_information)
             , drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         setInfo(navView)
-
 
         button_logout.setOnClickListener{
             mFirestoreAuth.signOut()
@@ -106,9 +109,9 @@ class MainActivity : AppCompatActivity() {
                             employer = res.toObject(Employer::class.java)
                             longNameEmployer = employer.getEmployerFirstName() + " " + employer.getEmployerLastName()
                             roleEmployer = employer.getEmployerRole()
-                            redrawNavView(navView,roleEmployer)
                             userName.setText(longNameEmployer)
                         }
+                        redrawNavView(navView,roleEmployer)
                     }else {
                         userName.setText("User")
                         redrawNavView(navView,"User")
@@ -126,12 +129,14 @@ class MainActivity : AppCompatActivity() {
         // we pass a last case as a "User" when we will fail to connect to firebase
         // and we give to this user the access as a developer
 
+
         when(roleEmployer) {
             "Manager" -> {
                 navView.menu.findItem(R.id.nav_addCupboard).setVisible(false)
                 navView.menu.findItem(R.id.nav_addDevice).setVisible(false)
                 navView.menu.findItem(R.id.nav_addEmployer).setVisible(false)
                 navView.menu.findItem(R.id.nav_orders).setVisible(false)
+                navView.menu.findItem(R.id.nav_listEmployers).setVisible(false)
             }
             "Administrator" -> {
                 navView.menu.findItem(R.id.nav_orders).setVisible(false)
@@ -142,6 +147,7 @@ class MainActivity : AppCompatActivity() {
                 navView.menu.findItem(R.id.nav_addDevice).setVisible(false)
                 navView.menu.findItem(R.id.nav_addEmployer).setVisible(false)
                 navView.menu.findItem(R.id.nav_ordersManager).setVisible(false)
+                navView.menu.findItem(R.id.nav_listEmployers).setVisible(false)
             }
         }
 
@@ -152,19 +158,5 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-/*
-    override fun onCreateOptionsMenu(menu: Menu?) : Boolean{
-        menuInflater.inflate(R.menu.main,menu)
-
-        val item = menu?.findItem(R.id.app_bar_search)
-        val searchView : androidx.appcompat.widget.SearchView = item?.actionView as androidx.appcompat.widget.SearchView
-
-        searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
-        Log.d("IntoMain","into for onCreateOptionsMenu -- ")
-        return true
-    }
-
- */
 
 }
