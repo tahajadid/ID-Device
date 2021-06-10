@@ -3,10 +3,7 @@ package com.example.id_dev_fire.ui.settings
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.text.InputType
-import android.text.Layout
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,15 +11,11 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.firestoreClass.FirestoreClass
-import com.example.id_dev_fire.ui.mims.MimsFragmentDirections
-import com.example.id_dev_fire.ui.orders.OrdersViewModel
-import com.google.firebase.firestore.FirebaseFirestore
 
 
 class SettingsFragment : Fragment() {

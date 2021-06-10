@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.id_dev_fire.MainActivity
@@ -32,6 +31,8 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         showProgressDialog()
 
+        // We need to verify if a user had already logged in
+        // We just verify (onStart the Activity) the uid exist
         if(actualUser != null){
 
             FirebaseFirestore.getInstance().collection("employers")
@@ -73,7 +74,15 @@ class LoginActivity : AppCompatActivity() {
                         ).show()
                     }
 
-                 }
+                 }.addOnFailureListener {
+
+                    hideProgressDialog()
+                    Toast.makeText(
+                        this,
+                        "Please try again !",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
         }else{
             hideProgressDialog()
@@ -156,6 +165,12 @@ class LoginActivity : AppCompatActivity() {
                                     }
 
                                 }.addOnFailureListener {
+                                    hideProgressDialog()
+                                    Toast.makeText(
+                                        this,
+                                        "Please try again !",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                         } else {
                             hideProgressDialog()

@@ -16,14 +16,17 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class OrdersFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
+    private var mFirestore = FirebaseFirestore.getInstance()
+
     private lateinit var ordersViewModel: OrdersViewModel
     lateinit var mProgressDialog: Dialog
-    private lateinit var orderList:ArrayList<Order>
-    private var mFirestore = FirebaseFirestore.getInstance()
     lateinit var thisRecyclerView : RecyclerView
+
+    private lateinit var orderList:ArrayList<Order>
     private var AllOrders: MutableList<Order> = arrayListOf()
     private var SearchOrders: MutableList<Order> = arrayListOf()
     lateinit var adapter: ListOrdersAdapter
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -92,7 +95,7 @@ class OrdersFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQueryT
             .orderBy("deviceName").startAt(newText).endAt(newText + "\uf8ff").addSnapshotListener { value, error ->
                 SearchOrders = arrayListOf()
                 for(a in value!!.toObjects(Order::class.java)){
-                    // Log the list with the name of devices
+
                     SearchOrders.add(a)
                 }
                 AllOrders = SearchOrders

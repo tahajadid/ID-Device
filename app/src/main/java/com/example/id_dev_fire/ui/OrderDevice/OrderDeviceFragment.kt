@@ -1,31 +1,21 @@
 package com.example.id_dev_fire.ui.OrderDevice
 
-import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.OrientationEventListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.id_dev_fire.MainActivity
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.firestoreClass.FirestoreClass
 import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Employer
 import com.example.id_dev_fire.model.Order
-import com.example.id_dev_fire.notificationClasses.NotificationData
-import com.example.id_dev_fire.notificationClasses.PushNotification
-import com.example.id_dev_fire.notificationClasses.RetrofitInstance
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -65,27 +55,12 @@ class OrderDeviceFragment : Fragment() {
         // Make the name of device on Top
         root.findViewById<TextView>(R.id.nameDevOrder_tv).setText(args.deviceNameForOrder)
 
-        /*
-        // I need to detect the rotation event and delete the background when the phone is rotated
-        val orientationEventListener = object : OrientationEventListener(context){
-
-            override fun onOrientationChanged(orientation: Int) {
-
-                Log.d("testOrientation","---------------1")
-                val rel = root.findViewById<RelativeLayout>(R.id.relativeLayoutOfOrder)
-                rel.setBackgroundResource(0)
-            }
-        }
-        orientationEventListener.enable()
-
-         */
-
 
         // Getting the current date
         val sdf = SimpleDateFormat("d-M-yyyy")
         val currentDay = sdf.format(Date())
         val today  = Calendar.getInstance()
-        val toPlot = Date(2021,0,4)
+
         // Initialize the two value of Start/End day to avoid the lateinit propriety of two variables
 
         root.findViewById<TextView>(R.id.toDate_tv).setText(currentDay.toString())
@@ -97,6 +72,8 @@ class OrderDeviceFragment : Fragment() {
         datePickerFrom.init(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH)){
             view, year, month, day ->
             dateStart = Date(year,month,day)
+
+            // Plot the Current Day by default
             val actualStart = day.toString()+"-"+(month+1).toString()+"-"+year.toString()
             val actualDateStart = root.findViewById<TextView>(R.id.fromDate_tv)
             actualDateStart.setText(actualStart)
@@ -105,6 +82,8 @@ class OrderDeviceFragment : Fragment() {
         datePickerTo.init(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DAY_OF_MONTH)){
             view, year, month, day ->
             dateEnd = Date(year,month,day)
+
+            // Plot the Current Day by default
             val actualEnd = day.toString()+"-"+(month+1).toString()+"-"+year.toString()
             val actualDateEnd = root.findViewById<TextView>(R.id.toDate_tv)
             actualDateEnd.setText(actualEnd)
@@ -117,16 +96,6 @@ class OrderDeviceFragment : Fragment() {
         return root
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        Log.d("testOrientation","---------------122")
-        super.onConfigurationChanged(newConfig)
-        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            Log.d("testOrientation","---------------22")
-        }else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            Log.d("testOrientation","---------------333")
-        }
-
-    }
 
     fun checkDate() : Boolean {
 

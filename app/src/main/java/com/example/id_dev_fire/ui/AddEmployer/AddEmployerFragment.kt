@@ -76,7 +76,7 @@ class AddEmployerFragment : Fragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-
+                //
             }
         }
 
@@ -89,7 +89,7 @@ class AddEmployerFragment : Fragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-
+                //
             }
         }
 
@@ -145,6 +145,13 @@ class AddEmployerFragment : Fragment() {
                             Toast.LENGTH_SHORT
                     ).show()
                 }
+            }.addOnFailureListener {
+                hideProgressDialog()
+                Toast.makeText(
+                    this.context,
+                    "Please Try Again :( ",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

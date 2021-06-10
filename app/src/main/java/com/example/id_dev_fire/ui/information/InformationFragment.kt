@@ -1,5 +1,6 @@
 package com.example.id_dev_fire.ui.information
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ class InformationFragment : Fragment() {
     private val mFirestoreClass = FirebaseFirestore.getInstance()
     private var actualVersion = BuildConfig.VERSION_NAME
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,9 +25,9 @@ class InformationFragment : Fragment() {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_information, container, false)
         root.findViewById<TextView>(R.id.versionApplication).setText("version : "+ BuildConfig.VERSION_NAME)
-        var lastVersion_tv = root.findViewById<TextView>(R.id.lastVersion_tv)
-        var description_tv = root.findViewById<TextView>(R.id.descriptionApplication_tv)
-        var linkDownload = root.findViewById<TextView>(R.id.linkdownload)
+        val lastVersion_tv = root.findViewById<TextView>(R.id.lastVersion_tv)
+        val description_tv = root.findViewById<TextView>(R.id.descriptionApplication_tv)
+        val linkDownload = root.findViewById<TextView>(R.id.linkdownload)
 
 
         mFirestoreClass.collection("information").document("my_app")
@@ -48,7 +50,6 @@ class InformationFragment : Fragment() {
             }.addOnFailureListener {
                 //
             }
-
         return root
     }
 

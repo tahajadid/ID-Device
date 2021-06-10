@@ -18,8 +18,13 @@ class BugFragment : Fragment() {
     lateinit var descriptionBug : EditText
     lateinit var btnAddBug : Button
     lateinit var grp_radio : RadioGroup
+
+    // Default value
     var reasonSelected : String = "Not Selected"
+
+    // Default name of BugOwner
     var fullNameOwner : String = "Anonyme"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,6 +57,10 @@ class BugFragment : Fragment() {
 
         btnAddBug.setOnClickListener {
             val actualDescription = descriptionBug.text.toString().trim(){ it <= ' ' }
+
+            // We always pass anything at the id, cause we will set it as the id of document
+            // When it will be created on mFirestoreClass
+
             val bug = Bug(fullNameOwner,fullNameOwner,reasonSelected,actualDescription)
             val mFirestoreClass = FirestoreClass()
             mFirestoreClass.addBugFirebase(this,bug)

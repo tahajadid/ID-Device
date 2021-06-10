@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.view.menu.MenuAdapter
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.firestoreClass.FirestoreClass
 import com.example.id_dev_fire.model.Cupboard
@@ -38,6 +37,8 @@ class AddCupboardFragment : Fragment() {
 
             val actualName = cupboardName.text.toString().trim(){ it <= ' ' }
 
+            // We always pass anything at the id, cause we will set it as the id of document
+            // When it will be created on mFirestoreClass
             val cup = Cupboard(
                 actualName,
                 actualName

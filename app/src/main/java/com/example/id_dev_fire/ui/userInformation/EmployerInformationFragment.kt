@@ -1,5 +1,6 @@
 package com.example.id_dev_fire.ui.userInformation
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -20,6 +21,8 @@ class EmployerInformationFragment : Fragment() {
     private val args by navArgs<EmployerInformationFragmentArgs>()
     private var mFirestoreClass = FirebaseFirestore.getInstance()
 
+    @ExperimentalStdlibApi
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +37,8 @@ class EmployerInformationFragment : Fragment() {
                     val thisEmployer = it.result!!.toObject(Employer::class.java)
                     if(thisEmployer != null){
                         root.findViewById<TextView>(R.id.nameUser_tv).setText(
-                            thisEmployer.getEmployerFirstName()+" "+thisEmployer.getEmployerLastName())
+                            thisEmployer.getEmployerFirstName().uppercase()
+                                    +" "+thisEmployer.getEmployerLastName().uppercase())
                         root.findViewById<TextView>(R.id.roleUser_tv).setText(
                             thisEmployer.getEmployerRole())
                         root.findViewById<TextView>(R.id.phoneUser_tv).setText(

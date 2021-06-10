@@ -43,7 +43,7 @@
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
                     android:text="e-doc"
-                    android:textColor="#000000"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -72,7 +72,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
                     android:text="Manager EVS"
-                    android:textColor="#000000"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 

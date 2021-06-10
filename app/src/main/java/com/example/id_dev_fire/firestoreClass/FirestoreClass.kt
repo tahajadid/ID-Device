@@ -1,6 +1,5 @@
 package com.example.id_dev_fire.firestoreClass
 
-import android.util.Log
 import android.widget.Toast
 import com.example.id_dev_fire.model.*
 import com.example.id_dev_fire.notificationClasses.NotificationData
@@ -58,8 +57,6 @@ class FirestoreClass {
 
     fun addEmployerActivityFirebase(activity: RegisterActivity,employerInfo: Employer){
 
-        Log.d("testTokens","-- Intern addEmployerActivityFirebase")
-
         val newEmployerRef = mFirestoreClass.collection("employers")
             .document(employerInfo.getEmployerId())
 
@@ -81,19 +78,19 @@ class FirestoreClass {
                             "Successfully registered. Please wait access from administrator !",
                             Toast.LENGTH_SHORT
                     ).show()
-                    Log.d("testTokens","-- Intern set Employer")
+
                     mFirestoreClass.collection("employers").whereEqualTo("role","Administrator")
                         .get().addOnCompleteListener {
-                            Log.d("testTokens","-- Intern find employer")
+
                             if(it.isSuccessful){
                                 for (actualAdmin in it.result!!.toObjects(Employer::class.java))
                                 {
-                                    Log.d("testTokens","-- Intern for employer")
+
                                     mFirestoreClass.collection("tokens")
                                         .document(actualAdmin.getEmployerId())
                                         .get().addOnCompleteListener {
                                             if(it.isSuccessful){
-                                                Log.d("testTokens","-- Intern find token employer")
+
                                                 val newToken = it.result!!.toObject(TokenDevice::class.java)
                                                 if(newToken != null){
 
@@ -109,20 +106,16 @@ class FirestoreClass {
                                                     }
 
                                                 }else{
-                                                    Log.d("testTokens","-- Intern Else 1")
                                                     // Not success
                                                 }
                                             }else{
-                                                Log.d("testTokens","-- Intern Else 2")
                                                 // Noth..
                                             }
                                         }.addOnFailureListener {
-                                            Log.d("testTokens","-- Intern Else 3")
                                             // Noth..
                                         }
                                 }
                             }else{
-                                Log.d("testTokens","-- Intern Else 4")
 
                             }
                         }.addOnFailureListener {
@@ -145,7 +138,7 @@ class FirestoreClass {
             .document(tokenDevice.getTokId().toString()).get().addOnCompleteListener {
                 if(it.isSuccessful){
                     if(it.result!!.exists()){
-                        Log.d("TestToken","--- set")
+
                         // make update
                         mFirestoreClass.collection("tokens")
                             .document(tokenDevice.getTokId().toString()).update(
@@ -153,16 +146,16 @@ class FirestoreClass {
                                     "tokDeviceToken" to tokenDevice.getTokDeviceToken()) as Map<String, Any>
                             )
                     }else{
-                        Log.d("TestToken","--- update")
+
                         // just set the new token
                         mFirestoreClass.collection("tokens")
                             .document(tokenDevice.getTokId().toString()).set(tokenDevice)
                     }
                 }else{
-                    Log.d("TestToken","--- there is a problem")
+
                 }
             }.addOnFailureListener {
-                Log.d("TestToken","--- there is a problem")
+
             }
 
     }
@@ -363,13 +356,12 @@ class FirestoreClass {
         try {
             val response = RetrofitInstance.api.postNotification(notification)
             if(response.isSuccessful){
-                Log.d("testNotif","#### Successful" )
+
             }else{
-                Log.d("testNotif", response.errorBody().toString() )
+
             }
 
         }catch (e : Exception){
-            Log.d("testNotif",e.toString() )
         }
 
     }

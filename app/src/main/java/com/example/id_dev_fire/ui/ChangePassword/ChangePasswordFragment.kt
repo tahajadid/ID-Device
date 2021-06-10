@@ -8,15 +8,12 @@ import androidx.fragment.app.Fragment
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.example.id_dev_fire.MainActivity
 import com.example.id_dev_fire.R
 import com.google.firebase.auth.FirebaseAuth
 
 class ChangePasswordFragment : Fragment() {
 
-    lateinit var changePasswordViewModel: ChangePasswordViewModel
     lateinit var oldPassword : EditText
     lateinit var newPassword : EditText
     lateinit var newPassword_2 : EditText
@@ -27,12 +24,10 @@ class ChangePasswordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        changePasswordViewModel =
-            ViewModelProvider(this).get(ChangePasswordViewModel::class.java)
-
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_change_password, container, false)
 
+        //
         oldPassword = root.findViewById(R.id.oldPassword)
         newPassword = root.findViewById(R.id.newPassword)
         newPassword_2 = root.findViewById(R.id.newPassword_2)
@@ -47,9 +42,7 @@ class ChangePasswordFragment : Fragment() {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(userr.email,oldPassword.text.toString()).
                 addOnCompleteListener { task ->
 
-                    Log.d("testPwd","------ into Complete")
                     if (task.isSuccessful) {
-                        Log.d("testPwd","------ into Task")
 
                         userr.updatePassword(newPassword.text.toString())
                             .addOnCompleteListener { task->
@@ -59,7 +52,7 @@ class ChangePasswordFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                         clearInputs()
-                        Log.d("testPwd","------ end Task")
+
                         val action = ChangePasswordFragmentDirections.actionChangePasswordFragmentToNavSettings()
                         it.findNavController().navigate(action)
                         }
@@ -71,14 +64,9 @@ class ChangePasswordFragment : Fragment() {
                                 ).show()
                             }
                     } else {
-                        Log.d("testPwd","------ into Faile Task")
+
                     }
                 }
-                /*
-                    val action = ChangePasswordFragmentDirections.actionChangePasswordFragmentToNavSettings()
-                    it.findNavController().navigate(action)
-                */
-
             }else{
                 Toast.makeText(
                     this.requireContext(),

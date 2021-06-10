@@ -3,11 +3,8 @@ package com.example.id_dev_fire.ui.singleDevice
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Order
-import com.example.id_dev_fire.model.QueueDevices
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import java.util.*
 
 class SingleDeviceViewModel(idDevice : String, application: Application) : AndroidViewModel(
@@ -39,7 +36,6 @@ class SingleDeviceViewModel(idDevice : String, application: Application) : Andro
                                 // Noth..
                             }
                         }
-
 
                     }
 

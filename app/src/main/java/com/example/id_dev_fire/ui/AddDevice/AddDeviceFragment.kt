@@ -162,6 +162,8 @@ class AddDeviceFragment : Fragment() {
             val actualFeature = featuresDevice.text.toString().trim(){ it <= ' ' }
             val actualservice = serviceNameDevice.text.toString().trim(){ it <= ' ' }
 
+            // We always pass anything at the id, cause we will set it as the id of document
+            // When it will be created on mFirestoreClass
             val device = Device(
                     "0",
                     actualName,

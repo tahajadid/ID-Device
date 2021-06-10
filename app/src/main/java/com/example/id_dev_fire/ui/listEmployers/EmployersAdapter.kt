@@ -46,6 +46,10 @@ class EmployersAdapter(var EmployerList : ArrayList<Employer>) : RecyclerView.Ad
 
 
                     }.addOnFailureListener {
+                            Toast.makeText(
+                                fragment.requireContext(),
+                                "Please Try Again",
+                                Toast.LENGTH_SHORT).show()
                     }
 
                 }
@@ -67,7 +71,7 @@ class EmployersAdapter(var EmployerList : ArrayList<Employer>) : RecyclerView.Ad
             return EmployerList.size
         }
 
-        @SuppressLint("ResourceAsColor")
+        @SuppressLint("ResourceAsColor", "SetTextI18n")
         override fun onBindViewHolder(holder: MyViewHolder, position: Int){
 
             val currentEmployer = EmployerList[position]

@@ -48,21 +48,27 @@ class EvsFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQueryText
 
         val noDevices = root.findViewById<TextView>(R.id.noDeviceFoundEvs_tv)
         val emtyAnim = root.findViewById<LottieAnimationView>(R.id.anim_empty_evs)
-        val sh = root.findViewById<ShimmerFrameLayout>(R.id.myshimmer_evs)
+        val shimmer = root.findViewById<ShimmerFrameLayout>(R.id.myshimmer_evs)
 
-        sh.startShimmerAnimation()
+        // We start the Shimmer when data is loading
+        shimmer.startShimmerAnimation()
+
         emtyAnim.visibility = View.INVISIBLE
         noDevices.visibility = View.INVISIBLE
+
         // Observe all the LiveData returned from the ViewModel
         evsViewModel.readAllData.observe(viewLifecycleOwner, { device ->
             adapter.setDeviceData(device)
             if(evsViewModel.readAllData.value == emptyList<Device>()){
+                // The case when we didn't have any Device in list we set the Animation and Quote visible
                 emtyAnim.visibility = View.VISIBLE
                 noDevices.visibility = View.VISIBLE
             }else{
             }
-            sh.stopShimmerAnimation()
-            sh.visibility = View.GONE
+
+            // We stop the Shimmer when we get a Response from Firebase
+            shimmer.stopShimmerAnimation()
+            shimmer.visibility = View.GONE
         })
 
         // Add menu
@@ -74,6 +80,7 @@ class EvsFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQueryText
     override fun onCreateOptionsMenu(menu: Menu,inflater: MenuInflater) {
         inflater.inflate(R.menu.main,menu)
 
+        // We add the widget of Searching to the AppBar
         val item = menu?.findItem(R.id.app_bar_search)
         val searchView : androidx.appcompat.widget.SearchView = item?.actionView as androidx.appcompat.widget.SearchView
 
@@ -82,15 +89,24 @@ class EvsFragment : Fragment(), androidx.appcompat.widget.SearchView.OnQueryText
 
     }
 
+    /*
+        Searching Part made by a queries in our Database "Firebase"
+     */
+
     override fun onQueryTextSubmit(query: String?): Boolean {
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
 
-        mFirestore.collection("devices").whereEqualTo("projectName","EVS").orderBy("devName").startAt(newText).endAt(newText + "\uf8ff").addSnapshotListener { value, error ->
+        mFirestore.collection("devices").whereEqualTo("projectName","EVS")
+            .orderBy("devName").startAt(newText).endAt(newText + "\uf8ff")
+            .addSnapshotListener { value, error ->
             SearchDevices = arrayListOf()
             for(a in value!!.toObjects(Device::class.java)){
+
+                // If the name of the device enter on the SerachBar match with our Device
+                    // We add it to the new list that will be displayed
                 SearchDevices.add(a)
             }
             AllDevices = SearchDevices

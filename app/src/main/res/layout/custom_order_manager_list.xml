@@ -43,7 +43,7 @@
                     android:layout_marginStart="6dp"
                     android:layout_marginLeft="6dp"
                     android:text="e-doc"
-                    android:textColor="#000000"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -101,7 +101,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
                     android:text=" EVS"
-                    android:textColor="#000000"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -159,7 +159,7 @@
                     android:layout_height="match_parent"
                     android:paddingLeft="2dp"
                     android:text="On hold"
-                    android:textColor="#000000"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 

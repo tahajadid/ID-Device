@@ -1,30 +1,20 @@
 package com.example.id_dev_fire.ui.singleDevice
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.fragment.app.findFragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.model.Order
-import com.example.id_dev_fire.ui.orders.OrdersFragment
-import com.google.firebase.firestore.FirebaseFirestore
 
 class ListOrderedAdapter(var OrderList : ArrayList<Order>) : RecyclerView.Adapter<ListOrderedAdapter.MyViewHolder>() {
 
-    private var mFirestore = FirebaseFirestore.getInstance()
-
-    inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-
-    }
+    inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_actual_order, parent, false))

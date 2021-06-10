@@ -29,7 +29,6 @@ class EmployersViewModel(application: Application) : AndroidViewModel(applicatio
                 readAllData.value = AllData
 
             }.addOnFailureListener {
-
             }
     }
 

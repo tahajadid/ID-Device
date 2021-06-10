@@ -2,7 +2,6 @@ package com.example.id_dev_fire.ui.orders
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

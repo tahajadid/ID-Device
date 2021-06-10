@@ -1,12 +1,9 @@
 package com.example.id_dev_fire.firestoreClass
 
-import android.util.Log
-import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Order
 import com.example.id_dev_fire.model.QueueDevices
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
-import kotlin.collections.HashMap
 
 class ImpactOrder {
 
@@ -22,8 +19,6 @@ class ImpactOrder {
 
 
     fun acceptOrder(idOrder : String,idDevice: String){
-
-        Log.d("TestQueue"," 1. ------- inter acceptOrder() : ")
 
         // If the manager accept the order
         // Steps to do :
@@ -73,7 +68,6 @@ class ImpactOrder {
                     .get().addOnCompleteListener {
                         val startDayOfOrder = it.result!!.toObject(Order::class.java)!!.getorderDateStart()
                         if(todayAfterOrEquals(startDayOfOrder!!)){
-                            Log.d("CheckState","0.1. Intern todayAfterOrEquals(startDayOfOrder!!)")
 
                             // Set the new updates
                             mFirestoreClass.collection("queueDevices")
@@ -96,7 +90,7 @@ class ImpactOrder {
                                     //
                                 }
                         }else{
-                            Log.d("CheckState","0.1. Out todayAfterOrEquals(startDayOfOrder!!)")
+
                             // Set the new updates
                             mFirestoreClass.collection("queueDevices")
                                 .document(idDevice)
@@ -219,19 +213,11 @@ class ImpactOrder {
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
     fun checkDeviceState(idDevice: String) {
-        Log.d("CheckState","#################### Today ####################")
-        Log.d("CheckState","--- Date : ${today.date}")
-        Log.d("CheckState","--- Month : ${today.month}")
-        Log.d("CheckState","--- Year : ${today.year}")
-        Log.d("CheckState","--- Day : ${today.day}")
-
-        Log.d("CheckState","_____________________ New One _____________________")
-        Log.d("CheckState","1. Intern function checkDeviceState()")
 
             mFirestoreClass.collection("queueDevices")
                 .document(idDevice).get()
                 .addOnCompleteListener { it ->
-                    Log.d("CheckState","2. Intern queueDevices collection")
+
                     if(it.isSuccessful)
                     {
                         // We get a specific Queue with her id
@@ -242,11 +228,6 @@ class ImpactOrder {
                         val listOrders = queue?.getQueueDevicesListOrders()
 
                         if (listOrders!!.size != 0) {
-                            Log.d("CheckState","-- if (listOrders!!.size != 0) --")
-
-                            Log.d("CheckState","3.1. Intern list of queueDevices")
-                            Log.d("CheckState","3.1.1. size list ${listOrders.size}")
-                            Log.d("CheckState","3.1.2. numCurrentOrder ${numCurrentOrder}")
 
                             //Log.d("CheckState","3.1.3. order to check : ${listOrders!![numCurrentOrder!!]}")
 
@@ -291,11 +272,9 @@ class ImpactOrder {
                                 if(numOrdersOnHold!! > 0 && (numCurrentOrder!!) !=-1){
                                     // != (-1) : this is not the first order of the device
 
-                                    Log.d("CheckState","-- if(numOrdersOnHold!! > 0 && (numCurrentOrder!!) !=-1) --")
                                     mFirestoreClass.collection("orders")
                                         .document(listOrders!![numCurrentOrder!!])
                                         .get().addOnCompleteListener {
-                                            Log.d("CheckState","4. Intern Orders collection")
 
                                             if(it.isSuccessful){
                                                 var currentOrderEndDay =
@@ -303,12 +282,10 @@ class ImpactOrder {
                                                 var currentOrderStartDay =
                                                     it.result!!.toObject(Order::class.java)!!.getorderDateStart()
 
-                                                Log.d("CheckState","4.1.0.temp End day : ${currentOrderEndDay}")
-
                                                 if(currentOrderStartDay != null){
 
                                                     if(todayAfterOrEquals(currentOrderStartDay!!)){
-                                                        Log.d("CheckState","-_-_- DecisionStart After Or Equals -_-_-_-")
+
                                                         // Need to start order
                                                         // Make Device reserved
                                                         mFirestoreClass.collection("devices").document(idDevice)
@@ -321,10 +298,8 @@ class ImpactOrder {
                                                                 if (currentOrderEndDay != null) {
 
                                                                     if(todayAfter(currentOrderEndDay!!)){
-                                                                        // The Order was achieve
-                                                                        Log.d("CheckState","-- if(DecisionEnd == false) --")
-                                                                        Log.d("CheckState","-_-_- DecisionEnd before -_-_-_-")
 
+                                                                        // The Order was achieve
                                                                         if((numOrdersOnHold-1)==0){
                                                                             // There is no order After That One
                                                                             // Set the new Modif on the QueueDevice branch
@@ -338,7 +313,6 @@ class ImpactOrder {
                                                                                             as Map<String, Any>
                                                                                 ).addOnCompleteListener {
 
-                                                                                    Log.d("CheckState","!!!!!--- No Order After  ---!!!!!")
                                                                                     mFirestoreClass.collection("devices").document(idDevice)
                                                                                         .update(
                                                                                             hashMapOf("currentState" to "Available",
@@ -351,7 +325,6 @@ class ImpactOrder {
 
 
                                                                         }else{
-                                                                            Log.d("CheckState","!!!!!--- Moreee Order After This ---!!!!!")
 
                                                                             mFirestoreClass.collection("queueDevices")
                                                                                 .document(idDevice)
@@ -374,17 +347,16 @@ class ImpactOrder {
                                                                                 }
                                                                         }
                                                                     }else{
-                                                                        Log.d("CheckState","-_-_- DecisionEnd After Or Equal -_-_-_-")
 
                                                                     }
                                                                 }else{
-                                                                    Log.d("CheckState","4.4 currentOrderEndDay was null was true")
+
                                                                 }
                                                             }.addOnFailureListener {
                                                                 //
                                                             }
                                                     }else{
-                                                        Log.d("CheckState","-_-_- DecisionStart Beofre -_-_-_-")
+
                                                     }
                                                 }else{
                                                     // currentOrderStartDay is empty
@@ -399,7 +371,6 @@ class ImpactOrder {
                                     mFirestoreClass.collection("orders")
                                         .document(listOrders!![numCurrentOrder!!+1])
                                         .get().addOnCompleteListener {
-                                            Log.d("CheckState", "4. Intern Orders collection")
 
                                             if (it.isSuccessful) {
                                                 var currentStartDay =
@@ -409,7 +380,7 @@ class ImpactOrder {
                                                 if (currentStartDay != null) {
 
                                                     if( today.equals(currentStartDay!!) ) {
-                                                        Log.d("CheckState","-_-_-_-_-_- Equals _-_-_-_-_-_-_-")
+
                                                         // Set the new Modif on the QueueDevice branch
                                                         mFirestoreClass.collection("queueDevices")
                                                             .document(idDevice)
@@ -443,12 +414,12 @@ class ImpactOrder {
                                         }
 
                                 }else{
-                                    Log.d("CheckState","2.2 Num Orders On Hold == 0")
+
                                 }
                             }
 
                         }else{
-                            Log.d("CheckState","3.2 List was empty")
+
                         }
                     }
 

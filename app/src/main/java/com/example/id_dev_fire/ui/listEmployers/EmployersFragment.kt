@@ -12,9 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.model.Employer
-import com.example.id_dev_fire.model.Order
-import com.example.id_dev_fire.ui.orders.ListOrdersAdapter
-import com.example.id_dev_fire.ui.orders.OrdersViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -23,7 +20,6 @@ class EmployersFragment : Fragment() {
     private lateinit var employerViewModel: EmployersViewModel
     lateinit var mProgressDialog: Dialog
     private lateinit var employerList:ArrayList<Employer>
-    private var mFirestore = FirebaseFirestore.getInstance()
     lateinit var thisRecyclerView : RecyclerView
     lateinit var adapter: EmployersAdapter
 

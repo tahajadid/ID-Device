@@ -1,13 +1,9 @@
 package com.example.id_dev_fire
 
 import android.annotation.SuppressLint
-import android.app.Notification
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
 import android.widget.*
 import androidx.annotation.RequiresApi
 import com.google.android.material.navigation.NavigationView
@@ -19,13 +15,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import com.example.id_dev_fire.model.Device
 import com.example.id_dev_fire.model.Employer
-import com.example.id_dev_fire.ui.list.ListDeviceAdapter
 import com.example.id_dev_fire.ui.login.LoginActivity
-import com.example.id_dev_fire.ui.orders.ListOrdersAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
