@@ -19,6 +19,7 @@ import kotlin.random.Random
 
 // Channel of notifications
 private const val CHANNEL_ID = "my_channel"
+
 class FirebaseService : FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
