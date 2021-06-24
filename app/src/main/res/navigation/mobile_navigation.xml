@@ -153,4 +153,19 @@
             android:name="idEmployer"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_damagedFragment"
+        android:name="com.example.id_dev_fire.ui.AddDemaged.DamagedFragment"
+        android:label="Declare Damaged Device"
+        tools:layout="@layout/fragment_damaged" />
+    <fragment
+        android:id="@+id/nav_listDamagedFragment"
+        android:name="com.example.id_dev_fire.ui.listDamagedDevices.ListDamagedFragment"
+        android:label="List Of Damaged Devices"
+        tools:layout="@layout/fragment_list_damaged" />
+    <fragment
+        android:id="@+id/nav_addTribFragment"
+        android:name="com.example.id_dev_fire.ui.AddTrib.AddTribFragment"
+        android:label="Add Trib"
+        tools:layout="@layout/fragment_add_trib" />
 </navigation>

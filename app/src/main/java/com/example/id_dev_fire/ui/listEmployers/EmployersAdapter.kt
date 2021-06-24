@@ -2,6 +2,7 @@ package com.example.id_dev_fire.ui.listEmployers
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,15 @@ import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.id_dev_fire.R
 import com.example.id_dev_fire.model.Employer
+import com.example.id_dev_fire.model.Order
+import com.example.id_dev_fire.model.TokenDevice
+import com.example.id_dev_fire.notificationClasses.NotificationData
+import com.example.id_dev_fire.notificationClasses.PushNotification
+import com.example.id_dev_fire.notificationClasses.RetrofitInstance
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class EmployersAdapter(var EmployerList : ArrayList<Employer>) : RecyclerView.Adapter<EmployersAdapter.MyViewHolder>()  {
 
@@ -44,6 +53,28 @@ class EmployersAdapter(var EmployerList : ArrayList<Employer>) : RecyclerView.Ad
                             "Flag Raised",
                             Toast.LENGTH_SHORT).show()
 
+                            mFirestore.collection("tokens").document(EmployerList[adapterPosition].id.toString())
+                                .get().addOnCompleteListener {
+
+                                    val newToken = it.result!!.toObject(TokenDevice::class.java)
+
+                                    val title = "Good News"
+                                    val message =
+                                            "Your Requet was accepted by the admin. Go and take the action" +
+                                            "to discover ID-Device"
+
+                                    PushNotification(
+                                        NotificationData(title,message),
+                                        newToken!!.getTokDeviceToken().toString()
+                                    ).also{
+                                        sendNotification(it)
+                                    }
+
+                                }.addOnFailureListener {
+                                    // Noth..
+                                }
+
+
 
                     }.addOnFailureListener {
                             Toast.makeText(
@@ -55,7 +86,7 @@ class EmployersAdapter(var EmployerList : ArrayList<Employer>) : RecyclerView.Ad
                 }
                 builder.setNegativeButton("No") { _, _ -> }
 
-                builder.setTitle("Delete Order")
+                builder.setTitle("Accept User")
                 builder.setMessage("Are you sure you want to give this user the access ?")
                 builder.create().show()
             }
@@ -86,5 +117,21 @@ class EmployersAdapter(var EmployerList : ArrayList<Employer>) : RecyclerView.Ad
             EmployerList = employer
             notifyDataSetChanged()
         }
+
+    private fun sendNotification(notification : PushNotification) = CoroutineScope(Dispatchers.IO).launch{
+
+        try {
+            val response = RetrofitInstance.api.postNotification(notification)
+            if(response.isSuccessful){
+                Log.d("testNotif","#### Successful" )
+            }else{
+                Log.d("testNotif", response.errorBody().toString() )
+            }
+
+        }catch (e : Exception){
+            Log.d("testNotif",e.toString() )
+        }
+
+    }
 
     }

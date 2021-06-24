@@ -1,6 +1,8 @@
 package com.example.id_dev_fire.firestoreClass
 
 import android.widget.Toast
+import com.example.id_dev_fire.ui.AddTrib.AddTribFragment
+import com.example.id_dev_fire.ui.AddDemaged.DamagedFragment
 import com.example.id_dev_fire.model.*
 import com.example.id_dev_fire.notificationClasses.NotificationData
 import com.example.id_dev_fire.notificationClasses.PushNotification
@@ -12,6 +14,7 @@ import com.example.id_dev_fire.ui.OrderDevice.OrderDeviceFragment
 import com.example.id_dev_fire.ui.bug.BugFragment
 import com.example.id_dev_fire.ui.register.RegisterActivity
 import com.example.id_dev_fire.ui.settings.SettingsFragment
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +23,7 @@ import kotlinx.coroutines.launch
 class FirestoreClass {
 
     private val mFirestoreClass = FirebaseFirestore.getInstance()
+    private val mFirebaseAuth = FirebaseAuth.getInstance()
 
     fun addEmployerFirebase(fragment: AddEmployerFragment,employerInfo: Employer){
 
@@ -287,15 +291,21 @@ class FirestoreClass {
                         if(it.isSuccessful){
 
                             val newToken = it.result!!.toObject(TokenDevice::class.java)
+
                             if(newToken != null){
 
-                                val title = "New Order"
-                                val message = "New order by " + orderInfo.fullNamecurrentOwner + " of < " + orderInfo.deviceName+" >"
-                                PushNotification(
-                                    NotificationData(title,message),
-                                    newToken!!.getTokDeviceToken().toString()
-                                ).also{
-                                    sendNotification(it)
+                                if (newToken!!.getTokId() != mFirebaseAuth.uid){
+                                    val title = "New Order"
+                                    val message = "New order by " + orderInfo.fullNamecurrentOwner +
+                                            " of < " + orderInfo.deviceName+" >"
+                                    PushNotification(
+                                        NotificationData(title,message),
+                                        newToken!!.getTokDeviceToken().toString()
+                                    ).also{
+                                        sendNotification(it)
+                                    }
+                                }else{
+                                    // Don't send a notification
                                 }
 
                             }else{
@@ -350,15 +360,107 @@ class FirestoreClass {
             }
     }
 
+    fun addTrib(fragment: AddTribFragment, trib: Trib){
+
+        val newDamagedDeviceRef = mFirestoreClass.collection("trib")
+            .document()
+
+        newDamagedDeviceRef.set(trib).addOnCompleteListener {Toast.makeText(
+            fragment.context,
+            "The Trib was added",
+            Toast.LENGTH_SHORT
+        ).show()
+        }.addOnFailureListener {
+            Toast.makeText(
+                fragment.context,
+                "There was a problem, please try again :(",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+    }
+
+    fun addDamagedDevice(fragment: DamagedFragment, damagedEntity: DamagedDevice){
+
+        val newRef = mFirestoreClass.collection("damagedDevice")
+            .document(damagedEntity.getDecIdDamagedDevice().toString())
+
+        val newDam = DamagedDevice(
+            damagedEntity.getDecIdDamagedDevice(),
+            damagedEntity.getDecNameDevice(),
+            damagedEntity.getDecDeclaredById(),
+            damagedEntity.getDecDeclaredByFullName(),
+            damagedEntity.getDecTitle(),
+            damagedEntity.getDecDescriptionDevices(),
+            damagedEntity.getDecDeviceOwnerDevice()
+        )
+
+        /*
+                mFirestoreClass.collection("damagedDevice")
+            .set(newDam).addOnCompleteListener {
+         */
+        newRef.set(newDam).addOnCompleteListener {
+
+            // Send Notification to the Device Owner
+            mFirestoreClass.collection("tokens")
+                .document(damagedEntity.getDecDeviceOwnerDevice().toString())
+                .get().addOnCompleteListener {
+                    if(it.isSuccessful){
+
+                        val newToken = it.result!!.toObject(TokenDevice::class.java)
+
+                        if(newToken != null){
+
+                            val title = "New Complaint"
+                            val message = "Damaged device declared by " + damagedEntity.getDecDeclaredByFullName()+
+                                        " & Device :  < " + damagedEntity.getDecNameDevice()+" >"
+                            PushNotification(
+                                NotificationData(title,message),
+                                newToken!!.getTokDeviceToken().toString()
+                            ).also{
+                                sendNotification(it)
+                            }
+
+                            Toast.makeText(
+                                fragment.context,
+                                "We add your complaint, Thank's",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        }else{
+                            // Notification not sended
+                        }
+                    }else{
+                        Toast.makeText(
+                            fragment.context,
+                            "There was a problem, please try again :(",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }.addOnFailureListener {
+
+                    Toast.makeText(
+                        fragment.context,
+                        "There was a problem, please try again :(",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+        }.addOnFailureListener {
+            // Noth..
+        }
+
+    }
+
 
     private fun sendNotification(notification : PushNotification) = CoroutineScope(Dispatchers.IO).launch{
 
         try {
             val response = RetrofitInstance.api.postNotification(notification)
             if(response.isSuccessful){
-
+                // Noth..
             }else{
-
+                // Noth..
             }
 
         }catch (e : Exception){

@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.listEmployers.EmployersFragment">
+    tools:context="ui.listDamagedDevices.ListDamagedFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:id="@+id/list_employers"
+        android:id="@+id/list_damagedDevices"
         android:layout_height="match_parent" />
 
 </FrameLayout>

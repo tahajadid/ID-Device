@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val header = navView.getHeaderView(0)
@@ -69,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         R.id.nav_settings,R.id.nav_orders,R.id.nav_support,R.id.nav_addEmployer,R.id.nav_addDevice,
         R.id.nav_addCupboard,R.id.nav_singleDeviceFragment,R.id.nav_orderDeviceFragment,
         R.id.nav_ordersManager,R.id.nav_changePassword,R.id.nav_bug,R.id.nav_bug,R.id.nav_listEmployers,
-        R.id.nav_information)
+        R.id.nav_information,R.id.nav_damagedFragment,R.id.nav_listDamagedFragment,R.id.nav_addTribFragment)
             , drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -85,7 +84,6 @@ class MainActivity : AppCompatActivity() {
             intentLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intentLogin)
         }
-
 
     }
 
@@ -126,12 +124,14 @@ class MainActivity : AppCompatActivity() {
                 navView.menu.findItem(R.id.nav_addCupboard).setVisible(false)
                 navView.menu.findItem(R.id.nav_addDevice).setVisible(false)
                 navView.menu.findItem(R.id.nav_addEmployer).setVisible(false)
-                navView.menu.findItem(R.id.nav_orders).setVisible(false)
                 navView.menu.findItem(R.id.nav_listEmployers).setVisible(false)
+                navView.menu.findItem(R.id.nav_addTribFragment).setVisible(false)
+
             }
             "Administrator" -> {
                 navView.menu.findItem(R.id.nav_orders).setVisible(false)
                 navView.menu.findItem(R.id.nav_ordersManager).setVisible(false)
+                navView.menu.findItem(R.id.nav_listDamagedFragment).setVisible(false)
             }
             else -> {
                 navView.menu.findItem(R.id.nav_addCupboard).setVisible(false)
@@ -139,6 +139,8 @@ class MainActivity : AppCompatActivity() {
                 navView.menu.findItem(R.id.nav_addEmployer).setVisible(false)
                 navView.menu.findItem(R.id.nav_ordersManager).setVisible(false)
                 navView.menu.findItem(R.id.nav_listEmployers).setVisible(false)
+                navView.menu.findItem(R.id.nav_listDamagedFragment).setVisible(false)
+                navView.menu.findItem(R.id.nav_addTribFragment).setVisible(false)
             }
         }
 

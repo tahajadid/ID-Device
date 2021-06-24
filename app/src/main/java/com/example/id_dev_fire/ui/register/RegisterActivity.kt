@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.*
 import com.example.id_dev_fire.R
@@ -14,6 +13,7 @@ import com.example.id_dev_fire.model.Employer
 import com.example.id_dev_fire.model.TokenDevice
 import com.example.id_dev_fire.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -39,6 +39,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        // TextView
         employerEmail = findViewById(R.id.registerEmail_et)
         employerPassword = findViewById(R.id.registerPassword_et)
         employerPassword_2 = findViewById(R.id.registerPassword2_et)
@@ -46,9 +47,12 @@ class RegisterActivity : AppCompatActivity() {
         lastName = findViewById(R.id.registerLastName_et)
         phone = findViewById(R.id.employerPhoneRegister_et)
 
+        // Spinner
         genderSpinner = findViewById(R.id.registerGender_spinner)
         roleSpinner = findViewById(R.id.registerRole_spinner)
         tribSpinner = findViewById(R.id.tribRegister_spinner)
+
+        // Button
         btn_addEmployer = findViewById(R.id.buttonRegister)
 
         // Get the gender selected
@@ -60,7 +64,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-
+                // Noth..
             }
         }
 
@@ -73,7 +77,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-
+                // Noth..
             }
         }
 
@@ -86,7 +90,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-
+                // Noth..
             }
         }
 
@@ -109,41 +113,61 @@ class RegisterActivity : AppCompatActivity() {
 
             showProgressDialog()
 
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(actualEmail,actualPwd).
-            addOnCompleteListener { task ->
+            FirebaseAuth.getInstance().fetchSignInMethodsForEmail(actualEmail).addOnCompleteListener {
+                if(it.isSuccessful){
+                    if(it.result!!.signInMethods.isEmpty()){
+                        // the Email adr doesn't exist
+                        FirebaseAuth.getInstance().createUserWithEmailAndPassword(actualEmail,actualPwd).
+                        addOnCompleteListener { task ->
 
-                if (task.isSuccessful) {
+                            if (task.isSuccessful) {
 
-                    // Set an Employer Object
-                    val employer = Employer(
-                            FirebaseAuth.getInstance().currentUser.uid,
-                            actualFirstName,
-                            actualLastName,
-                            actualEmail,
-                            actualphone.toLong(),
-                            this.genderSelected,
-                            this.roleSelected,
-                            this.tribSelected,
-                        false
-                    )
+                                retrieveAndStoreToken(FirebaseAuth.getInstance().currentUser.uid)
+                                // Set an Employer Object
+                                val employer = Employer(
+                                    FirebaseAuth.getInstance().currentUser.uid,
+                                    actualFirstName,
+                                    actualLastName,
+                                    actualEmail,
+                                    actualphone.toLong(),
+                                    this.genderSelected,
+                                    this.roleSelected,
+                                    this.tribSelected,
+                                    false
+                                )
 
-                    // Get Firebase instance and put the Employer Object to add it
-                    FirestoreClass().addEmployerActivityFirebase(this,employer)
-                    hideProgressDialog()
+                                // Get Firebase instance and put the Employer Object to add it
+                                FirestoreClass().addEmployerActivityFirebase(this,employer)
+                                hideProgressDialog()
 
-                    val intent = Intent(this, LoginActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                                val intent = Intent(this, LoginActivity::class.java)
+                                startActivity(intent)
+                                finish()
 
-                } else {
-                    hideProgressDialog()
-                    Toast.makeText(
-                            this,
-                            "Please Try Again :( ",
-                            Toast.LENGTH_SHORT
-                    ).show()
+                            } else {
+                                hideProgressDialog()
+                                Toast.makeText(
+                                    this,
+                                    "Please Try Again :( ",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                    }else{
+                        hideProgressDialog()
+                        Toast.makeText(this,
+                            "This Email seems already used !",
+                            Toast.LENGTH_SHORT).show()
+                    }
+
+
                 }
+            }.addOnFailureListener {
+
             }
+
+
         }
 
     }
@@ -234,4 +258,22 @@ class RegisterActivity : AppCompatActivity() {
     private fun hideProgressDialog() {
         mProgressDialog.hide()
     }
+
+    private fun retrieveAndStoreToken(uid : String) {
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener{
+                if (it.isSuccessful){
+                    val token : String? = it.result
+                    val tokenDevice = TokenDevice(
+                        uid,
+                        token.toString()
+                    )
+                    // We add the token & if the userId exists we just update it
+                    FirestoreClass().addTokenFirebase(tokenDevice)
+                }
+            }.addOnFailureListener {
+                // Noth..
+            }
+    }
+
 }

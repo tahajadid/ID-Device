@@ -1,5 +1,8 @@
 package com.example.id_dev_fire.ui.bug
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,12 +15,24 @@ import com.example.id_dev_fire.model.Bug
 import com.example.id_dev_fire.model.Employer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.util.*
+import java.util.UUID.randomUUID
 
 class BugFragment : Fragment() {
 
     lateinit var descriptionBug : EditText
     lateinit var btnAddBug : Button
     lateinit var grp_radio : RadioGroup
+    lateinit var uploadImgae : ImageView
+
+    lateinit var imageUri : Uri
+    lateinit var imageToShow : ImageView
+    lateinit var storage: FirebaseStorage
+    lateinit var storageReference: StorageReference
+
+    var mFireAuth = FirebaseAuth.getInstance()
 
     // Default value
     var reasonSelected : String = "Not Selected"
@@ -35,13 +50,22 @@ class BugFragment : Fragment() {
         grp_radio = root.findViewById(R.id.group_radioButton)
         btnAddBug = root.findViewById(R.id.addBug_btn)
         descriptionBug = root.findViewById(R.id.descriptionBug_et)
+        uploadImgae = root.findViewById(R.id.uploadImage_iv)
+        imageToShow = root.findViewById(R.id.imageUploaded_iv)
 
+        // Storage
+        storage = FirebaseStorage.getInstance()
+        storageReference = storage.getReference()
 
         grp_radio.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener{
             group, checkedId ->
             val radio : RadioButton = root.findViewById(checkedId)
             reasonSelected = radio.text.toString()
         })
+
+        uploadImgae.setOnClickListener {
+            choosePicture()
+        }
 
         FirebaseFirestore.getInstance().collection("employers")
             .document(FirebaseAuth.getInstance().currentUser.uid).get()
@@ -70,8 +94,55 @@ class BugFragment : Fragment() {
         return root
     }
 
-    private fun clearData() {
-        descriptionBug.text.clear()
+    private fun choosePicture() {
+        val intent = Intent()
+        intent.setType("image/*")
+        intent.setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(intent, 1)
+
     }
 
+    private fun clearData() {
+        descriptionBug.text.clear()
+        imageToShow.setImageResource(android.R.color.transparent)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 1 && resultCode==RESULT_OK && data!=null && data.data!=null ){
+            imageUri = data.data!!
+            imageToShow.setImageURI(imageUri)
+            uploadPicture()
+        }
+
+    }
+
+    private fun uploadPicture() {
+
+        val randomKey = randomUUID()
+        val newRfe = storageReference.child("images/bug/"+"bug-"+
+                mFireAuth.currentUser.email+"-"+randomKey.toString());
+
+        newRfe.putFile(imageUri)
+            .addOnSuccessListener {
+
+            Toast.makeText(
+                requireContext(),
+                "Image added",
+                Toast.LENGTH_LONG).show()
+
+            }
+            .addOnFailureListener {
+
+                Toast.makeText(
+                    requireContext(),
+                    "Retry to add the image",
+                    Toast.LENGTH_LONG).show()
+
+            }
+    }
+
+    override fun startActivityForResult(intent: Intent?, requestCode: Int) {
+        super.startActivityForResult(intent, requestCode)
+    }
 }

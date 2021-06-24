@@ -5,4 +5,16 @@ class Trib(
         val tribName : String = "",
         val tribManager : String ="")  {
 
+        fun getTribId() : String{
+                return id
+        }
+
+        fun getNameTrib() : String{
+                return tribName
+        }
+
+        fun getManagerTrib() : String{
+                return id
+        }
+
 }

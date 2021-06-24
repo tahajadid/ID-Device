@@ -84,7 +84,7 @@ class ImpactOrder {
                                     mFirestoreClass.collection("devices").document(idDevice)
                                         .update(
                                             hashMapOf("currentState" to "Reserved",
-                                                "devCurrentState" to "Reserved²") as Map<String, Any>
+                                                "devCurrentState" to "Reserved") as Map<String, Any>
                                         )
                                 }.addOnFailureListener {
                                     //

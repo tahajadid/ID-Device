@@ -1,6 +1,7 @@
 package com.example.id_dev_fire.ui.OrderDevice
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -90,7 +91,17 @@ class OrderDeviceFragment : Fragment() {
         }
 
         buttonMakeOrder.setOnClickListener {
-            getAllInformation()
+                if(TextUtils.isEmpty(reason.text.toString().trim(){ it <= ' ' }) ) {
+                    Toast.makeText(
+                        requireContext(),
+                        "please enter a reseaon",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
+                else {
+                    getAllInformation()
+                }
         }
 
         return root

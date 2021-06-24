@@ -58,6 +58,22 @@ class ListDeviceAdapter : RecyclerView.Adapter<ListDeviceAdapter.MyViewHolder>()
                 .setTextColor(R.color.black)
         }
 
+        if(currentDevice.getdevState().toString() == "Maintaining"){
+            holder.itemView.findViewById<TextView>(R.id.circle_state)
+                .setBackgroundResource(R.drawable.mycercle_red)
+            holder.itemView.findViewById<TextView>(R.id.deviceState_tv)
+                .setText(currentDevice.getdevState())
+            holder.itemView.findViewById<TextView>(R.id.deviceState_tv)
+                .setTextColor(R.color.black)
+
+            holder.itemView.findViewById<TextView>(R.id.circle_currentState)
+                .setBackgroundResource(R.drawable.mycercle_red)
+            holder.itemView.findViewById<TextView>(R.id.deviceCurrentState_tv)
+                .setText("Not available")
+            holder.itemView.findViewById<TextView>(R.id.deviceCurrentState_tv)
+                .setTextColor(R.color.black)
+        }
+
         this.Deviceid = currentDevice.getdevId().toString()
 
         /*

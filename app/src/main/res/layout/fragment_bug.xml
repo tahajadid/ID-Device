@@ -9,7 +9,6 @@
     >
 
     <RelativeLayout
-
         android:id="@+id/rowDeviceLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,12 +82,30 @@
             android:gravity="start|top"
             android:inputType="textMultiLine" />
 
+
+    <Button
+        android:id="@+id/addBug_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descriptionBug_et"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:text="Add Bug"
+        android:textColor="#FFF" />
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/anim"
-        android:layout_width="match_parent"
-        android:layout_height="141dp"
+        android:layout_width="388dp"
+        android:layout_height="140dp"
         android:layout_below="@+id/addBug_btn"
-        android:layout_marginTop="14dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="3dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/mobile" />
@@ -106,20 +123,39 @@
             android:textColor="#7030A0"
             android:textStyle="italic" />
 
-    <Button
-        android:id="@+id/addBug_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/descriptionBug_et"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginRight="22dp"
-        android:textColor="#FFF"
-        android:text="Add Bug" />
+        <ImageView
+            android:id="@+id/uploadImage_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@+id/descriptionBug_et"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="32dp"
+            app:srcCompat="@drawable/upload_img" />
+
+        <ImageView
+            android:id="@+id/imageUploaded_iv"
+            android:layout_width="76dp"
+            android:layout_height="59dp"
+            android:layout_below="@+id/descriptionBug_et"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="22dp"
+            tools:srcCompat="@tools:sample/avatars" />
 
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/descriptionBug_lab"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/descriptionBug_et"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="34dp"
+            android:text="Select a screenshot "
+            android:textColor="#7030a0" />
+
+    </RelativeLayout>
 
 </ScrollView>
 

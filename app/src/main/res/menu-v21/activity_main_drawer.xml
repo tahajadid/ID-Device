@@ -25,8 +25,8 @@
     </group>
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/personalInfo"
-            android:title="Personal Information">
+            android:id="@+id/orders"
+            android:title="Orders &amp; Declaration">
             <menu>
                 <item
                     android:id="@+id/nav_orders"
@@ -36,17 +36,51 @@
                     android:id="@+id/nav_ordersManager"
                     android:icon="@drawable/verifylist"
                     android:title="Orders Passed" />
-                <item
-                    android:id="@+id/nav_settings"
-                    android:icon="@drawable/settingsicon"
-                    android:title="Settings" />
-                <item
-                    android:id="@+id/nav_support"
-                    android:icon="@drawable/support"
-                    android:title="Support Center" />
+
             </menu>
         </item>
     </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/declaration"
+            android:title="Declaration">
+            <menu>
+                <item
+                    android:id="@+id/nav_damagedFragment"
+                    android:icon="@drawable/damaged"
+                    android:title="Declare Damaged Device" />
+                <item
+                    android:id="@+id/nav_listDamagedFragment"
+                    android:icon="@drawable/list_damaged"
+                    android:title="List Of Damaged Devices" />
+
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/frfr"
+            android:title="Internal Information">
+            <menu>
+                <item
+                    android:id="@+id/aboutAppe"
+                    android:title="About da">
+                    <item
+                        android:id="@+id/nav_settings"
+                        android:icon="@drawable/settingsicon"
+                        android:title="Settings" />
+                    <item
+                        android:id="@+id/nav_support"
+                        android:icon="@drawable/support"
+                        android:title="Support Center" />
+                </item>
+            </menu>
+        </item>
+    </group>
+
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/Admin"
@@ -68,6 +102,10 @@
                     android:id="@+id/nav_addCupboard"
                     android:icon="@drawable/addicon"
                     android:title="Add Cupboard" />
+                <item
+                    android:id="@+id/nav_addTribFragment"
+                    android:icon="@drawable/addicon"
+                    android:title="Add Trib" />
             </menu>
         </item>
     </group>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddDemaged.DamagedFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/selectProject_label"
+            android:layout_width="142dp"
+            android:layout_height="wrap_content"
+            android:text="Project :"
+            android:layout_marginTop="20dp"
+            android:textColor="#7030A0"
+            android:textStyle="italic" />
+
+        <Spinner
+            android:id="@+id/project_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#617030A0" />
+
+        <TextView
+            android:id="@+id/selectDevice_label"
+            android:layout_width="142dp"
+            android:layout_height="wrap_content"
+            android:text="Device :"
+            android:layout_marginTop="10dp"
+            android:textColor="#7030A0"
+            android:textStyle="italic" />
+
+        <Spinner
+            android:id="@+id/devices_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="#617030A0"/>
+
+        <EditText
+            android:id="@+id/damagedTitle_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#7030A0"
+            android:hint="Title.."
+            android:inputType="textPersonName"
+            android:textColorHint="#7030A0" />
+
+        <EditText
+            android:id="@+id/damagedDescription_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#7030A0"
+            android:ems="10"
+            android:hint="Description.."
+            android:inputType="textMultiLine"
+            android:textColorHint="#7030A0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:text="Select Two images "
+                android:textColor="#7030a0" />
+
+            <ImageView
+                android:id="@+id/uploadImageDamaged_iv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/upload_img" />
+
+            <ImageView
+                android:id="@+id/damagedImageUploaded1_iv"
+                android:layout_marginTop="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="40dp"
+                />
+
+            <ImageView
+                android:id="@+id/damagedImageUploaded2_iv"
+                android:layout_marginTop="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/addComplaint_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:layout_margin="20dp"
+            android:text="Add Complaint" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
