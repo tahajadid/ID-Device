@@ -23,3 +23,14 @@ For Demo of version 1.0.0 you can follow the link bellow (delivered version v1.2
 
 . [Demo v1.0.0](https://drive.google.com/file/d/1mGYCqjgaJFfoqB_B5dLpeueS5vl0jM5I/view?usp=sharing)
 ---
+## Screens
+
+![image](https://github.com/tahajadid/ID-Device/blob/master/Img/capt1.PNG) &nbsp;
+
+![image](https://github.com/tahajadid/ID-Device/blob/master/Img/capt2.PNG) &nbsp;
+
+![image](https://github.com/tahajadid/ID-Device/blob/master/Img/capt3.PNG) &nbsp;
+
+![image](https://github.com/tahajadid/ID-Device/blob/master/Img/capt4.PNG) &nbsp;
+
+![image](https://github.com/tahajadid/ID-Device/blob/master/Img/capt5.PNG) &nbsp;
